@@ -50,13 +50,11 @@ create_folder $LOG_PATH
 
 cp _433.py $PROJECT_PATH/
 
-cd $TMP_PATH
-wget "http://abyz.co.uk/rpi/pigpio/pigpio.zip"
-unzip pigpio.zip
-mv pigpio $PROJECT_PATH/
-cd $PROJECT_PATH ; cd pigpio
-make
-make install
+wget -O $TMP_PATH/pigpio.zip http://abyz.co.uk/rpi/pigpio/pigpio.zip
+unzip $TMP_PATH/pigpio.zip
+mv $TMP_PATH/pigpio $PROJECT_PATH/pigpio
+make $PROJECT_PATH/pigpio/
+make install $PROJECT_PATH/pigpio/
 
 systemctl enable pigpiod
 pigpiod
