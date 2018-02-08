@@ -41,7 +41,7 @@ function create_folder(){
 ##### main #####
 
 apt-get -y update
-apt-get -y install golang python-pip python-dev
+apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
 
 
 create_folder $PROJECT_PATH
@@ -50,10 +50,5 @@ create_folder $LOG_PATH
 
 cp _433.py $PROJECT_PATH/
 
-wget http://abyz.co.uk/rpi/pigpio/pigpio.zip
-unzip pigpio.zip
-(cd PIGPIO && make)
-(cd PIGPIO && make install)
-
 systemctl enable pigpiod
-pigpiod
+
