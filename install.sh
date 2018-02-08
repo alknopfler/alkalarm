@@ -52,8 +52,8 @@ cp _433.py $PROJECT_PATH/
 
 wget http://abyz.co.uk/rpi/pigpio/pigpio.zip
 unzip pigpio.zip
-make pigpio/
-make install pigpio/
+(cd pigpio && make)
+(cd pigpio && make install)
 
 systemctl enable pigpiod
 pigpiod
