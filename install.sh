@@ -40,7 +40,8 @@ function create_folder(){
 
 ##### main #####
 
-read "Starting the installation...Please press a key:"
+echo "Starting the installation...Please press a key:"
+read
 
 echo "### Installing packages ... ###"
 apt-get -y update
