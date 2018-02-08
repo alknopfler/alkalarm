@@ -40,6 +40,10 @@ function create_folder(){
 
 ##### main #####
 
+apt-get -y update
+apt-get -y install golang python-pip python-dev
+
+
 create_folder $PROJECT_PATH
 create_folder $TMP_PATH
 create_folder $LOG_PATH
@@ -47,7 +51,7 @@ create_folder $LOG_PATH
 cp _433.py $PROJECT_PATH/
 
 cd $TMP_PATH
-wget http://abyz.co.uk/rpi/pigpio/pigpio.zip
+wget "http://abyz.co.uk/rpi/pigpio/pigpio.zip"
 unzip pigpio.zip
 mv pigpio $PROJECT_PATH/
 cd $PROJECT_PATH ; cd pigpio
