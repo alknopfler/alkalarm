@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/alknopfler/alkalarm/config"
 	"fmt"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func CreateSchemas(){
