@@ -40,15 +40,22 @@ function create_folder(){
 
 ##### main #####
 
+read "Starting the installation...Please press a key:"
+
+echo "### Installing packages ... ###"
 apt-get -y update
 apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
 
+echo "### Creating Folders ... ###"
 
 create_folder $PROJECT_PATH
 create_folder $TMP_PATH
 create_folder $LOG_PATH
 
+echo "### Copy the python script to the project directory ... ### "
 cp _433.py $PROJECT_PATH/
 
+echo "### Enabling the PiGPIO daemon ###"
 systemctl enable pigpiod
 
+echo "### End Of Installation...SUCESS ###"
