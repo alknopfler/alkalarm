@@ -5,8 +5,7 @@ import "github.com/alknopfler/alkalarm/config"
 const (
 	SENSORS_TABLE = "CREATE TABLE IF NOT EXISTS sensors (" +
 		"code INTEGER PRIMARY KEY," +
-		"type TEXT CHECK( type IN ('presence','aperture','other') ) NOT NULL DEFAULT '', " +
-		"zone TEXT)"
+		"type TEXT CHECK( type IN ('presence','aperture','other') ), zone TEXT)"
 	MAILER_TABLE = "CREATE TABLE IF NOT EXISTS mailer (" +
 		"emisor TEXT," +
 		"receptor TEXT," +

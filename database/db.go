@@ -14,18 +14,22 @@ func CreateSchemas(){
 	}
 	task, _:= db.Prepare(SENSORS_TABLE)
 	task.Exec()
-
+	fmt.Println("primera")
 	task, _= db.Prepare(MAILER_TABLE)
 	task.Exec()
+	fmt.Println("segunda")
 
 	task, _= db.Prepare(ALARM_HISTORY_TABLE)
 	task.Exec()
+	fmt.Println("tercera")
 
 	task, _= db.Prepare(CONTROL_CODES_TABLE)
 	task.Exec()
+	fmt.Println("cuarta")
 
 	task, _= db.Prepare(GLOBAL_STATE)
 	task.Exec()
+	fmt.Println("quinta")
 
 	db.Close()
 }
