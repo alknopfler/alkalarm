@@ -39,9 +39,12 @@ func listenEvents(){
 	cmd.Wait()
 }
 
+func init() {
+	database.CreateSchemas()
+}
 
 func main() {
-	//First of all create the scheme if not exists
-	database.CreateSchemas()
-	//verify the inactive initial state
+
+	fmt.Println("main")
+
 }

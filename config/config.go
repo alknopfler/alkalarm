@@ -5,7 +5,7 @@ const (
 	PROJECT_PATH	="/opt/alkalarm/"
 	PYGPIO		="_433.py"
 	//DATABASE
-	DB_PATH		=PROJECT_PATH+"data.db"
+	DB_NAME		="data.db"
 	DB_TYPE		="sqlite3"
 	STATE_FULL	="full"
 	STATE_PART	="partial"
