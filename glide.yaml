@@ -1,2 +1,4 @@
 package: github.com/alknopfler/alkalarm
-import: []
+import:
+- package: github.com/mattn/go-sqlite3
+  version: ^1.6.0
