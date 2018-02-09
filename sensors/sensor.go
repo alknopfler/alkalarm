@@ -45,7 +45,7 @@ func RegisterSensor(){
 			}
 			break
 		}
-
+		now+=1
 	}
 	cmd.Process.Kill()
 	fmt.Println("Success registering the sensor")
