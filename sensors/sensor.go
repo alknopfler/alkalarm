@@ -25,10 +25,7 @@ func RegisterSensor(){
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
 	oneByte := make([]byte,0)
-	now:=1
-	ending:=1000
-	fmt.Println("before for")
-	for (now < ending){
+	for {
 		_, err := stdout.Read(oneByte)
 		if err != nil {
 			fmt.Printf(err.Error())
@@ -45,7 +42,6 @@ func RegisterSensor(){
 			}
 			break
 		}
-		now+=1
 	}
 	cmd.Process.Kill()
 	fmt.Println("Success registering the sensor")
