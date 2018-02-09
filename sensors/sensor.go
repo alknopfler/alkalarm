@@ -18,7 +18,7 @@ type Sensor struct {
 
 func RegisterSensor(){
 	//TODO en registrar no puede estar activa la alarma
-	cmdName := "python -u" + config.PROJECT_PATH + config.PYGPIO
+	cmdName := "python -u " + config.PROJECT_PATH + config.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
