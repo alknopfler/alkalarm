@@ -6,7 +6,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/alknopfler/alkalarm/config"
-	"github.com/alknopfler/alkalarm/sensors"
 )
 func InitDB(path ...string) (*sql.DB,error) {
 	if path == nil{
@@ -44,20 +43,20 @@ func Operate(db *sql.DB, operation string, values ...interface{})error{
 	}
 	return nil
 }
-
-func QuerySensors(db *sql.DB, query string) ([]sensors.Sensor,error){
-	var result []sensors.Sensor
+/*
+func QuerySensors(db *sql.DB, query string) ([]string,error){
+	var result []string
 	rows, err := db.Query(query)
 	if err != nil { return result,err }
 	defer rows.Close()
 
 
 	for rows.Next() {
-		item := sensors.Sensor{}
+		item := string{}
 		err2 := rows.Scan(&item.Code, &item.TypeOf, &item.Zone)
 		if err2 != nil { return nil,err }
 		result = append(result, item)
 	}
 	return result, nil
-}
+}*/
 

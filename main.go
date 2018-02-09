@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/alknopfler/alkalarm/sensors"
 )
 
 func init(){
@@ -21,4 +22,5 @@ func init(){
 }
 
 func main() {
+	sensors.RegisterSensor()
 }

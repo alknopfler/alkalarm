@@ -63,6 +63,5 @@ func handlerEvent(evento string) error{
 	defer db.Close()
 
 
-
+	return nil
 }
-
