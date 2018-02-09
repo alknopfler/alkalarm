@@ -26,7 +26,7 @@ func RegisterSensor(){
 	cmd.Start()
 	oneByte := make([]byte,0)
 	now:=1
-	ending:=10
+	ending:=1000
 	fmt.Println("before for")
 	for (now < ending){
 		_, err := stdout.Read(oneByte)
