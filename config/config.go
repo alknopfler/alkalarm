@@ -7,6 +7,7 @@ const (
 	//DATABASE
 	DB_NAME		="data.db"
 	DB_TYPE		="sqlite3"
+	//CONTROL
 	STATE_FULL	="full"
 	STATE_PART	="partial"
 	STATE_INAC	="inactive"

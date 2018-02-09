@@ -1,12 +1,14 @@
 package main
 
 import (
-"bufio"
-"fmt"
-"os/exec"
-"strings"
-"github.com/alknopfler/alkalarm/config"
-"github.com/alknopfler/alkalarm/database"
+	"bufio"
+	"fmt"
+	"os/exec"
+	"strings"
+	"github.com/alknopfler/alkalarm/config"
+	_ "github.com/mattn/go-sqlite3"
+
+	"github.com/alknopfler/alkalarm/database"
 )
 
 
@@ -39,12 +41,13 @@ func listenEvents(){
 	cmd.Wait()
 }
 
-func init() {
-	database.CreateSchemas()
-}
-
 func main() {
 
-	fmt.Println("main")
+	db := database.InitDB(config.DB_NAME)
+	defer db.Close()
+	database.CreateSchemas(db)
+
+	database.OperateWithItem(db, database.SENSOR_INSERT, "sensor1","presence","pasillo")
+
 
 }
