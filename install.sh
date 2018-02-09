@@ -59,4 +59,5 @@ cp _433.py $PROJECT_PATH/
 echo "### Enabling the PiGPIO daemon ###"
 systemctl enable pigpiod
 
+
 echo "### End Of Installation...SUCESS ###"

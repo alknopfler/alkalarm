@@ -1,53 +1,23 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os/exec"
-	"strings"
-	"github.com/alknopfler/alkalarm/config"
 	_ "github.com/mattn/go-sqlite3"
-
 	"github.com/alknopfler/alkalarm/database"
+	"github.com/alknopfler/alkalarm/sensors"
 )
 
 
-func handlerEvent(evento string){
-	if evento == "3462412"{
-		fmt.Println("ha pulsado cerrar")
-	}
-}
 
-func listenEvents(){
-	cmdName := "python -u" + config.PROJECT_PATH + config.PYGPIO
-	cmdArgs := strings.Fields(cmdName)
-
-	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
-	stdout, _ := cmd.StdoutPipe()
-	cmd.Start()
-	oneByte := make([]byte,0)
-	//TODO convertir en daemon y el python tambien
-	for {
-		_, err := stdout.Read(oneByte)
-		if err != nil {
-			fmt.Printf(err.Error())
-			break
-		}
-		r := bufio.NewReader(stdout)
-		line,_, _ := r.ReadLine()
-		handlerEvent(string(line))
-	}
-
-	cmd.Wait()
+func init(){
+	fmt.Println("Validating the database, and other params...Could take some minutes...")
+	//First Time to execute needs create database and scheme
+	db,_ := database.InitDB()
+	defer db.Close()
+	database.CreateSchemas(db)
+	fmt.Println("Success...Starting the program")
 }
 
 func main() {
-
-	db,err := database.InitDB()
-	defer db.Close()
-	database.CreateSchemas(db)
-
-	database.OperateWithItem(db, database.SENSOR_INSERT, "sensor1","presence","pasillo")
-
-
+	sensors.RegisterSensor()
 }

@@ -12,14 +12,11 @@ package database
 
 const (
 	//// INSERTS ////
-		SENSOR_INSERT = "INSERT INTO sensors(code,type,zone) values(?,?,?)"
+		SENSOR_INSERT = "INSERT INTO sensors(code,typeOf,zone) values(?,?,?)"
 		MAIL_INSERT = "INSERT INTO mailer(emisor,receptor,subject,text,smtp_address,smtp_port,smtp_user,smtp_pass,smtp_security) values (?,?,?,?,?,?,?,?,?)"
 		ALARM_INSERT = "INSERT INTO alarms(date,sensor) values(?,?)"
-		CONTROL_INSERT = "INSERT INTO control(code,description,type) values(?,?,?)"
+		CONTROL_INSERT = "INSERT INTO control(code,description,typeOf) values(?,?,?)"
 		GLOBAL_STATE_INSERT= "INSERT INTO global_state(id,state) values(1,?)"
-
-	//// SELECTS ////
-		SENSOR_SELECT = ""
 
 	//// DELETES ////
 		SENSOR_DELETE = "DELETE FROM sensors WHERE code=?"
@@ -30,5 +27,9 @@ const (
 
 	//// UPDATES ////
 		GLOBAL_STATE_UPDATE = "UPDATE global_state SET state=? WHERE id=1"
+
+
+	//// QUERIES ////
+		SENSOR_QUERY = "SELECT * FROM sensors"
 
 )
