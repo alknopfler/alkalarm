@@ -33,14 +33,10 @@ func RegisterSensor(){
 		}
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
-		fmt.Println("la linea es",string(line))
-		if string(line) != ""{
-			err:=handlerEvent(string(line))
-			if err!=nil{
-				fmt.Println("Error registering the Sensor")
-				return
-			}
-			break
+		err=handlerEvent(string(line))
+		if err!=nil{
+			fmt.Println("Error registering the Sensor")
+			return
 		}
 	}
 	cmd.Process.Kill()
