@@ -36,6 +36,7 @@ func RegisterSensor(){
 		line,_, _ := r.ReadLine()
 		if string(line) != ""{
 			handlerEvent(string(line))
+			break
 		}
 
 	}
