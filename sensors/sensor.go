@@ -25,6 +25,7 @@ func RegisterSensor(){
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
 	oneByte := make([]byte,0)
+	//TODO convertir en daemon y el python tambien
 	for {
 		_, err := stdout.Read(oneByte)
 		if err != nil {
@@ -33,14 +34,10 @@ func RegisterSensor(){
 		}
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
-		err=handlerEvent(string(line))
-		if err!=nil{
-			fmt.Println("Error registering the Sensor")
-			return
-		}
+		handlerEvent(string(line))
 	}
-	cmd.Process.Kill()
-	fmt.Println("Success registering the sensor")
+
+	cmd.Wait()
 }
 
 func UnregisterSensor(){
