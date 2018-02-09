@@ -7,6 +7,8 @@ import (
 	"bufio"
 	"github.com/alknopfler/alkalarm/config"
 
+	"github.com/alknopfler/alkalarm/database"
+	"github.com/swatlabs/taurus/db"
 )
 //Sensor struct to define the object
 type Sensor struct {
@@ -35,21 +37,33 @@ func RegisterSensor(){
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
 		if string(line) != ""{
-			handlerEvent(string(line))
+			err:=handlerEvent(string(line))
+			if err!=nil{
+				fmt.Println("Error registering the Sensor")
+				return
+			}
 			break
 		}
 
 	}
 	cmd.Process.Kill()
+	fmt.Println("Success registering the sensor")
 }
 
 func UnregisterSensor(){
 
 }
 
-func handlerEvent(evento string){
-
+func handlerEvent(evento string) error{
 	fmt.Println("Sensor detected: " ,evento)
+	db,err:=database.InitDB()
+	if err!= nil {
+		fmt.Println("Error opening the DB to register sensor: ", err)
+		return err
+	}
+	defer db.Close()
+
+
 
 }
 
