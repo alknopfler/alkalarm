@@ -8,7 +8,6 @@ import (
 	"github.com/alknopfler/alkalarm/config"
 
 	"github.com/alknopfler/alkalarm/database"
-	"github.com/swatlabs/taurus/db"
 )
 //Sensor struct to define the object
 type Sensor struct {

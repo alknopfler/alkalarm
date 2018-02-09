@@ -6,7 +6,6 @@ import (
 	"strings"
 	"os/exec"
 	"bufio"
-	"time"
 )
 
 func handlerEvent(evento string){
