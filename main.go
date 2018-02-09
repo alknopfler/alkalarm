@@ -43,7 +43,7 @@ func listenEvents(){
 
 func main() {
 
-	db := database.InitDB(config.DB_NAME)
+	db,err := database.InitDB()
 	defer db.Close()
 	database.CreateSchemas(db)
 

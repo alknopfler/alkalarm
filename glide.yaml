@@ -2,3 +2,4 @@ package: github.com/alknopfler/alkalarm
 import:
 - package: github.com/mattn/go-sqlite3
   version: ^1.6.0
+- package: github.com/stretchr/testify/assert
