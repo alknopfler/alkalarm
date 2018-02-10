@@ -38,6 +38,9 @@ func discoverCodeSensor() (string, error) {
 }
 
 func main(){
+	fmt.Println("Utility to discover sensor codes...")
+	fmt.Println("The program will stop automatically when it discover the sensor.")
+	fmt.Println("You could stop using ctrl+c")
 	code,err:=discoverCodeSensor()
 	if err!=nil{
 		fmt.Println("Fail: ",err)
