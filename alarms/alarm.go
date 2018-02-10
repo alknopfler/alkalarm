@@ -1,7 +1,7 @@
 package alarms
 
 import (
-	"github.com/alknopfler/alkalarm/config"
+	cfg "github.com/alknopfler/alkalarm/config"
 	"fmt"
 	"strings"
 	"os/exec"
@@ -15,7 +15,7 @@ func handlerEvent(evento string){
 }
 
 func listenEvents(){
-	cmdName := "python -u" + config.PROJECT_PATH + config.PYGPIO
+	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)

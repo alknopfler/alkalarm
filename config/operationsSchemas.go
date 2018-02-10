@@ -1,4 +1,4 @@
-package database
+package config
 
 /*
 		sensors: insert | select | delete       | (not make sense update)

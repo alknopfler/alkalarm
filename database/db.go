@@ -5,15 +5,15 @@ import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 
-	"github.com/alknopfler/alkalarm/config"
+	cfg "github.com/alknopfler/alkalarm/config"
 )
 func InitDB(path ...string) (*sql.DB,error) {
 	if path == nil{
-		db, err := sql.Open(config.DB_TYPE, config.DB_NAME)
+		db, err := sql.Open(cfg.DB_TYPE, cfg.DB_NAME)
 		if err != nil { return nil,err }
 		return db,nil
 	}else{ //for testing cases
-		db, err := sql.Open(config.DB_TYPE, path[0])
+		db, err := sql.Open(cfg.DB_TYPE, path[0])
 		if err != nil { return nil,err }
 		return db,nil
 	}
@@ -22,7 +22,7 @@ func InitDB(path ...string) (*sql.DB,error) {
 
 func CreateSchemas(db *sql.DB) error {
 	var err error
-	list:=[]string{SENSORS_TABLE,MAILER_TABLE,ALARM_HISTORY_TABLE,CONTROL_CODES_TABLE,GLOBAL_STATE_TABLE}
+	list:=[]string{cfg.SENSORS_TABLE,cfg.MAILER_TABLE,cfg.ALARM_HISTORY_TABLE,cfg.CONTROL_CODES_TABLE,cfg.GLOBAL_STATE_TABLE}
 	for _,val := range list{
 		_,err=db.Exec(val)
 	}
