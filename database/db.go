@@ -22,7 +22,7 @@ func InitDB(path ...string) (*sql.DB,error) {
 
 func CreateSchemas(db *sql.DB) error {
 	var err error
-	list:=[]string{cfg.SENSORS_TABLE,cfg.ALARM_HISTORY_TABLE,cfg.CONTROL_CODES_TABLE,cfg.GLOBAL_STATE_TABLE}
+	list:=[]string{cfg.SENSORS_TABLE,cfg.MAIL_TABLE,cfg.ALARM_HISTORY_TABLE,cfg.CONTROL_CODES_TABLE,cfg.GLOBAL_STATE_TABLE}
 	for _,val := range list{
 		_,err=db.Exec(val)
 	}
