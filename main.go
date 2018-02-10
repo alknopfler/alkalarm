@@ -8,6 +8,7 @@ import (
 	//"github.com/alknopfler/alkalarm/api"
 	//"net/http"
 	"github.com/alknopfler/alkalarm/mailer"
+	cfg "github.com/alknopfler/alkalarm/config"
 )
 
 func init(){
@@ -33,5 +34,9 @@ func main() {
 	if err != nil {
 		fmt.Println("Error listening server in :8080")
 	}*/
+	data:=cfg.Mailer{Receptor: "alknopfler@hotmail.com"}
+	mailer.RegisterMailer(data)
+	data = cfg.Mailer{Receptor: "begoclavero@gmail.com"}
+	mailer.RegisterMailer(data)
 	mailer.SendMail("ventana Salon")
 }

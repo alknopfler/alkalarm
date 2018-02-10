@@ -3,21 +3,82 @@ package mailer
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
 	"net/smtp"
-	"log"
+	"fmt"
+	"github.com/alknopfler/alkalarm/database"
+
 )
+func RegisterMailer(data cfg.Mailer) error{
+	db,err := database.InitDB()
+	if err != nil {
+		fmt.Println("Error initiating DB in Register Mailer")
+		return err
+	}
+	defer db.Close()
+
+	err=database.Operate(db,cfg.MAIL_INSERT,data.Receptor)
+	if err!=nil{
+		fmt.Println("Error inserting mailer in db")
+		return err
+	}
+	fmt.Println("Success...Mail registered successfully")
+	return nil
+}
+
+func UnregisterMailer(data cfg.Mailer) error{
+	db,err := database.InitDB()
+	if err != nil {
+		fmt.Println("Error initiating DB in Register Mailer")
+		return err
+	}
+	defer db.Close()
+
+	err=database.Operate(db,cfg.MAIL_DELETE,data.Receptor)
+	if err!=nil{
+		fmt.Println("Error inserting mailer in db")
+		return err
+	}
+	fmt.Println("Success...Mail registered successfully")
+	return nil
+}
 
 func SendMail(zona string){
+	list,err:=QueryMailAll()
+	if err != nil {
+		fmt.Println("Error retrieving the mails to send")
+		return
+	}
 	msg := "From: " + cfg.FROM + "\n" +
-		"To: " + cfg.LIST_TO_MAIL[0] + "\n" +
+		"To: " + list[0] + "\n" +
 		"Subject: ALARMA CASA - Sensor zona: "+zona+"\n\n" +
 		"Ha saltado la alarma de la casa del sensor: " + zona
 
-	err := smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
+	err = smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
 		smtp.PlainAuth("", cfg.FROM, cfg.SMTP_PASS, cfg.SMTP_SERVER),
-		cfg.FROM, cfg.LIST_TO_MAIL, []byte(msg))
+		cfg.FROM, list, []byte(msg))
 
 	if err != nil {
-		log.Printf("smtp error: %s", err)
+		fmt.Println("smtp error:", err)
 		return
 	}
+}
+
+func QueryMailAll() ([]string,error){
+	var result []cfg.Sensor
+	db,err := database.InitDB()
+	if err != nil {
+		fmt.Println("Error initiating DB in Query Sensor")
+		return result,err
+	}
+	defer db.Close()
+	rows, err := db.Query(cfg.MAIL_QUERY_ALL)
+	if err != nil { return result,err }
+	defer rows.Close()
+
+	for rows.Next() {
+		item := cfg.Mailer{}
+		err2 := rows.Scan(&item.Receptor)
+		if err2 != nil { return nil,err }
+		result = append(result, item)
+	}
+	return result, nil
 }

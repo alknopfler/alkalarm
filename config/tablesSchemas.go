@@ -10,6 +10,8 @@ const (
 	ALARM_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS alarms (" +
 		"date TEXT," +
 		"sensor TEXT);"
+	MAIL_TABLE = "CREATE TABLE IF NOT EXISTS mailer (" +
+		"receptor TEXT PRIMARY KEY)"
 	CONTROL_CODES_TABLE = "CREATE TABLE IF NOT EXISTS control (" +
 		"code TEXT PRIMARY KEY," +
 		"description TEXT," +

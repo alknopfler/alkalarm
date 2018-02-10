@@ -3,21 +3,22 @@ package config
 /*
 		sensors: insert | select | delete       | (not make sense update)
 		alarm:   insert | select | delete (all) | (not make sense update)
+		mail:    insert | select | delete (all) | (not make sense update)
 		control: insert | select | delete       | (not make sense update)
 		global:  insert | select | delete (all) | update
-
-
  */
 
 const (
 	//// INSERTS ////
 		SENSOR_INSERT = "INSERT INTO sensors(code,typeOf,zone) values(?,?,?)"
+		MAIL_INSERT = "INSERT INTO mailer(receptor) values (?)"
 		ALARM_INSERT = "INSERT INTO alarms(date,sensor) values(?,?)"
 		CONTROL_INSERT = "INSERT INTO control(code,description,typeOf) values(?,?,?)"
 		GLOBAL_STATE_INSERT= "INSERT INTO global_state(id,state) values(1,?)"
 
 	//// DELETES ////
 		SENSOR_DELETE = "DELETE FROM sensors WHERE code=?"
+		MAIL_DELETE = "DELETE FROM mailer WHERE receptor=?"
 		ALARM_DELETE = "DELETE FROM alarms"   //just to clear alarm historic
 		CONTROL_DELETE = "DELETE FROM control WHERE code=?"
 		GLOBAL_STATE_DELETE = "DELETE FROM global_state"
@@ -29,5 +30,6 @@ const (
 	//// QUERIES ////
 		SENSOR_QUERY_ALL= "SELECT * FROM sensors"
 		SENSOR_QUERY_CODE = "SELECT * FROM sensors WHERE code=?"
+		MAIL_QUERY_ALL = "SELECT * FROM mailer"
 
 )

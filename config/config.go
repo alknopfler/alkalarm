@@ -38,6 +38,10 @@ type Sensor struct {
 	Zone string
 }
 
+type Mailer struct {
+	Receptor string
+}
+
 func readPassFromFile()string{
 	b, err := ioutil.ReadFile(PROJECT_PATH+".passSMTP") // just pass the file name
 	if err != nil {
