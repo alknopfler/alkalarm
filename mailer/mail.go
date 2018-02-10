@@ -42,11 +42,13 @@ func UnregisterMailer(data cfg.Mailer) error{
 }
 
 func SendMail(zona string){
+	//first of all get all the mails to send the emails
 	list,err:=QueryMailAll()
 	if err != nil {
 		fmt.Println("Error retrieving the mails to send")
 		return
 	}
+
 	msg := "From: " + cfg.FROM + "\n" +
 		"To: " + list[0] + "\n" +
 		"Subject: ALARMA CASA - Sensor zona: "+zona+"\n\n" +
@@ -81,4 +83,19 @@ func QueryMailAll() ([]string,error){
 		result = append(result, item)
 	}
 	return result, nil
+}
+
+func MailExists(receptor string) bool{
+	db,err := database.InitDB()
+	if err != nil {
+		fmt.Println("Error initiating DB in Mail Exists")
+		return false
+	}
+	defer db.Close()
+	rows, err := db.Query(cfg.MAIL_QUERY_RECEPTOR,receptor)
+	defer rows.Close()
+	if rows.Next(){
+		return true
+	}
+	return false
 }

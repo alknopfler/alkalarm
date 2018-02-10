@@ -33,13 +33,14 @@ var (
 
 //Sensor struct to define the object
 type Sensor struct {
-	Code string
-	TypeOf string
-	Zone string
+	Code string  `json:"Code"`
+	TypeOf string `json:"TypeOf"`
+	Zone string `json:"Zone"`
 }
 
+//Mailer struct to define the object
 type Mailer struct {
-	Receptor string
+	Receptor string  `json:"Receptor"`
 }
 
 func readPassFromFile()string{

@@ -5,10 +5,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"github.com/alknopfler/alkalarm/database"
-	//"github.com/alknopfler/alkalarm/api"
-	//"net/http"
-	"github.com/alknopfler/alkalarm/mailer"
-	cfg "github.com/alknopfler/alkalarm/config"
+	"github.com/alknopfler/alkalarm/api"
+	"net/http"
 )
 
 func init(){
@@ -30,13 +28,8 @@ func init(){
 }
 
 func main() {
-	/*err := http.ListenAndServe(":8080", api.HandlerController())
+	err := http.ListenAndServe(":8080", api.HandlerController())
 	if err != nil {
 		fmt.Println("Error listening server in :8080")
-	}*/
-	data:=cfg.Mailer{Receptor: "alknopfler@hotmail.com"}
-	mailer.RegisterMailer(data)
-	data = cfg.Mailer{Receptor: "begoclavero@gmail.com"}
-	mailer.RegisterMailer(data)
-	mailer.SendMail("ventana Salon")
+	}
 }
