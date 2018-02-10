@@ -63,7 +63,7 @@ func SendMail(zona string){
 }
 
 func QueryMailAll() ([]string,error){
-	var result []cfg.Sensor
+	var result []string
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Query Sensor")
@@ -75,8 +75,8 @@ func QueryMailAll() ([]string,error){
 	defer rows.Close()
 
 	for rows.Next() {
-		item := cfg.Mailer{}
-		err2 := rows.Scan(&item.Receptor)
+		item := string{}
+		err2 := rows.Scan(&item)
 		if err2 != nil { return nil,err }
 		result = append(result, item)
 	}
