@@ -75,7 +75,7 @@ func QueryMailAll() ([]string,error){
 	defer rows.Close()
 
 	for rows.Next() {
-		item := []string{}
+		item := ""
 		err2 := rows.Scan(&item)
 		if err2 != nil { return nil,err }
 		result = append(result, item)
