@@ -45,6 +45,6 @@ func main(){
 	if err!=nil{
 		fmt.Println("Fail: ",err)
 	}else{
-		fmt.Println("Code: ",code)
+		fmt.Println("Code:",code)
 	}
 }
