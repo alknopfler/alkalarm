@@ -12,3 +12,7 @@ func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
 func HandlerDeleteSensor(w http.ResponseWriter, r *http.Request) {
 	//TODO la alarma global debe estar desactivada para operar
 }
+
+func HandlerGetSensors(w http.ResponseWriter, r *http.Request){
+
+}

@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"github.com/alknopfler/alkalarm/mailer"
 	"github.com/gorilla/mux"
-	"errors"
 	"github.com/alknopfler/alkalarm/config"
 )
 
