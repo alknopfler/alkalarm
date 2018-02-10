@@ -11,7 +11,7 @@ import (
 //HandlerCreateSensor function
 func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
 	//TODO la alarma global debe estar desactivada para operar
-	input, err := readMailBodyJson(r)
+	input, err := readSensorBodyJson(r)
 	if err != nil {
 		responseWithError(w, http.StatusBadRequest,err.Error())
 	}
@@ -35,7 +35,7 @@ func HandlerDeleteSensor(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data:= cfg.Sensor{Code:codeInput}
-	err:=sensors.UnregisterSensor(data)
+	err:=sensors.UnregisterSensor(data.Code)
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return
