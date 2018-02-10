@@ -1,6 +1,10 @@
 package config
 
-import "os"
+import (
+	"os"
+	"io/ioutil"
+	"fmt"
+)
 
 const (
 	//GENERIC
@@ -17,7 +21,15 @@ const (
 
 var (
 	DB_NAME = os.Getenv("HOME")+"/data.db"
-	DB_TYPE	="sqlite3"
+	DB_TYPE	= "sqlite3"
+
+	FROM = "alknopfler@gmail.com"
+	SMTP_USER = "alknopfler@gmail.com"
+	LIST_TO_MAIL = []string{"alknopfler@gmail.com","begoclavero@gmail.com"}
+	SMTP_SERVER = "smtp.gmail.com"
+	SMTP_PORT = "587"
+	SMTP_PASS = readPassFromFile()
+
 )
 
 //Sensor struct to define the object
@@ -26,16 +38,11 @@ type Sensor struct {
 	TypeOf string
 	Zone string
 }
-//Mailer struct to define the object
-type Mailer struct{
-	Emisor string
-	Receptor string
-	Subject string
-	Text string
-	Smtp_address string
-	Smtp_port string
-	Smtp_user string
-	Smtp_pass string
-	Smtp_security string
-}
 
+func readPassFromFile()string{
+	b, err := ioutil.ReadFile(PROJECT_PATH+".passSMTP") // just pass the file name
+	if err != nil {
+		fmt.Print(err)
+	}
+	return string(b)
+}

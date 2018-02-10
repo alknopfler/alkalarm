@@ -56,6 +56,11 @@ create_folder $LOG_PATH
 echo "### Copy the python script to the project directory ... ### "
 cp _433.py $PROJECT_PATH/
 
+echo "### Creating the password file with email smtp server password ... ### "
+
+read -p "Introduce la password de la cuenta smtp: " password
+echo password>$PROJECT_PATH/.passSMTP
+
 echo "### Enabling the PiGPIO daemon ###"
 systemctl enable pigpiod
 

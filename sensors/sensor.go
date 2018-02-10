@@ -24,7 +24,7 @@ func RegisterSensor(data cfg.Sensor) error{
 	return nil
 }
 
-func UnregisterSensor(data cfg.Sensor) error{
+func UnregisterSensor(code string) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Sensor")
@@ -32,7 +32,7 @@ func UnregisterSensor(data cfg.Sensor) error{
 	}
 	defer db.Close()
 
-	err=database.Operate(db,cfg.SENSOR_DELETE,data.Code)
+	err=database.Operate(db,cfg.SENSOR_DELETE,code)
 	if err!=nil{
 		fmt.Println("Error inserting sensor in db")
 		return err
@@ -42,12 +42,12 @@ func UnregisterSensor(data cfg.Sensor) error{
 }
 
 
-func QuerySensorsAll(param ...string) ([]cfg.Sensor,error){
+func QuerySensorsAll() ([]cfg.Sensor,error){
 	var result []cfg.Sensor
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Query Sensor")
-		return err
+		return result,err
 	}
 	defer db.Close()
 	rows, err := db.Query(cfg.SENSOR_QUERY_ALL)
@@ -63,16 +63,35 @@ func QuerySensorsAll(param ...string) ([]cfg.Sensor,error){
 	return result, nil
 }
 
+func QuerySensors(code string) (cfg.Sensor,error){
+	var result cfg.Sensor
+	db,err := database.InitDB()
+	if err != nil {
+		fmt.Println("Error initiating DB in Query Sensor")
+		return result,err
+	}
+	defer db.Close()
+	rows, err := db.Query(cfg.SENSOR_QUERY_CODE,code)
+	if err != nil { return result,err }
+	defer rows.Close()
+
+	if rows.Next() {
+		err2 := rows.Scan(&result.Code, &result.TypeOf, &result.Zone)
+		if err2 != nil { return result,err }
+	}
+	return result, nil
+}
+
 func SensorExists(code string) bool{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Sensor Exists")
-		return err
+		return false
 	}
 	defer db.Close()
-	rows, err := db.Query(cfg.SENSOR_EXISTS,code)
+	rows, err := db.Query(cfg.SENSOR_QUERY_CODE,code)
 	defer rows.Close()
-	if len(rows)== 1{
+	if rows.Next(){
 		return true
 	}
 	return false

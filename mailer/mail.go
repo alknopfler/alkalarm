@@ -2,42 +2,24 @@ package mailer
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"fmt"
-	"github.com/alknopfler/alkalarm/database"
+	"net/smtp"
+	"log"
 )
 
-func RegisterMailer(data cfg.Mailer) error{
-	//First Time to execute needs create database and scheme
-	db,err := database.InitDB()
+func SendMail(zona string,){
+
+	msg := "From: " + cfg.FROM + "\n" +
+		"To: " + cfg.LIST_TO_MAIL[0] + "\n" +
+		"Subject: ALARMA CASA - Sensor zona: "+zona+"\n\n" +
+		"Ha saltado la alarma de la casa del sensor: " + zona
+
+	err := smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
+		smtp.PlainAuth("", cfg.FROM, cfg.SMTP_PASS, cfg.SMTP_SERVER),
+		cfg.FROM, cfg.LIST_TO_MAIL, []byte(msg))
+
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Mailer")
-		return err
+		log.Printf("smtp error: %s", err)
+		return
 	}
-	defer db.Close()
 
-	err=database.Operate(db,cfg.MAIL_INSERT,data.Emisor,data.Receptor,data.Subject,data.Text,data.Smtp_address,data.Smtp_port,data.Smtp_user,data.Smtp_pass,data.Smtp_security)
-	if err!=nil{
-		fmt.Println("Error inserting mailer in db")
-		return err
-	}
-	fmt.Println("Success...Mail registered successfully")
-	return nil
-}
-
-func UnregisterMailer(data cfg.Mailer) error{
-	//First Time to execute needs create database and scheme
-	db,err := database.InitDB()
-	if err != nil {
-		fmt.Println("Error initiating DB in Register Mailer")
-		return err
-	}
-	defer db.Close()
-
-	err=database.Operate(db,cfg.MAIL_DELETE,data.Receptor)
-	if err!=nil{
-		fmt.Println("Error inserting mailer in db")
-		return err
-	}
-	fmt.Println("Success...Mail registered successfully")
-	return nil
 }

@@ -31,11 +31,6 @@ func TestOperateWithItem(t *testing.T) {
 	err:=Operate(db, cfg.SENSOR_DELETE, "sensorTest")
 	assert.NoError(t,err)
 
-	//prueba de insert y delete sobre mailer
-	Operate(db, cfg.MAIL_INSERT, "emisorTest","receptorTest","subjectTest","textTest","smtp","smtp2","smtp3","smtp4","smtp5")
-	err=Operate(db, cfg.MAIL_DELETE, "receptorTest")
-	assert.NoError(t,err)
-
 	//prueba de insert y delete sobre alarm
 	Operate(db, cfg.ALARM_INSERT, "fechaTest","sensorTest")
 	err=Operate(db, cfg.ALARM_DELETE)

@@ -7,16 +7,6 @@ const (
 		"code TEXT PRIMARY KEY," +
 		"typeOf TEXT CHECK( typeOf IN ('presence','aperture','other') )," +
 		"zone TEXT);"
-	MAILER_TABLE = "CREATE TABLE IF NOT EXISTS mailer (" +
-		"emisor TEXT," +
-		"receptor TEXT," +
-		"subject TEXT," +
-		"text TEXT," +
-		"smtp_address TEXT," +
-		"smtp_port TEXT," +
-		"smtp_user TEXT," +
-		"smtp_pass TEXT," +
-		"smtp_security TEXT);"
 	ALARM_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS alarms (" +
 		"date TEXT," +
 		"sensor TEXT);"
