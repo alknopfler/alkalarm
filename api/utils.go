@@ -54,3 +54,21 @@ func readMailBodyJson(r *http.Request)([]cfg.Mailer,error){
 	}
 	return value, nil
 }
+
+func readControlBodyJson(r *http.Request)([]cfg.Control,error){
+	var value []cfg.Control
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+
+	if err != nil {
+		fmt.Println("Error while reading input JSON")
+		return value, err
+	}
+
+	err = json.Unmarshal(b, &value)
+	if err != nil {
+		fmt.Println("Error while unmarshalling input JSON")
+		return value, err
+	}
+	return value, nil
+}

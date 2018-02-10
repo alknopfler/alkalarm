@@ -13,9 +13,11 @@ func HandlerController()  *mux.Router {
 	r.HandleFunc("/setup/mail", HandlerCreateMail).Methods("POST")
 	r.HandleFunc("/setup/mail", HandlerGetMail).Methods("GET")
 	r.HandleFunc("/setup/mail/{receptor}", HandlerDeleteMail).Methods("DELETE")
-	r.HandleFunc("/setup/control", HandlerCreateSensor).Methods("POST")
-	r.HandleFunc("/setup/control", HandlerGetSensors).Methods("GET")
-	r.HandleFunc("/setup/control/{code}", HandlerDeleteSensor).Methods("DELETE")
+	r.HandleFunc("/setup/control", HandlerCreateControl).Methods("POST")
+	r.HandleFunc("/setup/control", HandlerGetControl).Methods("GET")
+	r.HandleFunc("/setup/control/{code}", HandlerDeleteControl).Methods("DELETE")
+	r.HandleFunc("/alarm", HandlerGetAlarm).Methods("GET")
+	r.HandleFunc("/alarm", HandlerDeleteAlarm).Methods("DELETE")
 	return r
 }
 

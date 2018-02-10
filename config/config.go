@@ -9,6 +9,7 @@ const (
 	//GENERIC
 	PROJECT_PATH	="/opt/alkalarm/"
 	PYGPIO		="_433.py"
+	SERVER_API_PORT =":8080"
 	//DATABASE
 
 	//CONTROL
@@ -48,6 +49,11 @@ type Control struct {
 	Code string  `json:"Code"`
 	Description string `json:"Description"`
 	TypeOf string `json:"TypeOf"`
+}
+
+type Alarm struct{
+	Date string  `json:"Date"`
+	Sensor string `json:"Sensor"`
 }
 
 

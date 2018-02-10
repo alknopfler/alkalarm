@@ -1,0 +1,15 @@
+curl -X POST \
+  http://192.168.43.23:8080/setup/sensor \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 1cf98e70-a219-decc-3a44-a7a8e1db80da' \
+  -d '[
+	{ "Code":"234554",
+	  "TypeOf":"presence",
+	  "Zone": "puerta entrada"
+	},
+	{ "Code":"555555",
+	  "TypeOf":"other",
+	  "Zone": "tejado"
+	}
+]'

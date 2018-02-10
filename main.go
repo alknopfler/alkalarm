@@ -5,6 +5,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"github.com/alknopfler/alkalarm/database"
+	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/api"
 	"net/http"
 )
@@ -28,8 +29,8 @@ func init(){
 }
 
 func main() {
-	err := http.ListenAndServe(":8080", api.HandlerController())
+	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {
-		fmt.Println("Error listening server in :8080")
+		fmt.Println("Error listening api server...")
 	}
 }

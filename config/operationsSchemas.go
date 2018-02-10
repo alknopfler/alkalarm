@@ -32,5 +32,8 @@ const (
 		SENSOR_QUERY_CODE = "SELECT * FROM sensors WHERE code=?"
 		MAIL_QUERY_ALL = "SELECT * FROM mailer"
 		MAIL_QUERY_RECEPTOR = "SELECT * FROM mailer WHERE receptor=?"
+		CONTROL_QUERY_ALL= "SELECT * FROM control"
+		CONTROL_QUERY_CODE = "SELECT * FROM control WHERE code=?"
+		ALARM_QUERY_ALL= "SELECT * FROM alarms"
 
 )
