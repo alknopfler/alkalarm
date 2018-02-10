@@ -20,7 +20,7 @@ const (
 )
 
 var (
-	DB_NAME = os.Getenv("HOME")+"/data.db"
+	DB_NAME = PROJECT_PATH+"data.db"
 	DB_TYPE	= "sqlite3"
 
 	FROM = "alknopfler@gmail.com"

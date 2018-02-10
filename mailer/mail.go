@@ -6,8 +6,7 @@ import (
 	"log"
 )
 
-func SendMail(zona string,){
-
+func SendMail(zona string){
 	msg := "From: " + cfg.FROM + "\n" +
 		"To: " + cfg.LIST_TO_MAIL[0] + "\n" +
 		"Subject: ALARMA CASA - Sensor zona: "+zona+"\n\n" +
@@ -21,5 +20,4 @@ func SendMail(zona string,){
 		log.Printf("smtp error: %s", err)
 		return
 	}
-
 }
