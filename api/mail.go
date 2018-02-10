@@ -19,7 +19,7 @@ func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 	for i:=range input{
 		err=mailer.RegisterMailer(input[i])
 		if err!= nil {
-			responseWithError(w,http.StatusInternalServerError,err)
+			responseWithError(w,http.StatusInternalServerError,err.Error())
 			return
 		}
 	}
@@ -31,7 +31,7 @@ func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
 	//TODO la alarma global debe estar desactivada para operar
 	receptorInput, _ := mux.Vars(r)["receptor"]
 	if ! mailer.MailExists(receptorInput){
-		responseWithError(w, http.StatusBadGateway, errors.New("Mail Not Found"))
+		responseWithError(w, http.StatusBadGateway, "Mail Not Found")
 		return
 	}
 	data:= config.Mailer{Receptor:receptorInput}
