@@ -5,6 +5,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"github.com/alknopfler/alkalarm/database"
+	"github.com/alknopfler/alkalarm/api"
+	"net/http"
 )
 
 func init(){
@@ -13,14 +15,21 @@ func init(){
 	//First Time to execute needs create database and scheme
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB")
+		fmt.Println("Error initiating DB First Time (init):",err)
 		os.Exit(2)
 	}
 	defer db.Close()
-	database.CreateSchemas(db)
-
+	err=database.CreateSchemas(db)
+	if err!=nil{
+		fmt.Println("Error creating the schema the first time (init):", err)
+		os.Exit(3)
+	}
 	fmt.Println("Success...Starting the program")
 }
 
 func main() {
+	err := http.ListenAndServe(":8080", api.HandlerController())
+	if err != nil {
+		fmt.Println("Error listening server in :8080")
+	}
 }
