@@ -30,6 +30,8 @@ const (
 
 
 	//// QUERIES ////
-		SENSOR_QUERY = "SELECT * FROM sensors"
+		SENSOR_QUERY_ALL= "SELECT * FROM sensors"
+		SENSOR_QUERY_CODE = "SELECT * FROM sensors WHERE code=?"
+		SENSOR_EXISTS = "SELECT EXISTS (SELECT * FROM sensors WHERE code=? LIMIT 1)"
 
 )

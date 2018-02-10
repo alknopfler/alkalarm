@@ -43,20 +43,4 @@ func Operate(db *sql.DB, operation string, values ...interface{})error{
 	}
 	return nil
 }
-/*
-func QuerySensors(db *sql.DB, query string) ([]string,error){
-	var result []string
-	rows, err := db.Query(query)
-	if err != nil { return result,err }
-	defer rows.Close()
-
-
-	for rows.Next() {
-		item := string{}
-		err2 := rows.Scan(&item.Code, &item.TypeOf, &item.Zone)
-		if err2 != nil { return nil,err }
-		result = append(result, item)
-	}
-	return result, nil
-}*/
 
