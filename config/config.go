@@ -43,6 +43,14 @@ type Mailer struct {
 	Receptor string  `json:"Receptor"`
 }
 
+//Control struct to define the object
+type Control struct {
+	Code string  `json:"Code"`
+	Description string `json:"Description"`
+	TypeOf string `json:"TypeOf"`
+}
+
+
 func readPassFromFile()string{
 	b, err := ioutil.ReadFile(PROJECT_PATH+".passSMTP") // just pass the file name
 	if err != nil {

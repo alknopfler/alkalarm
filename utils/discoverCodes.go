@@ -9,6 +9,7 @@ import (
 	cfg "github.com/alknopfler/alkalarm/config"
 
 	"encoding/json"
+	"os"
 )
 
 func discoverCodeSensor() (string, error) {
@@ -38,12 +39,8 @@ func discoverCodeSensor() (string, error) {
 	return "",errors.New("Sensor Not Found after 10 second looking for it...")
 }
 
-func menu(){
-	fmt.Println("***********************************")
-	fmt.Println("Utility to discover sensor codes...")
-	fmt.Println("The program will stop automatically when it discover the sensor.")
-	fmt.Println("Anyway, you could stop using ctrl+c")
-	fmt.Println("***********************************")
+func sensor(){
+
 	var listSensor []cfg.Sensor
 	for true{
 		fmt.Println("Looking for new sensor...Try to activate manually to detect it...")
@@ -71,9 +68,54 @@ func menu(){
 	response, _ := json.Marshal(listSensor)
 	fmt.Println("The json with the sensors detected is: ")
 	fmt.Println(response)
-	fmt.Println("Try to register in AlkAlarm using the API setup/sensor and load the body payload with this json.")
+	fmt.Println("Try to register in AlkAlarm using the API 'setup/sensor' and load the body payload with this json.")
+}
+
+func control(){
+
+	var listControl []cfg.Control
+	for true{
+		fmt.Println("Looking for new control...Try to activate manually to detect it...")
+		code,err:=discoverCodeSensor()
+
+		if err!=nil{
+			fmt.Println("Fail: ",err)
+		}else{
+			fmt.Println("Code Detected:",code)
+			fmt.Print("Enter description (i.e mando1): ")
+			var desc string
+			fmt.Scanln(&desc)
+			fmt.Print("Enter the type of your button in the controller: ")
+			var typeOf string
+			fmt.Scanln(&typeOf)
+			listControl = append(listControl,cfg.Control{code,desc,typeOf})
+		}
+		fmt.Print("Do you want to continuos with another control?:[Y|n] ")
+		var answer string
+		fmt.Scanln(&answer)
+		if answer == "n" || answer == "N"{
+			break
+		}
+	}
+	response, _ := json.Marshal(listControl)
+	fmt.Println("The json with the controls detected is: ")
+	fmt.Println(response)
+	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
 }
 
 func main(){
-	menu()
+	fmt.Println("***********************************")
+	fmt.Println("Utility to discover sensor or control codes...")
+	fmt.Println("The program will stop automatically when it discover the sensor.")
+	fmt.Println("Anyway, you could stop using ctrl+c")
+	fmt.Println("***********************************")
+	fmt.Println("")
+	fmt.Println("Select if you want to discover Sensors or Controls [sensor|control] (default:sensor):")
+	var answer string
+	fmt.Scanln(&answer)
+	if answer == "control"{
+		control()
+		os.Exit(0)
+	}
+	sensor()
 }
