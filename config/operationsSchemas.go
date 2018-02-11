@@ -21,7 +21,6 @@ const (
 		MAIL_DELETE = "DELETE FROM mailer WHERE receptor=?"
 		ALARM_DELETE = "DELETE FROM alarms"   //just to clear alarm historic
 		CONTROL_DELETE = "DELETE FROM control WHERE code=?"
-		GLOBAL_STATE_DELETE = "DELETE FROM global_state"
 
 	//// UPDATES ////
 		GLOBAL_STATE_UPDATE = "UPDATE global_state SET state=? WHERE id=1"
@@ -35,5 +34,6 @@ const (
 		CONTROL_QUERY_ALL= "SELECT * FROM control"
 		CONTROL_QUERY_CODE = "SELECT * FROM control WHERE code=?"
 		ALARM_QUERY_ALL= "SELECT * FROM alarms"
+		GLOBAL_STATE_QUERY="SELECT state FROM global_state WHERE id=1"
 
 )

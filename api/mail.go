@@ -4,42 +4,49 @@ import (
 	"net/http"
 	"github.com/alknopfler/alkalarm/mailer"
 	"github.com/gorilla/mux"
-	"github.com/alknopfler/alkalarm/config"
+	cfg "github.com/alknopfler/alkalarm/config"
+	"github.com/alknopfler/alkalarm/kernel"
 )
 
 
 //HandlerCreateMail function
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
-	//TODO la alarma global debe estar desactivada para operar
-	input, err := readMailBodyJson(r)
-	if err != nil {
-		responseWithError(w, http.StatusBadRequest,err.Error())
-	}
-	for i:=range input{
-		err=mailer.RegisterMailer(input[i])
-		if err!= nil {
-			responseWithError(w,http.StatusInternalServerError,err.Error())
-			return
+	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+		input, err := readMailBodyJson(r)
+		if err != nil {
+			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
+		for i:=range input{
+			err=mailer.RegisterMailer(input[i])
+			if err!= nil {
+				responseWithError(w,http.StatusInternalServerError,err.Error())
+				return
+			}
+		}
+		responseWithJSON(w,http.StatusCreated,"Mail Registered successfully")
+		return
 	}
-	responseWithJSON(w,http.StatusCreated,"Mail Registered successfully")
+	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")
 }
 
 //HandlerDeleteMail function
 func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
-	//TODO la alarma global debe estar desactivada para operar
-	receptorInput, _ := mux.Vars(r)["receptor"]
-	if ! mailer.MailExists(receptorInput){
-		responseWithError(w, http.StatusBadGateway, "Mail Not Found")
+	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+		receptorInput, _ := mux.Vars(r)["receptor"]
+		if ! mailer.MailExists(receptorInput){
+			responseWithError(w, http.StatusBadGateway, "Mail Not Found")
+			return
+		}
+		data:= cfg.Mailer{Receptor:receptorInput}
+		err:=mailer.UnregisterMailer(data)
+		if err!=nil{
+			responseWithError(w,http.StatusInternalServerError,err.Error())
+			return
+		}
+		responseWithJSON(w,http.StatusOK,"Mail Deleted successfully")
 		return
 	}
-	data:= config.Mailer{Receptor:receptorInput}
-	err:=mailer.UnregisterMailer(data)
-	if err!=nil{
-		responseWithError(w,http.StatusInternalServerError,err.Error())
-		return
-	}
-	responseWithJSON(w,http.StatusOK,"Mail Deleted successfully")
+	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")
 }
 
 func HandlerGetMail(w http.ResponseWriter, r *http.Request){
