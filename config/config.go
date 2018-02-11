@@ -32,7 +32,7 @@ var (
 
 )
 type ArraySensor struct{
-	Data []Sensor `json:"-"`
+	Data []Sensor `json:"Data"`
 }
 //Sensor struct to define the object
 type Sensor struct {
