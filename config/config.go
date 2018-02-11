@@ -46,6 +46,9 @@ type Mailer struct {
 	Receptor string  `json:"Receptor"`
 }
 
+type ArrayControl struct{
+	Data []Control `json:"Data"`
+}
 //Control struct to define the object
 type Control struct {
 	Code string  `json:"Code"`

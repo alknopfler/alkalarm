@@ -73,7 +73,7 @@ func sensor(){
 
 func control(){
 
-	var listControl []cfg.Control
+	var listArrayControl []cfg.Control
 	for true{
 		fmt.Println("Looking for new control...Try to activate manually to detect it...")
 		code,err:=discoverCodeSensor()
@@ -88,7 +88,7 @@ func control(){
 			fmt.Print("Enter the type of your button in the controller: ")
 			var typeOf string
 			fmt.Scanln(&typeOf)
-			listControl = append(listControl,cfg.Control{code,desc,typeOf})
+			listArrayControl = append(listArrayControl,cfg.Control{code,desc,typeOf})
 		}
 		fmt.Print("Do you want to continuos with another control?:[Y|n] ")
 		var cont string
@@ -97,7 +97,7 @@ func control(){
 			break
 		}
 	}
-	response, _ := json.Marshal(listControl)
+	response, _ := json.Marshal(listArrayControl)
 	fmt.Println("The json with the controls detected is: ")
 	fmt.Println(string(response))
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
