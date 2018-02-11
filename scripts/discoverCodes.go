@@ -67,7 +67,9 @@ func sensor(){
 	fmt.Println(listArraySensor)
 	response, _ := json.Marshal(listArraySensor)
 	fmt.Println("The json with the sensors detected is: ")
+	fmt.Println("")
 	fmt.Println(string(response))
+	fmt.Println("")
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/sensor' and load the body payload with this json.")
 }
 
@@ -99,7 +101,9 @@ func control(){
 	}
 	response, _ := json.Marshal(listArrayControl)
 	fmt.Println("The json with the controls detected is: ")
+	fmt.Println("")
 	fmt.Println(string(response))
+	fmt.Println("")
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
 }
 
