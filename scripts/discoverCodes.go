@@ -57,7 +57,7 @@ func sensor(){
 			var zone string
 			fmt.Scanln(&zone)
 			listSensor = append(listSensor,cfg.Sensor{code,typeof,zone})
-			listArraySensor = append(listArraySensor,listSensor)
+			listArraySensor = append(listArraySensor,cfg.ArraySensor{listSensor})
 		}
 		fmt.Print("Do you want to continuos with another sensor?:[Y|n] ")
 		var cont string
@@ -98,7 +98,7 @@ func control(){
 			break
 		}
 	}
-	response, _ := json.Marshal(string(listControl))
+	response, _ := json.Marshal(listControl)
 	fmt.Println("The json with the controls detected is: ")
 	fmt.Println(response)
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
