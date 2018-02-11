@@ -64,7 +64,6 @@ func sensor(){
 			break
 		}
 	}
-	fmt.Println(listArraySensor)
 	response, _ := json.Marshal(listArraySensor)
 	fmt.Println("The json with the sensors detected is: ")
 	fmt.Println("")
@@ -87,7 +86,7 @@ func control(){
 			fmt.Print("Enter description (i.e mando1): ")
 			var desc string
 			fmt.Scanln(&desc)
-			fmt.Print("Enter the type of your button in the controller: ")
+			fmt.Print("Enter the type of your button in the controller [full|partial|inactive|sos]: ")
 			var typeOf string
 			fmt.Scanln(&typeOf)
 			listArrayControl = append(listArrayControl,cfg.Control{code,desc,typeOf})
