@@ -99,7 +99,7 @@ func control(){
 	}
 	response, _ := json.Marshal(listControl)
 	fmt.Println("The json with the controls detected is: ")
-	fmt.Println(response)
+	fmt.Println(string(response))
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
 }
 
