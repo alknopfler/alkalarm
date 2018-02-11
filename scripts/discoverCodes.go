@@ -64,7 +64,7 @@ func sensor(){
 			break
 		}
 	}
-
+	fmt.Println(listArraySensor)
 	response, _ := json.Marshal(listArraySensor)
 	fmt.Println("The json with the sensors detected is: ")
 	fmt.Println(response)
