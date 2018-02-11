@@ -91,9 +91,9 @@ func control(){
 			listControl = append(listControl,cfg.Control{code,desc,typeOf})
 		}
 		fmt.Print("Do you want to continuos with another control?:[Y|n] ")
-		var answer string
-		fmt.Scanln(&answer)
-		if answer == "n" || answer == "N"{
+		var cont string
+		fmt.Scanln(&cont)
+		if cont == "n" || cont == "N"{
 			break
 		}
 	}

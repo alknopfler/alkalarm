@@ -46,6 +46,7 @@ func UpdateGlobalState(newState string)  error{
 func handlerEvent(evento string){
 
 	fmt.Println("Sensor detected: " ,evento)
+	//CALL TO NOTIFICATOR MAYBE
 
 }
 
