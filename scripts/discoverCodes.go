@@ -57,7 +57,7 @@ func sensor(){
 			var zone string
 			fmt.Scanln(&zone)
 			listSensor = append(listSensor,cfg.Sensor{code,typeof,zone})
-			listArraySensor = append(listArraySensor,cfg.ArraySensor{listSensor})
+			listArraySensor = append(listArraySensor,cfg.ArraySensor{Data:listSensor})
 		}
 		fmt.Print("Do you want to continuos with another sensor?:[Y|n] ")
 		var cont string
