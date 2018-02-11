@@ -31,9 +31,7 @@ var (
 	SMTP_PASS = readPassFromFile()
 
 )
-type ArraySensor struct{
-	Sensor []Sensor `json:"_"`
-}
+
 //Sensor struct to define the object
 type Sensor struct {
 	Code string  `json:"Code"`

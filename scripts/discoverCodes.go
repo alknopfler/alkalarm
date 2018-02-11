@@ -41,7 +41,7 @@ func discoverCodeSensor() (string, error) {
 
 func sensor(){
 
-	var listSensor []cfg.ArraySensor
+	var listSensor []cfg.Sensor
 	for true{
 		fmt.Println("Looking for new sensor...Try to activate manually to detect it...")
 		code,err:=discoverCodeSensor()
@@ -65,7 +65,7 @@ func sensor(){
 			break
 		}
 	}
-	response, _ := json.Marshal(listSensor)
+	response, _ := json.Marshal(string(listSensor))
 	fmt.Println("The json with the sensors detected is: ")
 	fmt.Println(response)
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/sensor' and load the body payload with this json.")
@@ -97,7 +97,7 @@ func control(){
 			break
 		}
 	}
-	response, _ := json.Marshal(listControl)
+	response, _ := json.Marshal(string(listControl))
 	fmt.Println("The json with the controls detected is: ")
 	fmt.Println(response)
 	fmt.Println("Try to register in AlkAlarm using the API 'setup/control' and load the body payload with this json.")
