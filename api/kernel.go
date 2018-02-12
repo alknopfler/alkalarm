@@ -14,9 +14,9 @@ func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
 		return
 	}else if states.Query()== cfg.STATE_PART{
-		kernel.State <- "stop"  //primero paro y despues lanzo con full
+		//kernel.State <- "stop"  //primero paro y despues lanzo con full
 		states.Update(cfg.STATE_FULL)
-		go kernel.ListenEvents()
+		//go kernel.ListenEvents()
 		return
 	}
 	responseWithJSON(w,http.StatusOK,"Alarm started successfully")
@@ -29,9 +29,9 @@ func HandlerActivatePartial(w http.ResponseWriter, r *http.Request) {
 		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
 		return
 	}else if states.Query()== cfg.STATE_FULL{
-		kernel.State <- "stop"  //primero paro y despues lanzo con part
+		//kernel.State <- "stop"  //primero paro y despues lanzo con part
 		states.Update(cfg.STATE_PART)
-		go kernel.ListenEvents()
+		//go kernel.ListenEvents()
 		return
 	}
 	responseWithJSON(w,http.StatusOK,"Alarm started successfully")
@@ -39,8 +39,8 @@ func HandlerActivatePartial(w http.ResponseWriter, r *http.Request) {
 
 func HandlerDeactivate(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_FULL || states.Query() == cfg.STATE_PART {
-		states.Update(cfg.STATE_INAC)
 		kernel.State <- "stop"
+		states.Update(cfg.STATE_INAC)
 		responseWithJSON(w, http.StatusOK, "Alarm stoped successfully")
 		return
 	}

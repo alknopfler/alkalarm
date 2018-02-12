@@ -26,8 +26,8 @@ func handlerEvent(evento string){
 		}
 	}else if control.Exists(evento){
 		if control.QueryTypeOf(evento) == cfg.STATE_INAC && states.Query() != cfg.STATE_INAC{
-			states.Update(cfg.STATE_INAC)
 			State <- "stop"
+			states.Update(cfg.STATE_INAC)
 			return
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
@@ -36,9 +36,9 @@ func handlerEvent(evento string){
 				go ListenEvents()
 				return
 			}else if states.Query()== cfg.STATE_PART{
-				State <- "stop"  //primero paro y despues lanzo con full
+				//State <- "stop"  //primero paro y despues lanzo con full
 				states.Update(cfg.STATE_FULL)
-				go ListenEvents()
+				//go ListenEvents()
 				return
 			}
 		}
@@ -48,9 +48,9 @@ func handlerEvent(evento string){
 				go ListenEvents()
 				return
 			}else if states.Query()== cfg.STATE_FULL{
-				State <- "stop"  //primero paro y despues lanzo con part
+				//State <- "stop"  //primero paro y despues lanzo con part
 				states.Update(cfg.STATE_PART)
-				go ListenEvents()
+				//go ListenEvents()
 				return
 			}
 		}
