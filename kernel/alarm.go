@@ -9,6 +9,7 @@ import (
 	"github.com/alknopfler/alkalarm/sensors"
 	"github.com/alknopfler/alkalarm/control"
 	"github.com/alknopfler/alkalarm/states"
+	"os"
 )
 
 var State = make(chan string)
@@ -59,6 +60,7 @@ func handlerEvent(evento string){
 }
 
 func ListenEvents(){
+
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)

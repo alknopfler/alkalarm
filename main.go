@@ -38,7 +38,7 @@ func init(){
 }
 
 func main() {
-	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
+	//go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {
 		fmt.Println("Error listening api server...")
