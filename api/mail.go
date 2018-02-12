@@ -5,13 +5,13 @@ import (
 	"github.com/alknopfler/alkalarm/mailer"
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
-	"github.com/alknopfler/alkalarm/kernel"
+	"github.com/alknopfler/alkalarm/states"
 )
 
 
 //HandlerCreateMail function
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		input, err := readMailBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
@@ -31,7 +31,7 @@ func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteMail function
 func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		receptorInput, _ := mux.Vars(r)["receptor"]
 		if ! mailer.MailExists(receptorInput){
 			responseWithError(w, http.StatusBadGateway, "Mail Not Found")

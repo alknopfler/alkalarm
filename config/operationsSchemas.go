@@ -14,7 +14,7 @@ const (
 		MAIL_INSERT = "INSERT INTO mailer(receptor) values (?)"
 		ALARM_INSERT = "INSERT INTO alarms(date,sensor) values(?,?)"
 		CONTROL_INSERT = "INSERT INTO control(code,description,typeOf) values(?,?,?)"
-		GLOBAL_STATE_INSERT= "INSERT INTO global_state(id,state) values(1,?)"
+		GLOBAL_STATE_INSERT= "INSERT INTO global_state(id,gstate) values(1,?)"
 
 	//// DELETES ////
 		SENSOR_DELETE = "DELETE FROM sensors WHERE code=?"
@@ -23,7 +23,7 @@ const (
 		CONTROL_DELETE = "DELETE FROM control WHERE code=?"
 
 	//// UPDATES ////
-		GLOBAL_STATE_UPDATE = "UPDATE global_state SET state=? WHERE id=1"
+		GLOBAL_STATE_UPDATE = "UPDATE global_state SET gstate=? WHERE id=1"
 
 
 	//// QUERIES ////
@@ -34,6 +34,6 @@ const (
 		CONTROL_QUERY_ALL= "SELECT * FROM control"
 		CONTROL_QUERY_CODE = "SELECT * FROM control WHERE code=?"
 		ALARM_QUERY_ALL= "SELECT * FROM alarms"
-		GLOBAL_STATE_QUERY="SELECT state FROM global_state WHERE id=1"
+		GLOBAL_STATE_QUERY="SELECT * FROM global_state WHERE id=1"
 
 )

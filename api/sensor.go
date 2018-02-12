@@ -5,13 +5,13 @@ import (
 	"github.com/alknopfler/alkalarm/sensors"
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
-	"github.com/alknopfler/alkalarm/kernel"
+	"github.com/alknopfler/alkalarm/states"
 )
 
 
 //HandlerCreateSensor function
 func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		input, err := readSensorBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
@@ -31,7 +31,7 @@ func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteSensor function
 func HandlerDeleteSensor(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		codeInput, _ := mux.Vars(r)["code"]
 		if ! sensors.SensorExists(codeInput){
 			responseWithError(w, http.StatusBadGateway, "Sensor Not Found")

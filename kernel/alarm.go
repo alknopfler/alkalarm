@@ -2,7 +2,6 @@ package kernel
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"github.com/alknopfler/alkalarm/database"
 	"fmt"
 	"strings"
 	"os/exec"
@@ -11,48 +10,22 @@ import (
 
 var State = make(chan string)
 
-func GetGlobalState()  string{
-	var state string
-	db,err := database.InitDB()
-	if err != nil {
-		fmt.Println("Error initiating DB in Query Control")
-		return state
-	}
-	defer db.Close()
-	rows, err := db.Query(cfg.GLOBAL_STATE_QUERY)
-	if err != nil { return state}
-	defer rows.Close()
+func handlerEventFull(evento string){
 
-	if rows.Next() {
-		err2 := rows.Scan(&state)
-		if err2 != nil { return state }
-	}
-	return state
-}
-
-func UpdateGlobalState(newState string)  error{
-	db,err := database.InitDB()
-	if err != nil {
-		fmt.Println("Error initiating DB in Query Control")
-		return err
-	}
-	defer db.Close()
-	err=database.Operate(db,cfg.GLOBAL_STATE_UPDATE,newState)
-	if err!=nil{
-		return err
-	}
-	return nil
-}
-
-
-func handlerEvent(evento string){
-
-	fmt.Println("Sensor detected: " ,evento)
+	fmt.Println("FULL-Sensor detected: " ,evento)
 	//CALL TO NOTIFICATOR MAYBE
 
 }
 
-func ListenEvents(){
+func handlerEventPartial(evento string){
+
+	fmt.Println("PARTIAL-Sensor detected: " ,evento)
+	//CALL TO NOTIFICATOR MAYBE
+
+}
+
+
+func ListenEvents(typeofalarm string){
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
@@ -67,10 +40,20 @@ func ListenEvents(){
 		}
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
-		handlerEvent(string(line))
-		if "stop" == <-State{
-			break
+		if typeofalarm == cfg.STATE_PART{
+			handlerEventPartial(string(line))
+		}else{
+			handlerEventFull(string(line))
+		}
+
+		select {
+		case <-State:
+			cmd.Process.Kill()
+			fmt.Println("saliendodooooo")
+			return
+		default:
+			continue
 		}
 	}
-	cmd.Process.Kill()
+
 }

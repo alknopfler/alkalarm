@@ -61,6 +61,11 @@ type Alarm struct{
 	Sensor string `json:"Sensor"`
 }
 
+type GlobalState struct{
+	Id string `json:"Id"`
+	GState string `json:"State"`
+}
+
 
 func readPassFromFile()string{
 	b, err := ioutil.ReadFile(PROJECT_PATH+".passSMTP") // just pass the file name

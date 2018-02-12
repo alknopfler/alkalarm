@@ -19,7 +19,8 @@ func HandlerController()  *mux.Router {
 	r.HandleFunc("/alarm", HandlerGetAlarm).Methods("GET")
 	r.HandleFunc("/alarm", HandlerDeleteAlarm).Methods("DELETE")
 
-	r.HandleFunc("/activate",HandlerActivate).Methods("POST")
+	r.HandleFunc("/activate/full",HandlerActivateFull).Methods("POST")
+	r.HandleFunc("/activate/partial",HandlerActivatePartial).Methods("POST")
 	r.HandleFunc("/deactivate",HandlerDeactivate).Methods("POST")
 	return r
 }

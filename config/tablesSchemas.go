@@ -18,6 +18,6 @@ const (
 		"typeOf TEXT CHECK( typeOf IN ('"+STATE_INAC+"','"+STATE_FULL+"','"+STATE_PART+"','"+STATE_SOS+"') ) NOT NULL DEFAULT '');"
 	GLOBAL_STATE_TABLE = "CREATE TABLE IF NOT EXISTS global_state (" +
 		"id TEXT PRIMARY KEY,"+
-		"state TEXT CHECK( state IN ('"+STATE_FULL+"','"+STATE_PART+"','"+STATE_INAC+"') ) NOT NULL DEFAULT '');"
+		"gstate TEXT CHECK( gstate IN ('"+STATE_FULL+"','"+STATE_PART+"','"+STATE_INAC+"') ) NOT NULL DEFAULT '');"
 )
 

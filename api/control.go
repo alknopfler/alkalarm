@@ -3,15 +3,15 @@ package api
 import (
 	"net/http"
 	"github.com/alknopfler/alkalarm/control"
-	"github.com/alknopfler/alkalarm/kernel"
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
+	"github.com/alknopfler/alkalarm/states"
 )
 
 
 //HandlerCreateControl function
 func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		input, err := readControlBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest, err.Error())
@@ -31,7 +31,7 @@ func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteControl function
 func HandlerDeleteControl(w http.ResponseWriter, r *http.Request) {
-	if kernel.GetGlobalState() != cfg.STATE_INAC {   //must be inactive
+	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
 		codeInput, _ := mux.Vars(r)["code"]
 		if ! control.ControlExists(codeInput){
 			responseWithError(w, http.StatusBadGateway, "Control Not Found")

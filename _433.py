@@ -324,10 +324,7 @@ if __name__ == "__main__":
     # define optional callback for received codes.
 
     def rx_callback(code, bits, gap, t0, t1):
-        if code==13635112 or code==13318440 or code==2191656 or code==3157251 or code==6258984:
             print(code)
-        else:
-            print("nuevo %s" % code)
 
     pi = pigpio.pi() # Connect to local Pi.
     while True:
