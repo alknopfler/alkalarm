@@ -8,6 +8,7 @@ import (
 	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/api"
 	"net/http"
+	"github.com/alknopfler/alkalarm/kernel"
 )
 
 
@@ -32,6 +33,7 @@ func init(){
 		fmt.Println("Error activating the first time (init):", err)
 		os.Exit(3)
 	}
+	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	fmt.Println("Success...Starting the program")
 }
 
