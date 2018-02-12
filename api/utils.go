@@ -37,8 +37,8 @@ func readSensorBodyJson(r *http.Request)([]cfg.Sensor,error){
 	return value, nil
 }
 
-func readMailBodyJson(r *http.Request)(cfg.Mailer,error){
-	var value cfg.Mailer
+func readMailBodyJson(r *http.Request)([]cfg.Mailer,error){
+	var value []cfg.Mailer
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 

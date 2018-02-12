@@ -14,20 +14,16 @@ import (
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		input, err := readMailBodyJson(r)
-		fmt.Println("termina leer body")
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
-		//for i:=range input{
-		//	err=mailer.Register(input[i])
-		fmt.Println("antes de register")
-		err=mailer.Register(input)
-		fmt.Println("despues de registrer")
+		for i:=range input{
+			err=mailer.Register(input[i])
 			if err!= nil {
 				responseWithError(w,http.StatusInternalServerError,err.Error())
 				return
 			}
-		//}
+		}
 		responseWithJSON(w,http.StatusCreated,"Mail Registered successfully")
 		return
 	}
