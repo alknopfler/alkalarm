@@ -9,7 +9,6 @@ import (
 	"github.com/alknopfler/alkalarm/sensors"
 	"github.com/alknopfler/alkalarm/control"
 	"github.com/alknopfler/alkalarm/states"
-	"os"
 )
 
 var State = make(chan string)
