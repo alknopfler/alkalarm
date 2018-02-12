@@ -11,7 +11,7 @@ import (
 
 //HandlerCreateControl function
 func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
-	if states.Query() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		input, err := readControlBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest, err.Error())
@@ -31,7 +31,7 @@ func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteControl function
 func HandlerDeleteControl(w http.ResponseWriter, r *http.Request) {
-	if states.Query() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		codeInput, _ := mux.Vars(r)["code"]
 		if ! control.Exists(codeInput){
 			responseWithError(w, http.StatusBadGateway, "Control Not Found")

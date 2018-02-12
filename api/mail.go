@@ -11,7 +11,7 @@ import (
 
 //HandlerCreateMail function
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
-	if states.Query() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		input, err := readMailBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
@@ -31,7 +31,7 @@ func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteMail function
 func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
-	if states.Query() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		receptorInput, _ := mux.Vars(r)["receptor"]
 		if ! mailer.Exists(receptorInput){
 			responseWithError(w, http.StatusBadGateway, "Mail Not Found")

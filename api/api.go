@@ -22,6 +22,7 @@ func HandlerController()  *mux.Router {
 	r.HandleFunc("/activate/full",HandlerActivateFull).Methods("POST")
 	r.HandleFunc("/activate/partial",HandlerActivatePartial).Methods("POST")
 	r.HandleFunc("/deactivate",HandlerDeactivate).Methods("POST")
+	r.HandleFunc("/status",HandlerAlarmStatus).Methods("GET")
 	return r
 }
 

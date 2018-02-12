@@ -46,3 +46,7 @@ func HandlerDeactivate(w http.ResponseWriter, r *http.Request) {
 	}
 	responseWithJSON(w, http.StatusOK, "Alarm stoped successfully")
 }
+
+func HandlerAlarmStatus(w http.ResponseWriter, r *http.Request){
+	responseWithJSON(w,http.StatusOK,states.Query())
+}
