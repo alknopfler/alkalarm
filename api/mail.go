@@ -6,7 +6,6 @@ import (
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/states"
-	"fmt"
 )
 
 

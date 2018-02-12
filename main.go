@@ -23,6 +23,7 @@ func init(){
 		os.Exit(2)
 	}
 	defer db.Close()
+	//TODO revisar si es necesario crear esquemas o simplemente arrancar
 	err=database.CreateSchemas(db)
 	if err!=nil{
 		fmt.Println("Error creating the schema the first time (init):", err)
