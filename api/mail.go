@@ -16,13 +16,14 @@ func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
-		for i:=range input{
-			err=mailer.Register(input[i])
+		//for i:=range input{
+		//	err=mailer.Register(input[i])
+		err=mailer.Register(input)
 			if err!= nil {
 				responseWithError(w,http.StatusInternalServerError,err.Error())
 				return
 			}
-		}
+		//}
 		responseWithJSON(w,http.StatusCreated,"Mail Registered successfully")
 		return
 	}
