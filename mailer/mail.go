@@ -15,8 +15,9 @@ func Register(data cfg.Mailer) error{
 		return err
 	}
 	defer db.Close()
-
+	fmt.Println("antes de insert")
 	err=database.Operate(db,cfg.MAIL_INSERT,data.Receptor)
+	fmt.Println("despues de insert")
 	if err!=nil{
 		fmt.Println("Error inserting mailer in db")
 		return err

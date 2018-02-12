@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/states"
+	"fmt"
 )
 
 
@@ -13,12 +14,15 @@ import (
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_INAC {   //must be inactive
 		input, err := readMailBodyJson(r)
+		fmt.Println("termina leer body")
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
 		//for i:=range input{
 		//	err=mailer.Register(input[i])
+		fmt.Println("antes de register")
 		err=mailer.Register(input)
+		fmt.Println("despues de registrer")
 			if err!= nil {
 				responseWithError(w,http.StatusInternalServerError,err.Error())
 				return
