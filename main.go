@@ -33,11 +33,11 @@ func init(){
 		fmt.Println("Error activating the first time (init):", err)
 		os.Exit(3)
 	}
-	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	fmt.Println("Success...Starting the program")
 }
 
 func main() {
+	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {
 		fmt.Println("Error listening api server...")
