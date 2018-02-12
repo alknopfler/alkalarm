@@ -7,7 +7,7 @@ import (
 )
 
 
-func UpdateState(newstate string) error{
+func Update(newstate string) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in update Global State")
@@ -24,7 +24,7 @@ func UpdateState(newstate string) error{
 	return nil
 }
 
-func QueryState() string{
+func Query() string{
 	var result cfg.GlobalState
 	db,err := database.InitDB()
 	if err != nil {

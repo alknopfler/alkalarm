@@ -7,7 +7,7 @@ import (
 )
 
 
-func RegisterControl(data cfg.Control) error{
+func Register(data cfg.Control) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Control")
@@ -24,7 +24,7 @@ func RegisterControl(data cfg.Control) error{
 	return nil
 }
 
-func UnregisterControl(code string) error{
+func Unregister(code string) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Control")
@@ -42,7 +42,7 @@ func UnregisterControl(code string) error{
 }
 
 
-func QueryControlAll() ([]cfg.Control,error){
+func QueryAll() ([]cfg.Control,error){
 	var result []cfg.Control
 	db,err := database.InitDB()
 	if err != nil {
@@ -63,7 +63,7 @@ func QueryControlAll() ([]cfg.Control,error){
 	return result, nil
 }
 
-func QueryControl(code string) (cfg.Control,error){
+func Query(code string) (cfg.Control,error){
 	var result cfg.Control
 	db,err := database.InitDB()
 	if err != nil {
@@ -82,7 +82,12 @@ func QueryControl(code string) (cfg.Control,error){
 	return result, nil
 }
 
-func ControlExists(code string) bool{
+func QueryTypeOf(code string) string {
+	c,_:=Query(code)
+	return c.TypeOf
+}
+
+func Exists(code string) bool{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Control Exists")

@@ -11,13 +11,13 @@ import (
 
 //HandlerCreateControl function
 func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		input, err := readControlBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest, err.Error())
 		}
 		for i := range input {
-			err = control.RegisterControl(input[i])
+			err = control.Register(input[i])
 			if err != nil {
 				responseWithError(w, http.StatusInternalServerError, err.Error())
 				return
@@ -31,14 +31,14 @@ func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteControl function
 func HandlerDeleteControl(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		codeInput, _ := mux.Vars(r)["code"]
-		if ! control.ControlExists(codeInput){
+		if ! control.Exists(codeInput){
 			responseWithError(w, http.StatusBadGateway, "Control Not Found")
 			return
 		}
 		data:= cfg.Control{Code:codeInput}
-		err:=control.UnregisterControl(data.Code)
+		err:=control.Unregister(data.Code)
 		if err!=nil{
 			responseWithError(w,http.StatusInternalServerError,err.Error())
 			return
@@ -50,7 +50,7 @@ func HandlerDeleteControl(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerGetControl(w http.ResponseWriter, r *http.Request){
-	value,err:=control.QueryControlAll()
+	value,err:=control.QueryAll()
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return

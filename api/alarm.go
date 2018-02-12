@@ -10,7 +10,7 @@ import (
 //HandlerDeleteSensor function
 func HandlerDeleteAlarm(w http.ResponseWriter, r *http.Request) {
 
-	err:=alarms.UnregisterAlarm()
+	err:=alarms.Unregister()
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return
@@ -19,7 +19,7 @@ func HandlerDeleteAlarm(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerGetAlarm(w http.ResponseWriter, r *http.Request){
-	value,err:=alarms.QueryAlarmAll()
+	value,err:=alarms.QueryAll()
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return

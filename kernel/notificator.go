@@ -1,7 +1,24 @@
 package kernel
 
-// este se encargara de escribir alarma en historico
-// notificar a los mailers
-// y ejecutar el gpio de activar sirena
+import (
+	"github.com/alknopfler/alkalarm/sensors"
+	"github.com/alknopfler/alkalarm/mailer"
+	cfg "github.com/alknopfler/alkalarm/config"
 
-//TODO CON GOROUTINES PARA EVITAR ESPERAS Y BLOQUEOS
+	"time"
+	"github.com/alknopfler/alkalarm/alarms"
+)
+
+
+func Notificate(evento string){
+	//TODO GPIO con alarma sirena
+	sensor,_ := sensors.Query(evento)
+	data := cfg.Alarm{
+		Date: time.Now().String(),
+		Sensor: sensor.Zone+"  "+sensor.TypeOf+"  "+sensor.Code,
+	}
+
+	go mailer.SendMail(sensor.TypeOf,sensor.Zone)  //envio y me desentiendo
+
+	go alarms.Register(data)  //registro alarma y me desentiendo
+}

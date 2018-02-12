@@ -7,7 +7,7 @@ import (
 )
 
 
-func RegisterSensor(data cfg.Sensor) error{
+func Register(data cfg.Sensor) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Sensor")
@@ -24,7 +24,7 @@ func RegisterSensor(data cfg.Sensor) error{
 	return nil
 }
 
-func UnregisterSensor(code string) error{
+func Unregister(code string) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Sensor")
@@ -42,7 +42,7 @@ func UnregisterSensor(code string) error{
 }
 
 
-func QuerySensorsAll() ([]cfg.Sensor,error){
+func QueryAll() ([]cfg.Sensor,error){
 	var result []cfg.Sensor
 	db,err := database.InitDB()
 	if err != nil {
@@ -63,7 +63,7 @@ func QuerySensorsAll() ([]cfg.Sensor,error){
 	return result, nil
 }
 
-func QuerySensors(code string) (cfg.Sensor,error){
+func Query(code string) (cfg.Sensor,error){
 	var result cfg.Sensor
 	db,err := database.InitDB()
 	if err != nil {
@@ -82,7 +82,7 @@ func QuerySensors(code string) (cfg.Sensor,error){
 	return result, nil
 }
 
-func SensorExists(code string) bool{
+func Exists(code string) bool{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Sensor Exists")
@@ -92,6 +92,17 @@ func SensorExists(code string) bool{
 	rows, err := db.Query(cfg.SENSOR_QUERY_CODE,code)
 	defer rows.Close()
 	if rows.Next(){
+		return true
+	}
+	return false
+}
+
+func IsPartial(code string) bool{
+	s,err:=Query(code)
+	if err!=nil{
+		return false
+	}
+	if s.TypeOf == "aperture"{
 		return true
 	}
 	return false

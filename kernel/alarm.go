@@ -6,26 +6,52 @@ import (
 	"strings"
 	"os/exec"
 	"bufio"
+	"github.com/alknopfler/alkalarm/sensors"
+	"github.com/alknopfler/alkalarm/control"
+	"github.com/alknopfler/alkalarm/states"
 )
 
 var State = make(chan string)
 
-func handlerEventFull(evento string){
+func handlerEvent(evento string){
 
-	fmt.Println("FULL-Sensor detected: " ,evento)
-	//CALL TO NOTIFICATOR MAYBE
-
+	if sensors.Exists(evento) && states.Query() != cfg.STATE_INAC{
+		if sensors.IsPartial(evento) && states.Query() == cfg.STATE_PART{
+			Notificate(evento)
+		}
+		if states.Query() == cfg.STATE_FULL{
+			Notificate(evento)
+		}
+	}else if control.Exists(evento){
+		if control.QueryTypeOf(evento) == cfg.STATE_INAC && states.Query() != cfg.STATE_INAC{
+			states.Update(cfg.STATE_INAC)
+			State <- "stop"
+		}
+		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
+			if states.Query()== cfg.STATE_INAC{
+				states.Update(cfg.STATE_FULL)
+				go ListenEvents()
+			}else if states.Query()== cfg.STATE_PART{
+				State <- "stop"  //primero paro y despues lanzo con full
+				states.Update(cfg.STATE_FULL)
+				go ListenEvents()
+			}
+		}
+		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
+			if states.Query() == cfg.STATE_INAC{
+				states.Update(cfg.STATE_PART)
+				go ListenEvents()
+			}else if states.Query()== cfg.STATE_FULL{
+				State <- "stop"  //primero paro y despues lanzo con part
+				states.Update(cfg.STATE_PART)
+				go ListenEvents()
+			}
+		}
+	}
+	//si no es sensor ni control, o la alarma esta inactiva, le dejo pasar sin notificar ni hacer nada
 }
 
-func handlerEventPartial(evento string){
-
-	fmt.Println("PARTIAL-Sensor detected: " ,evento)
-	//CALL TO NOTIFICATOR MAYBE
-
-}
-
-
-func ListenEvents(typeofalarm string){
+func ListenEvents(){
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
@@ -40,16 +66,12 @@ func ListenEvents(typeofalarm string){
 		}
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
-		if typeofalarm == cfg.STATE_PART{
-			handlerEventPartial(string(line))
-		}else{
-			handlerEventFull(string(line))
-		}
+
+		handlerEvent(string(line))
 
 		select {
 		case <-State:
 			cmd.Process.Kill()
-			fmt.Println("saliendodooooo")
 			return
 		default:
 			continue

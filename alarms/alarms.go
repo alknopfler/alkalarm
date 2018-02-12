@@ -7,7 +7,7 @@ import (
 )
 
 
-func RegisterAlarm(data cfg.Alarm) error{
+func Register(data cfg.Alarm) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Alarm")
@@ -24,7 +24,7 @@ func RegisterAlarm(data cfg.Alarm) error{
 	return nil
 }
 
-func UnregisterAlarm() error{
+func Unregister() error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in unregister Alarm")
@@ -42,7 +42,7 @@ func UnregisterAlarm() error{
 }
 
 
-func QueryAlarmAll() ([]cfg.Alarm,error){
+func QueryAll() ([]cfg.Alarm,error){
 	var result []cfg.Alarm
 	db,err := database.InitDB()
 	if err != nil {

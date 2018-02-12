@@ -11,13 +11,13 @@ import (
 
 //HandlerCreateSensor function
 func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		input, err := readSensorBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
 		for i:=range input{
-			err=sensors.RegisterSensor(input[i])
+			err=sensors.Register(input[i])
 			if err!= nil {
 				responseWithError(w,http.StatusInternalServerError,err.Error())
 				return
@@ -31,14 +31,14 @@ func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteSensor function
 func HandlerDeleteSensor(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		codeInput, _ := mux.Vars(r)["code"]
-		if ! sensors.SensorExists(codeInput){
+		if ! sensors.Exists(codeInput){
 			responseWithError(w, http.StatusBadGateway, "Sensor Not Found")
 			return
 		}
 		data:= cfg.Sensor{Code:codeInput}
-		err:=sensors.UnregisterSensor(data.Code)
+		err:=sensors.Unregister(data.Code)
 		if err!=nil{
 			responseWithError(w,http.StatusInternalServerError,err.Error())
 			return
@@ -50,7 +50,7 @@ func HandlerDeleteSensor(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerGetSensors(w http.ResponseWriter, r *http.Request){
-	value,err:=sensors.QuerySensorsAll()
+	value,err:=sensors.QueryAll()
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return

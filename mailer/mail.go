@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"github.com/alknopfler/alkalarm/database"
 
+	"strings"
 )
-func RegisterMailer(data cfg.Mailer) error{
+func Register(data cfg.Mailer) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Mailer")
@@ -24,7 +25,7 @@ func RegisterMailer(data cfg.Mailer) error{
 	return nil
 }
 
-func UnregisterMailer(data cfg.Mailer) error{
+func Unregister(data cfg.Mailer) error{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Register Mailer")
@@ -41,9 +42,9 @@ func UnregisterMailer(data cfg.Mailer) error{
 	return nil
 }
 
-func SendMail(zona string){
+func SendMail(typeof,zona string){
 	//first of all get all the mails to send the emails
-	list,err:=QueryMailAll()
+	list,err:=QueryAll()
 	if err != nil {
 		fmt.Println("Error retrieving the mails to send")
 		return
@@ -51,8 +52,8 @@ func SendMail(zona string){
 
 	msg := "From: " + cfg.FROM + "\n" +
 		"To: " + list[0] + "\n" +
-		"Subject: ALARMA CASA - Sensor zona: "+zona+"\n\n" +
-		"Ha saltado la alarma de la casa del sensor: " + zona
+		"Subject: ALARMA CASA - Sensor de "+strings.ToUpper(typeof)+" de la zona: "+strings.ToUpper(zona)+"\n\n" +
+		"Ha saltado el sensor de "+strings.ToUpper(typeof)+" de la zona : " + strings.ToUpper(zona)
 
 	err = smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
 		smtp.PlainAuth("", cfg.FROM, cfg.SMTP_PASS, cfg.SMTP_SERVER),
@@ -64,7 +65,7 @@ func SendMail(zona string){
 	}
 }
 
-func QueryMailAll() ([]string,error){
+func QueryAll() ([]string,error){
 	var result []string
 	db,err := database.InitDB()
 	if err != nil {
@@ -85,7 +86,7 @@ func QueryMailAll() ([]string,error){
 	return result, nil
 }
 
-func MailExists(receptor string) bool{
+func Exists(receptor string) bool{
 	db,err := database.InitDB()
 	if err != nil {
 		fmt.Println("Error initiating DB in Mail Exists")

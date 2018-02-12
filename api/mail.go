@@ -11,13 +11,13 @@ import (
 
 //HandlerCreateMail function
 func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		input, err := readMailBodyJson(r)
 		if err != nil {
 			responseWithError(w, http.StatusBadRequest,err.Error())
 		}
 		for i:=range input{
-			err=mailer.RegisterMailer(input[i])
+			err=mailer.Register(input[i])
 			if err!= nil {
 				responseWithError(w,http.StatusInternalServerError,err.Error())
 				return
@@ -31,14 +31,14 @@ func HandlerCreateMail(w http.ResponseWriter, r *http.Request) {
 
 //HandlerDeleteMail function
 func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
-	if states.QueryState() != cfg.STATE_INAC {   //must be inactive
+	if states.Query() != cfg.STATE_INAC {   //must be inactive
 		receptorInput, _ := mux.Vars(r)["receptor"]
-		if ! mailer.MailExists(receptorInput){
+		if ! mailer.Exists(receptorInput){
 			responseWithError(w, http.StatusBadGateway, "Mail Not Found")
 			return
 		}
 		data:= cfg.Mailer{Receptor:receptorInput}
-		err:=mailer.UnregisterMailer(data)
+		err:=mailer.Unregister(data)
 		if err!=nil{
 			responseWithError(w,http.StatusInternalServerError,err.Error())
 			return
@@ -50,7 +50,7 @@ func HandlerDeleteMail(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerGetMail(w http.ResponseWriter, r *http.Request){
-	value,err:=mailer.QueryMailAll()
+	value,err:=mailer.QueryAll()
 	if err!=nil{
 		responseWithError(w,http.StatusInternalServerError,err.Error())
 		return
