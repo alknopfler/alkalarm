@@ -10,7 +10,7 @@ import (
 func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 	if states.Query()== cfg.STATE_INAC{
 		states.Update(cfg.STATE_FULL)
-		go kernel.ListenEvents()
+		//go kernel.ListenEvents()
 		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
 		return
 	}else if states.Query()== cfg.STATE_PART{
@@ -25,7 +25,7 @@ func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 func HandlerActivatePartial(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_INAC{
 		states.Update(cfg.STATE_PART)
-		go kernel.ListenEvents()
+		//go kernel.ListenEvents()
 		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
 		return
 	}else if states.Query()== cfg.STATE_FULL{

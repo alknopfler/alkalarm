@@ -34,7 +34,7 @@ func handlerEvent(evento string){
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
 			if states.Query()== cfg.STATE_INAC{
 				states.Update(cfg.STATE_FULL)
-				go ListenEvents()
+				//go ListenEvents()
 				return
 			}else if states.Query()== cfg.STATE_PART{
 				//State <- "stop"  //primero paro y despues lanzo con full
@@ -46,7 +46,7 @@ func handlerEvent(evento string){
 		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
 			if states.Query() == cfg.STATE_INAC{
 				states.Update(cfg.STATE_PART)
-				go ListenEvents()
+				//go ListenEvents()
 				return
 			}else if states.Query()== cfg.STATE_FULL{
 				//State <- "stop"  //primero paro y despues lanzo con part
@@ -60,7 +60,6 @@ func handlerEvent(evento string){
 }
 
 func ListenEvents(){
-
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
