@@ -9,6 +9,8 @@ import (
 	"bufio"
 )
 
+var State = make(chan string)
+
 func GetGlobalState()  string{
 	var state string
 	db,err := database.InitDB()
@@ -50,10 +52,9 @@ func handlerEvent(evento string){
 
 }
 
-func listenEvents(){
+func ListenEvents(){
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
-
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
@@ -67,8 +68,9 @@ func listenEvents(){
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
 		handlerEvent(string(line))
-
+		if "stop" == <-State{
+			break
+		}
 	}
-
-	cmd.Wait()
+	cmd.Process.Kill()
 }

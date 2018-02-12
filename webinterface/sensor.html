@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+    <title></title>
+
+    <script src="jquery-1.7.1.js" type="text/javascript"></script>
+
+    <script>
+
+         $(document).ready(function () {
+
+             $("#Save").click(function () {
+
+
+
+                 var sensor = new Object();
+
+                 sensor.code = $('#code').val();
+
+                 sensor.typeof = $('#typeof').val();
+
+                 sensor.zone = $('#zone').val();
+
+
+
+                 $.ajax({
+
+                     url: 'http://localhost:8080/setup/sensor',
+
+                     type: 'POST',
+
+                     dataType: 'json',
+
+                     data: sensor,
+
+                     success: function (data, textStatus, xhr) {
+
+                         console.log(data);
+
+                     },
+
+                     error: function (xhr, textStatus, errorThrown) {
+
+                         console.log('Error in Operation');
+
+                     }
+
+                 });
+
+
+
+
+
+             });
+
+         });
+
+    </script>
+
+</head>
+
+<body>
+
+
+
+<form id="form1">
+
+    Code :- <input type="text" name="code" id="code" />
+
+    TypeOf:- <input type="text" name="typeof" id="typeof" />
+
+    TypeOf:- <input type="text" name="zone" id="zone" />
+
+    <input type="button" id="Save" value="Save Data" />
+
+</form>
+
+</body>
+
+</html>

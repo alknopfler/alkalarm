@@ -10,6 +10,8 @@ import (
 	"net/http"
 )
 
+
+
 func init(){
 
 	fmt.Println("Validating the database, and other params...Could take some minutes...")
