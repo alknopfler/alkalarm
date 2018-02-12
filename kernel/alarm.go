@@ -18,33 +18,40 @@ func handlerEvent(evento string){
 	if sensors.Exists(evento) && states.Query() != cfg.STATE_INAC{
 		if sensors.IsPartial(evento) && states.Query() == cfg.STATE_PART{
 			Notificate(evento)
+			return
 		}
 		if states.Query() == cfg.STATE_FULL{
 			Notificate(evento)
+			return
 		}
 	}else if control.Exists(evento){
 		if control.QueryTypeOf(evento) == cfg.STATE_INAC && states.Query() != cfg.STATE_INAC{
 			states.Update(cfg.STATE_INAC)
 			State <- "stop"
+			return
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
 			if states.Query()== cfg.STATE_INAC{
 				states.Update(cfg.STATE_FULL)
 				go ListenEvents()
+				return
 			}else if states.Query()== cfg.STATE_PART{
 				State <- "stop"  //primero paro y despues lanzo con full
 				states.Update(cfg.STATE_FULL)
 				go ListenEvents()
+				return
 			}
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
 			if states.Query() == cfg.STATE_INAC{
 				states.Update(cfg.STATE_PART)
 				go ListenEvents()
+				return
 			}else if states.Query()== cfg.STATE_FULL{
 				State <- "stop"  //primero paro y despues lanzo con part
 				states.Update(cfg.STATE_PART)
 				go ListenEvents()
+				return
 			}
 		}
 	}
