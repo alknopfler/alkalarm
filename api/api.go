@@ -25,10 +25,7 @@ func HandlerController()  *mux.Router {
 	r.HandleFunc("/deactivate",HandlerDeactivate).Methods("POST")
 	r.HandleFunc("/status",HandlerAlarmStatus).Methods("GET")
 
-
-	http.Handle("/a", http.FileServer(http.Dir("../webinterface")))
-	http.Handle("/b", http.FileServer(http.Dir("webinterface")))
-	http.Handle("/c", http.FileServer(http.Dir("./webinterface")))
+	http.Handle("/", http.FileServer(http.Dir("./webinterface")))
 
 
 
