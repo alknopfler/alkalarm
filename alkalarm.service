@@ -19,7 +19,7 @@ ExecStart=/opt/alkalarm/alkalarm
 # make sure log directory exists and owned by syslog
 PermissionsStartOnly=true
 ExecStartPre=/bin/mkdir -p /var/log/alkalarm
-ExecStartPre=/bin/chown syslog:adm /var/log/alkalarm
+ExecStartPre=/bin/chown root:adm /var/log/alkalarm
 ExecStartPre=/bin/chmod 755 /var/log/alkalarm
 StandardOutput=syslog
 StandardError=syslog
