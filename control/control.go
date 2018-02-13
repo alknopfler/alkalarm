@@ -2,7 +2,7 @@ package control
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"fmt"
+	"log"
 	"github.com/alknopfler/alkalarm/database"
 )
 
@@ -10,34 +10,34 @@ import (
 func Register(data cfg.Control) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Control")
+		log.Println("Error initiating DB in Register Control")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.CONTROL_INSERT,data.Code,data.Description,data.TypeOf)
 	if err!=nil{
-		fmt.Println("Error inserting control in db")
+		log.Println("Error inserting control in db")
 		return err
 	}
-	fmt.Println("Success...Control registered successfully")
+	log.Println("Success...Control registered successfully")
 	return nil
 }
 
 func Unregister(code string) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Control")
+		log.Println("Error initiating DB in Register Control")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.CONTROL_DELETE,code)
 	if err!=nil{
-		fmt.Println("Error inserting control in db")
+		log.Println("Error inserting control in db")
 		return err
 	}
-	fmt.Println("Success...control registered successfully")
+	log.Println("Success...control registered successfully")
 	return nil
 }
 
@@ -46,7 +46,7 @@ func QueryAll() ([]cfg.Control,error){
 	var result []cfg.Control
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query control")
+		log.Println("Error initiating DB in Query control")
 		return result,err
 	}
 	defer db.Close()
@@ -67,7 +67,7 @@ func Query(code string) (cfg.Control,error){
 	var result cfg.Control
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query Control")
+		log.Println("Error initiating DB in Query Control")
 		return result,err
 	}
 	defer db.Close()
@@ -90,7 +90,7 @@ func QueryTypeOf(code string) string {
 func Exists(code string) bool{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Control Exists")
+		log.Println("Error initiating DB in Control Exists")
 		return false
 	}
 	defer db.Close()

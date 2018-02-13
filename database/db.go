@@ -2,7 +2,7 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	_ "github.com/mattn/go-sqlite3"
 
 	cfg "github.com/alknopfler/alkalarm/config"
@@ -32,13 +32,13 @@ func CreateSchemas(db *sql.DB) error {
 func Operate(db *sql.DB, operation string, values ...interface{})error{
 	line, err := db.Prepare(operation)
 	if err != nil {
-		fmt.Println("Error preparing the DB for the operation: ",err)
+		log.Println("Error preparing the DB for the operation: ",err)
 		return err
 	}
 	defer line.Close()
 	_, err2 := line.Exec(values...)
 	if err2 != nil{
-		fmt.Println("Error executing the operation in DB: ",err2)
+		log.Println("Error executing the operation in DB: ",err2)
 		return err2
 	}
 	return nil

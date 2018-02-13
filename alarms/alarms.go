@@ -2,7 +2,7 @@ package alarms
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"fmt"
+	"log"
 	"github.com/alknopfler/alkalarm/database"
 )
 
@@ -10,34 +10,34 @@ import (
 func Register(data cfg.Alarm) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Alarm")
+		log.Println("Error initiating DB in Register Alarm")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.ALARM_INSERT,data.Date,data.Sensor)
 	if err!=nil{
-		fmt.Println("Error inserting Alarm in db")
+		log.Println("Error inserting Alarm in db")
 		return err
 	}
-	fmt.Println("Success...Alarm registered successfully")
+	log.Println("Success...Alarm registered successfully")
 	return nil
 }
 
 func Unregister() error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in unregister Alarm")
+		log.Println("Error initiating DB in unregister Alarm")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.ALARM_DELETE)
 	if err!=nil{
-		fmt.Println("Error inserting alarm in db")
+		log.Println("Error inserting alarm in db")
 		return err
 	}
-	fmt.Println("Success...alarm registered successfully")
+	log.Println("Success...alarm registered successfully")
 	return nil
 }
 
@@ -46,7 +46,7 @@ func QueryAll() ([]cfg.Alarm,error){
 	var result []cfg.Alarm
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query alarm")
+		log.Println("Error initiating DB in Query alarm")
 		return result,err
 	}
 	defer db.Close()

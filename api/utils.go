@@ -5,7 +5,7 @@ import (
 	"net/http"
 	cfg "github.com/alknopfler/alkalarm/config"
 	"io/ioutil"
-	"fmt"
+	"log"
 )
 
 func responseWithError(w http.ResponseWriter, code int, message string) {
@@ -25,13 +25,13 @@ func readSensorBodyJson(r *http.Request)([]cfg.Sensor,error){
 	defer r.Body.Close()
 
 	if err != nil {
-		fmt.Println("Error while reading input JSON")
+		log.Println("Error while reading input JSON")
 		return value, err
 	}
 
 	err = json.Unmarshal(b, &value)
 	if err != nil {
-		fmt.Println("Error while unmarshalling input JSON")
+		log.Println("Error while unmarshalling input JSON")
 		return value, err
 	}
 	return value, nil
@@ -43,13 +43,13 @@ func readMailBodyJson(r *http.Request)([]cfg.Mailer,error){
 	defer r.Body.Close()
 
 	if err != nil {
-		fmt.Println("Error while reading input JSON")
+		log.Println("Error while reading input JSON")
 		return value, err
 	}
 
 	err = json.Unmarshal(b, &value)
 	if err != nil {
-		fmt.Println("Error while unmarshalling input JSON")
+		log.Println("Error while unmarshalling input JSON")
 		return value, err
 	}
 	return value, nil
@@ -61,13 +61,13 @@ func readControlBodyJson(r *http.Request)([]cfg.Control,error){
 	defer r.Body.Close()
 
 	if err != nil {
-		fmt.Println("Error while reading input JSON")
+		log.Println("Error while reading input JSON")
 		return value, err
 	}
 
 	err = json.Unmarshal(b, &value)
 	if err != nil {
-		fmt.Println("Error while unmarshalling input JSON")
+		log.Println("Error while unmarshalling input JSON")
 		return value, err
 	}
 	return value, nil

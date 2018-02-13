@@ -11,29 +11,29 @@ func TestRegisterSensor(t *testing.T) {
 		Code:"testCode",
 		TypeOf: "presence",
 		Zone: "ventanaTest"}
-	err:=RegisterSensor(data)
+	err:=Register(data)
 	assert.NoError(t,err)
 }
 
 func TestQuerySensors(t *testing.T) {
-	code,err:=QuerySensors("testCode")
+	code,err:=Query("testCode")
 	assert.NoError(t,err)
 	assert.Equal(t,code,cfg.Sensor{Code:"testCode", TypeOf:"presence", Zone:"ventanaTest"})
 }
 
 func TestQuerySensorsAll(t *testing.T) {
-	_,err:=QuerySensorsAll()
+	_,err:=QueryAll()
 	assert.NoError(t,err)
 }
 
 func TestSensorExists(t *testing.T) {
-	res:=SensorExists("testCode")
+	res:=Exists("testCode")
 	assert.True(t,res)
-	res2:=SensorExists("codeeeeeefail")
+	res2:=Exists("codeeeeeefail")
 	assert.False(t,res2)
 }
 
 func TestUnregisterSensor(t *testing.T) {
-	err:=UnregisterSensor("testCode")
+	err:=Unregister("testCode")
 	assert.NoError(t,err)
 }

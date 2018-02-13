@@ -1,0 +1,8 @@
+curl -X POST \
+  http://192.168.10.70:8080/setup/mail \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 09f5b95c-86f0-531e-7923-9d238697155c' \
+  -d '[	{
+	"receptor":"alknopfler@gmail.com"
+}]'

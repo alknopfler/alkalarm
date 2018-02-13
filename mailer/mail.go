@@ -3,7 +3,7 @@ package mailer
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
 	"net/smtp"
-	"fmt"
+	"log"
 	"github.com/alknopfler/alkalarm/database"
 
 	"strings"
@@ -11,33 +11,33 @@ import (
 func Register(data cfg.Mailer) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Mailer")
+		log.Println("Error initiating DB in Register Mailer")
 		return err
 	}
 	defer db.Close()
 	err=database.Operate(db,cfg.MAIL_INSERT,data.Receptor)
 	if err!=nil{
-		fmt.Println("Error inserting mailer in db")
+		log.Println("Error inserting mailer in db")
 		return err
 	}
-	fmt.Println("Success...Mail registered successfully")
+	log.Println("Success...Mail registered successfully")
 	return nil
 }
 
 func Unregister(data cfg.Mailer) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Mailer")
+		log.Println("Error initiating DB in Register Mailer")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.MAIL_DELETE,data.Receptor)
 	if err!=nil{
-		fmt.Println("Error inserting mailer in db")
+		log.Println("Error inserting mailer in db")
 		return err
 	}
-	fmt.Println("Success...Mail registered successfully")
+	log.Println("Success...Mail registered successfully")
 	return nil
 }
 
@@ -45,7 +45,7 @@ func SendMail(typeof,zona string){
 	//first of all get all the mails to send the emails
 	list,err:=QueryAll()
 	if err != nil {
-		fmt.Println("Error retrieving the mails to send")
+		log.Println("Error retrieving the mails to send")
 		return
 	}
 
@@ -59,7 +59,7 @@ func SendMail(typeof,zona string){
 		cfg.FROM, list, []byte(msg))
 
 	if err != nil {
-		fmt.Println("smtp error:", err)
+		log.Println("smtp error:", err)
 		return
 	}
 }
@@ -68,7 +68,7 @@ func QueryAll() ([]string,error){
 	var result []string
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query Sensor")
+		log.Println("Error initiating DB in Query Sensor")
 		return result,err
 	}
 	defer db.Close()
@@ -88,7 +88,7 @@ func QueryAll() ([]string,error){
 func Exists(receptor string) bool{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Mail Exists")
+		log.Println("Error initiating DB in Mail Exists")
 		return false
 	}
 	defer db.Close()

@@ -2,7 +2,7 @@ package kernel
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"fmt"
+	"log"
 	"strings"
 	"os/exec"
 	"bufio"
@@ -69,7 +69,7 @@ func ListenEvents(){
 	for {
 		_, err := stdout.Read(oneByte)
 		if err != nil {
-			fmt.Printf(err.Error())
+			log.Printf(err.Error())
 			break
 		}
 		r := bufio.NewReader(stdout)

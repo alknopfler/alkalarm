@@ -2,7 +2,7 @@ package sensors
 
 import (
 	cfg "github.com/alknopfler/alkalarm/config"
-	"fmt"
+	"log"
 	"github.com/alknopfler/alkalarm/database"
 )
 
@@ -10,34 +10,34 @@ import (
 func Register(data cfg.Sensor) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Sensor")
+		log.Println("Error initiating DB in Register Sensor")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.SENSOR_INSERT,data.Code,data.TypeOf,data.Zone)
 	if err!=nil{
-		fmt.Println("Error inserting sensor in db")
+		log.Println("Error inserting sensor in db")
 		return err
 	}
-	fmt.Println("Success...Sensor registered successfully")
+	log.Println("Success...Sensor registered successfully")
 	return nil
 }
 
 func Unregister(code string) error{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Register Sensor")
+		log.Println("Error initiating DB in Register Sensor")
 		return err
 	}
 	defer db.Close()
 
 	err=database.Operate(db,cfg.SENSOR_DELETE,code)
 	if err!=nil{
-		fmt.Println("Error inserting sensor in db")
+		log.Println("Error inserting sensor in db")
 		return err
 	}
-	fmt.Println("Success...Sensor registered successfully")
+	log.Println("Success...Sensor registered successfully")
 	return nil
 }
 
@@ -46,7 +46,7 @@ func QueryAll() ([]cfg.Sensor,error){
 	var result []cfg.Sensor
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query Sensor")
+		log.Println("Error initiating DB in Query Sensor")
 		return result,err
 	}
 	defer db.Close()
@@ -67,7 +67,7 @@ func Query(code string) (cfg.Sensor,error){
 	var result cfg.Sensor
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Query Sensor")
+		log.Println("Error initiating DB in Query Sensor")
 		return result,err
 	}
 	defer db.Close()
@@ -85,7 +85,7 @@ func Query(code string) (cfg.Sensor,error){
 func Exists(code string) bool{
 	db,err := database.InitDB()
 	if err != nil {
-		fmt.Println("Error initiating DB in Sensor Exists")
+		log.Println("Error initiating DB in Sensor Exists")
 		return false
 	}
 	defer db.Close()

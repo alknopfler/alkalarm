@@ -41,12 +41,6 @@ func TestOperateWithItem(t *testing.T) {
 	err=Operate(db, cfg.CONTROL_DELETE, "codeTest")
 	assert.NoError(t,err)
 
-	//prueba de insert , update and delete sobre sensor
-	Operate(db, cfg.GLOBAL_STATE_INSERT, "1","full")
-	Operate(db, cfg.GLOBAL_STATE_UPDATE, "1","partial")
-	err=Operate(db, cfg.GLOBAL_STATE_DELETE)
-	assert.NoError(t,err)
-
 
 	os.Remove("./test.db")
 }
