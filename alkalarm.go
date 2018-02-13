@@ -14,13 +14,17 @@ import (
 
 
 func init(){
-	logging, e := syslog.New(syslog.LOG_NOTICE, "alkalarm")
+	needCreation:=true
+ 	logging, e := syslog.New(syslog.LOG_NOTICE, "alkalarm")
 	if e == nil {
 		log.SetOutput(logging)
 	}
 
 	log.Print("Validating the database, and other params...Could take some minutes...")
 	//First Time to execute needs create database and scheme
+	if _, err := os.Stat(cfg.DB_NAME); err == nil {
+		needCreation := false
+	}
 	db,err := database.InitDB()
 	if err != nil {
 		log.Println("Error initiating DB First Time (init)")
@@ -32,7 +36,7 @@ func init(){
 		log.Println("Error creating the schema the first time (init)")
 		os.Exit(3)
 	}
-	if _, err := os.Stat(cfg.DB_NAME); err == nil {
+	if ! needCreation {
 		log.Println("entrar por update a inactive")
 		err=database.Operate(db,cfg.GLOBAL_STATE_UPDATE,cfg.STATE_INAC)
 		if err!=nil{
