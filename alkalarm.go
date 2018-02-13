@@ -15,7 +15,6 @@ import (
 
 
 func init(){
-	//TODO revisaria si existe el file de la db, y en ese caso no haria inicializacion de estado global
 	logging, e := syslog.New(syslog.LOG_NOTICE, "alkalarm")
 	if e == nil {
 		log.SetOutput(logging)
@@ -52,7 +51,6 @@ func init(){
 }
 
 func main() {
-	//TODO revisar si se cae listenevent que hacer, o si se cae main levantarlo todo como daemon
 	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {

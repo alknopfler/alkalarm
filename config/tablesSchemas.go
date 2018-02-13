@@ -8,7 +8,7 @@ const (
 		"typeOf TEXT CHECK( typeOf IN ('presence','aperture','other') )," +
 		"zone TEXT);"
 	ALARM_HISTORY_TABLE = "CREATE TABLE IF NOT EXISTS alarms (" +
-		"date TEXT," +
+		"date TEXT PRIMARY KEY," +
 		"sensor TEXT);"
 	MAIL_TABLE = "CREATE TABLE IF NOT EXISTS mailer (" +
 		"receptor TEXT PRIMARY KEY)"
