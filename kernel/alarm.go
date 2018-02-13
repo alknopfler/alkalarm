@@ -26,7 +26,7 @@ func handlerEvent(evento string){
 		}
 	}else if control.Exists(evento){
 		if control.QueryTypeOf(evento) == cfg.STATE_INAC && states.Query() != cfg.STATE_INAC{
-			State <- "stop"
+			//State <- "stop"
 			states.Update(cfg.STATE_INAC)
 			return
 		}
@@ -76,13 +76,15 @@ func ListenEvents(){
 
 		handlerEvent(string(line))
 
-		select {
-		case <-State:
-			cmd.Process.Kill()
-			return
-		default:
-			continue
-		}
+		//select {
+		//case <-State:
+		//	cmd.Process.Kill()
+		//	return
+		//default:
+		//	continue
+		//}
 	}
+	//
+	cmd.Process.Wait()
 
 }

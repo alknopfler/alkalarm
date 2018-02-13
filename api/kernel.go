@@ -2,7 +2,7 @@ package api
 
 import (
 	"net/http"
-	"github.com/alknopfler/alkalarm/kernel"
+	//"github.com/alknopfler/alkalarm/kernel"
 	"github.com/alknopfler/alkalarm/states"
 	cfg "github.com/alknopfler/alkalarm/config"
 )
@@ -39,7 +39,7 @@ func HandlerActivatePartial(w http.ResponseWriter, r *http.Request) {
 
 func HandlerDeactivate(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_FULL || states.Query() == cfg.STATE_PART {
-		kernel.State <- "stop"
+		//kernel.State <- "stop"
 		states.Update(cfg.STATE_INAC)
 		responseWithJSON(w, http.StatusOK, "Alarm stoped successfully")
 		return
