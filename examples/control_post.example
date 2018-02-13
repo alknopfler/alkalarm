@@ -1,0 +1,6 @@
+curl -X POST \
+  http://192.168.10.70:8080/setup/control \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: a1207293-0a8b-16ca-7b34-c9e965a66710' \
+  -d '[{"Code":"3462412","Description":"mando1","TypeOf":"inactive"},{"Code":"3462448","Description":"mando1","TypeOf":"full"},{"Code":"3462592","Description":"mando1","TypeOf":"partial"}]'

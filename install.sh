@@ -48,7 +48,6 @@ apt-get -y update
 apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
 
 echo "### Creating Folders ... ###"
-
 create_folder $PROJECT_PATH
 create_folder $TMP_PATH
 create_folder $LOG_PATH
@@ -62,6 +61,14 @@ echo $password>$PROJECT_PATH/.passSMTP
 
 echo "### Enabling the PiGPIO daemon ###"
 systemctl enable pigpiod
+
+echo "### Creating the file in rsyslog ###"
+cp 30-alkalarm.conf /etc/rsyslog.d/
+systemctl restart rsyslog
+
+echo "### Creating AlkAlarm systemd service ###"
+cp alkalarm.service /lib/systemd/system/.
+chmod 755 /lib/systemd/system/alkalarm.service
 
 
 echo "### End Of Installation...SUCESS ###"
