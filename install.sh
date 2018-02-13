@@ -52,8 +52,9 @@ create_folder $PROJECT_PATH
 create_folder $TMP_PATH
 create_folder $LOG_PATH
 
-echo "### Copy the python script to the project directory ... ### "
-cp _433.py $PROJECT_PATH/
+echo "### Copy the python script and binary to the project directory ... ### "
+cp _433.py alkalarm $PROJECT_PATH/
+
 
 echo "### Creating the password file with email smtp server password ... ### "
 read -p "Introduce la password de la cuenta smtp: " password
