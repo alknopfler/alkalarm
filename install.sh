@@ -53,7 +53,8 @@ create_folder $TMP_PATH
 create_folder $LOG_PATH
 
 echo "### Copy the python script and binary to the project directory ... ### "
-cp _433.py alkalarm $PROJECT_PATH/
+go install alkalarm.go
+cp _433.py /root/bin/alkalarm $PROJECT_PATH/
 
 
 echo "### Creating the password file with email smtp server password ... ### "
