@@ -57,6 +57,11 @@ func init(){
 
 func main() {
 	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
+	fs := http.FileServer(http.Dir("webinterface"))
+	http.Handle("/webinterface/", http.StripPrefix("/webinterface/", fs))
+	log.Println("Listening...")
+	go http.ListenAndServe(":3000", nil)
+
 	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {
 		log.Println("Error listening api server...")
