@@ -23,6 +23,7 @@ func init(){
 	log.Print("Validating the database, and other params...Could take some minutes...")
 	//First Time to execute needs create database and scheme
 	if _, err := os.Stat(cfg.DB_NAME); err == nil {
+		log.Println("ya existe la base de datos")
 		needCreation= false
 	}
 	db,err := database.InitDB()
@@ -37,7 +38,6 @@ func init(){
 		os.Exit(3)
 	}
 	if needCreation {
-		log.Println("entrar por update a inactive")
 		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
 		if err!=nil{
 			log.Println("Error activating the first time (init)")
