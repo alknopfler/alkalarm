@@ -33,6 +33,7 @@ func init(){
 		os.Exit(3)
 	}
 	if _, err := os.Stat(cfg.DB_NAME); err == nil {
+		log.Println("entrar por update a inactive")
 		err=database.Operate(db,cfg.GLOBAL_STATE_UPDATE,cfg.STATE_INAC)
 		if err!=nil{
 			log.Println("Error activating the first time (init)")
@@ -40,6 +41,7 @@ func init(){
 		}
 	}else{
 		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
+		log.Println("entrar por insert a inactive")
 		if err!=nil{
 			log.Println("Error activating the first time (init)")
 			os.Exit(3)
