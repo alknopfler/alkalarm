@@ -23,7 +23,7 @@ func init(){
 	log.Print("Validating the database, and other params...Could take some minutes...")
 	//First Time to execute needs create database and scheme
 	if _, err := os.Stat(cfg.DB_NAME); err == nil {
-		needCreation := false
+		needCreation= false
 	}
 	db,err := database.InitDB()
 	if err != nil {
