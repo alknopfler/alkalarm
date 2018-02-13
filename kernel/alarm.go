@@ -64,6 +64,7 @@ func ListenEvents(){
 	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
+
 	oneByte := make([]byte,0)
 	for {
 		_, err := stdout.Read(oneByte)

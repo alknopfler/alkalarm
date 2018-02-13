@@ -13,7 +13,6 @@ import (
 )
 
 func discoverCodeSensor() (string, error) {
-	//TODO en registrar no puede estar activa la alarma
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 

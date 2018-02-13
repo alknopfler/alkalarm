@@ -9,6 +9,7 @@ import (
 	"github.com/alknopfler/alkalarm/api"
 	"net/http"
 	"github.com/alknopfler/alkalarm/kernel"
+	"github.com/alknopfler/alkalarm/states"
 )
 
 
@@ -29,15 +30,20 @@ func init(){
 		fmt.Println("Error creating the schema the first time (init):", err)
 		os.Exit(3)
 	}
-	err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
+	err=states.Query()
 	if err!=nil{
-		fmt.Println("Error activating the first time (init):", err)
-		os.Exit(3)
+		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
+		if err!=nil{
+			fmt.Println("Error activating the first time (init):", err)
+			os.Exit(3)
+		}
 	}
+
 	fmt.Println("Success...Starting the program")
 }
 
 func main() {
+	//TODO revisar si se cae listenevent que hacer
 	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
 	if err != nil {
