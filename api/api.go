@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
 
@@ -23,6 +24,10 @@ func HandlerController()  *mux.Router {
 	r.HandleFunc("/activate/partial",HandlerActivatePartial).Methods("POST")
 	r.HandleFunc("/deactivate",HandlerDeactivate).Methods("POST")
 	r.HandleFunc("/status",HandlerAlarmStatus).Methods("GET")
+
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./webinterface/")))
+	http.Handle("/", r)
+
 	return r
 }
 

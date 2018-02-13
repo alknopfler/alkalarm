@@ -71,6 +71,8 @@ systemctl restart rsyslog
 echo "### Creating AlkAlarm systemd service ###"
 cp alkalarm.service /lib/systemd/system/.
 chmod 755 /lib/systemd/system/alkalarm.service
+systemctl enable alkalarm
+systemctl start alkalarm
 
 
 echo "### End Of Installation...SUCESS ###"
