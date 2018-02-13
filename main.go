@@ -31,7 +31,7 @@ func init(){
 		os.Exit(3)
 	}
 	res:=states.Query()
-	if res!=nil{
+	if res!=""{
 		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
 		if err!=nil{
 			fmt.Println("Error activating the first time (init):", err)
