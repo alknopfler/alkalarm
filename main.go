@@ -30,15 +30,11 @@ func init(){
 		fmt.Println("Error creating the schema the first time (init):", err)
 		os.Exit(3)
 	}
-	res:=states.Query()
-	if res!=""{
-		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
-		if err!=nil{
-			fmt.Println("Error activating the first time (init):", err)
-			os.Exit(3)
-		}
+	err=database.Operate(db,cfg.GLOBAL_STATE_UPDATE,cfg.STATE_INAC)
+	if err!=nil{
+		fmt.Println("Error activating the first time (init):", err)
+		os.Exit(3)
 	}
-
 	fmt.Println("Success...Starting the program")
 }
 
