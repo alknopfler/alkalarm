@@ -10,7 +10,7 @@ Group=root
 LimitNOFILE=1024
 
 Restart=always
-WatchdogSec=3600
+WatchdogSec=1800
 RestartSec=5
 startLimitIntervalSec=60
 
