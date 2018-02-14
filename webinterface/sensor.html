@@ -12,6 +12,8 @@
                  var sensor = $('#sensor').val();
 
                  $.ajax({
+                     async: true,
+                     crossDomain: true,
                      url: 'http://192.168.10.70:8080/setup/sensor',
                      type: 'POST',
                      dataType: 'json',
