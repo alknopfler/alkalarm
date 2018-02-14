@@ -21,7 +21,7 @@ func Update(newstate string) error{
 		log.Println("Error updating the global state in db")
 		return err
 	}
-	log.Println("Success...Global State updated successfully")
+	log.Println("Success...Global State updated to ",newstate)
 	return nil
 }
 

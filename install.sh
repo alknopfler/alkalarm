@@ -74,5 +74,5 @@ chmod 755 /lib/systemd/system/alkalarm.service
 systemctl enable alkalarm
 systemctl start alkalarm
 
-
+#TODO falta por hacer el webserver installation go install y el daemon para lanzarlo
 echo "### End Of Installation...SUCESS ###"

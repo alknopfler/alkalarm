@@ -37,7 +37,7 @@ func Unregister() error{
 		log.Println("Error inserting alarm in db")
 		return err
 	}
-	log.Println("Success...alarm registered successfully")
+	log.Println("Success...alarm unregistered successfully")
 	return nil
 }
 

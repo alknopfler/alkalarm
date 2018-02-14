@@ -37,7 +37,7 @@ func Unregister(code string) error{
 		log.Println("Error inserting control in db")
 		return err
 	}
-	log.Println("Success...control registered successfully")
+	log.Println("Success...control unregistered successfully")
 	return nil
 }
 

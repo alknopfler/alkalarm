@@ -37,7 +37,7 @@ func Unregister(data cfg.Mailer) error{
 		log.Println("Error inserting mailer in db")
 		return err
 	}
-	log.Println("Success...Mail registered successfully")
+	log.Println("Success...Mail unregistered successfully")
 	return nil
 }
 

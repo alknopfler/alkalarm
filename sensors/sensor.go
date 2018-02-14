@@ -37,7 +37,7 @@ func Unregister(code string) error{
 		log.Println("Error inserting sensor in db")
 		return err
 	}
-	log.Println("Success...Sensor registered successfully")
+	log.Println("Success...Sensor unregistered successfully")
 	return nil
 }
 

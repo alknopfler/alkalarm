@@ -24,8 +24,6 @@ var (
 	DB_TYPE	= "sqlite3"
 
 	FROM = "alknopfler@gmail.com"
-	SMTP_USER = "alknopfler@gmail.com"
-	LIST_TO_MAIL = []string{"alknopfler@gmail.com","begoclavero@gmail.com"}
 	SMTP_SERVER = "smtp.gmail.com"
 	SMTP_PORT = "587"
 	SMTP_PASS = readPassFromFile()
