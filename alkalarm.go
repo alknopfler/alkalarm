@@ -6,10 +6,12 @@ import (
 	"github.com/alknopfler/alkalarm/database"
 	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/api"
+	"github.com/gorilla/handlers"
 	"net/http"
 	"github.com/alknopfler/alkalarm/kernel"
 	"log/syslog"
 	"log"
+	"github.com/gorilla/mux"
 )
 
 
@@ -50,7 +52,27 @@ func init(){
 func main() {
 	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 
-	err := http.ListenAndServe(cfg.SERVER_API_PORT, api.HandlerController())
+	r := mux.NewRouter()
+	r.HandleFunc("/setup/sensor", api.HandlerCreateSensor).Methods("POST")
+	r.HandleFunc("/setup/sensor", api.HandlerGetSensors).Methods("GET")
+	r.HandleFunc("/setup/sensor/{code}", api.HandlerDeleteSensor).Methods("DELETE")
+	r.HandleFunc("/setup/mail", api.HandlerCreateMail).Methods("POST")
+	r.HandleFunc("/setup/mail", api.HandlerGetMail).Methods("GET")
+	r.HandleFunc("/setup/mail/{receptor}", api.HandlerDeleteMail).Methods("DELETE")
+	r.HandleFunc("/setup/control", api.HandlerCreateControl).Methods("POST")
+	r.HandleFunc("/setup/control", api.HandlerGetControl).Methods("GET")
+	r.HandleFunc("/setup/control/{code}", api.HandlerDeleteControl).Methods("DELETE")
+	r.HandleFunc("/alarm", api.HandlerGetAlarm).Methods("GET")
+	r.HandleFunc("/alarm", api.HandlerDeleteAlarm).Methods("DELETE")
+
+	r.HandleFunc("/activate/full",api.HandlerActivateFull).Methods("POST")
+	r.HandleFunc("/activate/partial",api.HandlerActivatePartial).Methods("POST")
+	r.HandleFunc("/deactivate",api.HandlerDeactivate).Methods("POST")
+	r.HandleFunc("/status",api.HandlerAlarmStatus).Methods("GET")
+
+
+	corsObj:=handlers.AllowedOrigins([]string{"*"})
+	err := http.ListenAndServe(cfg.SERVER_API_PORT, handlers.CORS(corsObj)(r))
 	if err != nil {
 		log.Println("Error listening api server...")
 	}

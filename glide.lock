@@ -1,6 +1,10 @@
-hash: f948a151c791acf3e2e870ba8019f83a4f6cec54013531361dbb09db86a721fb
-updated: 2018-02-10T10:10:04.099245642+01:00
+hash: a47b0627eb19b7e1a6b6532c0812efeb040b2c71481983836dcf8db0290c2bff
+updated: 2018-02-14T13:30:15.34471833+01:00
 imports:
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/handlers
+  version: 90663712d74cb411cbef281bc1e08c19d1a76145
 - name: github.com/gorilla/mux
   version: 392c28fe23e1c45ddba891b0320b3b5df220beea
 - name: github.com/mattn/go-sqlite3
