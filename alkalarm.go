@@ -52,6 +52,7 @@ func init(){
 func main() {
 	go kernel.ListenEvents()  //lanzo el primero por si la activo con el mando en lugar de con la api
 
+	//TODO auth basic with gorilla user/password
 	r := mux.NewRouter()
 	r.HandleFunc("/setup/sensor", api.HandlerCreateSensor).Methods("POST")
 	r.HandleFunc("/setup/sensor", api.HandlerGetSensors).Methods("GET")

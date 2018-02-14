@@ -18,8 +18,6 @@ func Notificate(evento string){
 		Sensor: sensor.Zone+"  "+sensor.TypeOf+"  "+sensor.Code,
 	}
 
-	//TODO revisar si ya se ha enviado mail recientemente no enviar
-
 	go mailer.SendMail(sensor.TypeOf,sensor.Zone)  //envio y me desentiendo
 
 	go alarms.Register(data)  //registro alarma y me desentiendo
