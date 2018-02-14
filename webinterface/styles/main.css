@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 		width: 100%;
 		margin-right: 5%;
 		margin-top:10%;
-		float: left;
+		float: center;
 		}
 /* Logo H1 */
 header h1 {
