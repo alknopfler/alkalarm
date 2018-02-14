@@ -8,6 +8,12 @@
 
          $(document).ready(function () {
              $("#Save").click(function () {
+                 function sensor(Code,TypeOf,Zone){
+                    this.Code = Code;
+                    this.TypeOf = TypeOf;
+                    this.Zone = Zone;
+                 }
+
                  var sensor = new Array();
                  sensor[0].Code = $('#Code').val();
                  sensor[0].TypeOf = $('#TypeOf').val();
