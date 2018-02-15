@@ -14,7 +14,7 @@ func Notificate(evento string){
 	//TODO GPIO con alarma sirena
 	sensor,_ := sensors.Query(evento)
 	data := cfg.Alarm{
-		Date: time.Now().String(),
+		Date: time.Now().Format("Mon Jan _2 15:04:05 2006"),
 		Sensor: sensor.Zone+"  "+sensor.TypeOf+"  "+sensor.Code,
 	}
 
