@@ -18,7 +18,7 @@
                          $('#desactivarAlarm').css({'color':'blue'});
                          $("#activarPartialAlarm").css({'color':'grey'});
                    }
-                 })
+                 });
                  $("#activarFullAlarm").click(function () {
                      $.ajax({
                          async: true,
