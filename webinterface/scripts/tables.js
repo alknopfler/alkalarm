@@ -22,3 +22,4 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.Sensor + "</td>"));
 }
 
+

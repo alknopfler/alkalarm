@@ -291,3 +291,32 @@ header nav {
 	position:relative;
 	top:1px;
 }
+
+.btn {
+  background: #34d95a;
+  background-image: -webkit-linear-gradient(top, #34d95a, #6a993d);
+  background-image: -moz-linear-gradient(top, #34d95a, #6a993d);
+  background-image: -ms-linear-gradient(top, #34d95a, #6a993d);
+  background-image: -o-linear-gradient(top, #34d95a, #6a993d);
+  background-image: linear-gradient(to bottom, #34d95a, #6a993d);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 1px 4px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  border: solid #0e2d40 2px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}

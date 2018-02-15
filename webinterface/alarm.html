@@ -11,6 +11,8 @@
 		<script type='text/javascript' src='scripts/respond.min.js'></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" language="javascript" src="scripts/tables.js"></script>
+		<script type="text/javascript" language="javascript" src="scripts/clear.js"></script>
+
 		</head>
 		<body>
 
@@ -19,12 +21,14 @@
 					<h1>AlkAlarm</h1>
 					<nav>
 						<ul>
-							<li><a href="#" title="Alarmas">Alarmas</a></li>
-							<li><a href="#" title="Setup">Setup</a></li>
+							<li><a href="index.html" title="Inicio">Inicio</a></li>
+							<li><a href="alarm.html" title="Alarmas">Alarmas</a></li>
+							<li><a href="setup.html" title="Setup">Setup</a></li>
 						</ul>
 					</nav>
 				</header>
 				<section align="center" id="main">
+					<input type="button" class="btn" id="clear" value="Clear All Notifications" /><br><br>
 					<table id="alarm" class="greenTable">
 						<tr>
 							<th>Date</th>
