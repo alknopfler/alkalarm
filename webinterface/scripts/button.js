@@ -1,10 +1,12 @@
 
          $(document).ready(function () {
-             var code = prompt("Please enter your code:", "******");
+             var code = prompt("Please enter your code:", "");
 
              jQuery.get('../../.htaccess', function(data) {
              if (code ==data) {
-
+                 $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
+                    $("#status").html(respuesta);
+                 })
                  $("#activarFullAlarm").click(function () {
                      $.ajax({
                          async: true,
