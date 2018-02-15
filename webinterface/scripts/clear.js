@@ -3,10 +3,7 @@
      crossDomain: true,
      url: 'http://alknopfler.ddns.net:8080/alarm',
      type: 'DELETE',
-     success: function (data, textStatus, xhr) {
+     success: function () {
          $(document).reload()
-     },
-     error: function (xhr, textStatus, errorThrown) {
-         console.log('Error in Operation');
      }
  });
