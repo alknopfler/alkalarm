@@ -1,4 +1,4 @@
-$("#clear").onclick(function () {
+$("#clear").click(function () {
  $.ajax({
      async: true,
      crossDomain: true,
