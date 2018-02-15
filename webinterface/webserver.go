@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("./static/"))
+	fs := http.FileServer(http.Dir("./"))
 	http.Handle("/", fs)
 
-	log.Println("Listening...")
+	log.Println("Listening... :80")
 	http.ListenAndServe(":80", nil)
 
 

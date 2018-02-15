@@ -2,7 +2,7 @@
          $(document).ready(function () {
              var code = prompt("Please enter your code:", "******");
 
-             jQuery.get('.htaccess', function(data) {
+             jQuery.get('../.htaccess', function(data) {
              console.log(data)
              if (code ==data) {
                 console.log("entraaaaa")
