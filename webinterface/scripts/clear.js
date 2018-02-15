@@ -1,3 +1,4 @@
+$(document).ready(function () {
  $.ajax({
      async: true,
      crossDomain: true,
@@ -6,4 +7,5 @@
      success: function () {
          $(document).reload()
      }
+ });
  });
