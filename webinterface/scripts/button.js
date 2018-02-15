@@ -5,11 +5,11 @@
              jQuery.get('../../.htaccess', function(data) {
              if (code ==data) {
                  $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
-                   if respuesta == "full"{
+                   if (respuesta == "full"){
                          $("#activarFullAlarm").css({'color':'blue'});
                          $("#activarPartialAlarm").css({'color':'grey'});
                          $('#desactivarAlarm').css({'color':'grey'});
-                   }else if respuesta == "partial"{
+                   }else if (respuesta == "partial"){
                          $("#activarFullAlarm").css({'color':'grey'});
                          $("#activarPartialAlarm").css({'color':'blue'});
                          $('#desactivarAlarm').css({'color':'grey'});
