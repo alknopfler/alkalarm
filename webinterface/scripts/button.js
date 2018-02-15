@@ -6,7 +6,7 @@
              console.log(data)
              });
              if (code ==data) {
-
+                console.log("entraaaaa")
 
                  $("#activarFullAlarm").click(function () {
                      $.ajax({
