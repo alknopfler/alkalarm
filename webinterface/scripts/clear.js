@@ -5,7 +5,7 @@ $("#clear").click(function () {
      url: 'http://alknopfler.ddns.net:8080/alarm',
      type: 'DELETE',
      success: function () {
-         $(document).reload()
+         $('#table').reload()
      }
  });
  });
