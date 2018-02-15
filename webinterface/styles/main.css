@@ -58,8 +58,8 @@ header nav {
 		}
 
 /* Banner */			
-#banner {
-	float: left;
+#banner1 {
+	float: center;
 	margin-bottom: 15px;
 	width: 100%;
 	}
@@ -67,7 +67,6 @@ header nav {
 	#banner img {
 		width: 100%;
 		}
-
 
 /* Media Queries */
 @media screen and (max-width: 480px) {

@@ -31,6 +31,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
 			if states.Query()== cfg.STATE_INAC{
+				//TODO sleep 30 seg para uqe pueda salir de casa
 				states.Update(cfg.STATE_FULL)
 				return
 			}else if states.Query()== cfg.STATE_PART{
@@ -40,6 +41,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
 			if states.Query() == cfg.STATE_INAC{
+				//TODO sleep 30 seg para que pueda salir de casa
 				states.Update(cfg.STATE_PART)
 				return
 			}else if states.Query()== cfg.STATE_FULL{
