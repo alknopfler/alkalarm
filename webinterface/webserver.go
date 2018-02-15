@@ -29,6 +29,6 @@ func noDirListing(h http.Handler) http.HandlerFunc {
 }
 
 func main() {
-	http.Handle("/", noDirListing(http.FileServer(http.Dir("./"))))
+	http.Handle("/", noDirListing(http.FileServer(http.Dir("./static/"))))
 	log.Println(http.ListenAndServe(":80", nil))
 }
