@@ -5,8 +5,7 @@
              jQuery.get('../../.htaccess', function(data) {
              if (code ==data) {
                  $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
-                    console.log(respuesta)
-                  /*  if respuesta == "full"{
+                   if respuesta == "full"{
                          $("#activarFullAlarm").css({'color':'blue'});
                          $("#activarPartialAlarm").css({'color':'grey'});
                          $('#desactivarAlarm').css({'color':'grey'});
@@ -18,7 +17,7 @@
                          $("#activarFullAlarm").css({'color':'grey'});
                          $('#desactivarAlarm').css({'color':'blue'});
                          $("#activarPartialAlarm").css({'color':'grey'});
-                   }*/
+                   }
                  });
                  $("#activarFullAlarm").click(function () {
                      $.ajax({
