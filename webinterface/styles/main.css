@@ -292,8 +292,6 @@ header nav {
 	top:1px;
 }
 
-
-
 .clearAlarm {
 	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
@@ -319,12 +317,12 @@ header nav {
 	display:inline-block;
 	color:#ffffff;
 	font-family:Courier New;
-	font-size:10px;
+	font-size:15px;
 	font-weight:bold;
 	font-style:normal;
 	height:42px;
 	line-height:42px;
-	width:200px;
+	width:90px;
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #689324;
@@ -334,7 +332,33 @@ header nav {
 	background:-moz-linear-gradient( center top, #8cb82b 5%, #9dce2c 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8cb82b', endColorstr='#9dce2c');
 	background-color:#8cb82b;
-}.clearAlarm:active {
+}
+.clearAlarm:active {
 	position:relative;
 	top:1px;
+	}
+
+.textbox {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 68%;
+  height: 50px;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  font: normal 16px/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,142,198,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(252,252,252,1);
+  -webkit-box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
