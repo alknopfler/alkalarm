@@ -66,7 +66,8 @@ tput setaf 2;echo
 echo "### Installing web server and copy the binary to the project directory ... ###"
 tput sgr0;echo
 go install webinterface/webserver.go
-cp /root/bin/webserver $PROJECT_PATH/
+cp -r webinterface $PROJECT_PATH
+cp /root/bin/webserver $PROJECT_PATH/webinterface/
 
 tput setaf 2;echo
 echo "### Creating the password file with email smtp server password ... ### "
