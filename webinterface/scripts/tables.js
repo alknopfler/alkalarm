@@ -22,11 +22,7 @@ $(document).ready(function () {
                              url: 'http://alknopfler.ddns.net:8080/alarm',
                              type: 'delete',
                              success: function () {
-                                //if (data.success){
-                                       console.log("Entra success");
-                             },
-                             error: function(){
-                                        console.log("entra error");
+                                $("#alarm").load(" #alarm")
                              }
                          });
     });
