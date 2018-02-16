@@ -15,7 +15,7 @@ $(document).ready(function () {
                      data: sensor,
                      success: function (data, textStatus, xhr) {
                          window.alert("Sensor loaded successfully");
-                         $("#sensortable").show();
+                         $("#sensortable").load();
                      },
                      error: function (data){
                          window.alert("Remember to stop the alarm before...");
@@ -31,7 +31,7 @@ $(document).ready(function () {
                       type: 'delete',
                       success: function () {
                          window.alert("Sensor delete successfully");
-                         $("#sensortable").show();
+                         $("#sensortable").load();
                       },
                       error: function (data){
                            window.alert("Remember to stop the alarm before...");
