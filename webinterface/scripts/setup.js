@@ -14,8 +14,11 @@ $(document).ready(function () {
                      dataType: 'json',
                      data: sensor,
                      success: function (data, textStatus, xhr) {
-                         console.log(data);
+                         window.alert("Sensor loaded successfully");
                      },
+                     error: function (data){
+                         window.alert("Remember to stop the alarm before...");
+                     }
                  });
              });
              $("#saveControl").click(function () {
@@ -28,8 +31,11 @@ $(document).ready(function () {
                       dataType: 'json',
                       data: control,
                       success: function (data, textStatus, xhr) {
-                          console.log(data);
-                      },
+                          window.alert("Sensor loaded successfully");
+                           },
+                           error: function (data){
+                               window.alert("Remember to stop the alarm before...");
+                           }
                   });
              });
              $("#saveMailer").click(function () {
@@ -42,7 +48,11 @@ $(document).ready(function () {
                        dataType: 'json',
                        data: mailer,
                        success: function (data, textStatus, xhr) {
-                           console.log(data);
+                           window.alert("Sensor loaded successfully");
+                            },
+                            error: function (data){
+                                window.alert("Remember to stop the alarm before...");
+                            }
                        },
                    });
              });
