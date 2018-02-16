@@ -1,4 +1,4 @@
-$("#clear").click(function () {
+$("#clear.btn").click(function () {
                     console.log("entra por aqui")
                      $.ajax({
                          async: true,
