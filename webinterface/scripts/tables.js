@@ -1,4 +1,3 @@
-$("#alarm").click(function () {
 $.ajax({
     url: 'http://alknopfler.ddns.net:8080/alarm',
     type: "get",
