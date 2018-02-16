@@ -1,6 +1,6 @@
 [Unit]
 Description=AlkAlarm Web Service
-ConditionPathExists=/opt/alkalarm/webserver
+ConditionPathExists=/opt/alkalarm/webinterface/webserver
 After=network.target
 
 [Service]
@@ -13,8 +13,8 @@ Restart=always
 RestartSec=5
 startLimitIntervalSec=60
 
-WorkingDirectory=/opt/alkalarm
-ExecStart=/opt/alkalarm/webserver
+WorkingDirectory=/opt/alkalarm/webinterface
+ExecStart=/opt/alkalarm/webinterface/webserver
 
 # make sure log directory exists and owned by syslog
 PermissionsStartOnly=true
