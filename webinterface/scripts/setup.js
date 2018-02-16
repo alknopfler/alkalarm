@@ -53,7 +53,7 @@ $(document).ready(function () {
                             error: function (data){
                                 window.alert("Remember to stop the alarm before...");
                             }
-                       },
+
                    });
              });
 
