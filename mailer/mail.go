@@ -50,18 +50,26 @@ func SendMail(typeof,zona string){
 	}
 
 	msg := "From: " + cfg.FROM + "\n" +
-		"To: " + list[0] + "\n" +
+		"To: " + list[0].Receptor + "\n" +
 		"Subject: ALARMA CASA - Sensor de "+strings.ToUpper(typeof)+" de la zona: "+strings.ToUpper(zona)+"\n\n" +
 		"Ha saltado el sensor de "+strings.ToUpper(typeof)+" de la zona : " + strings.ToUpper(zona)
 
 	err = smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
 		smtp.PlainAuth("", cfg.FROM, cfg.SMTP_PASS, cfg.SMTP_SERVER),
-		cfg.FROM, list, []byte(msg))
+		cfg.FROM, getArrayMailTo(list), []byte(msg))
 
 	if err != nil {
 		log.Println("smtp error:", err)
 		return
 	}
+}
+
+func getArrayMailTo(list []cfg.Mailer)[]string{
+	var result [len(list)]string
+	for i := range list {
+		result[i]=list[i].Receptor
+	}
+	return result
 }
 
 func QueryAll() ([]cfg.Mailer,error){
