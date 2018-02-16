@@ -1,3 +1,4 @@
+$(document).ready(function () {
 $.ajax({
     url: 'http://alknopfler.ddns.net:8080/alarm',
     type: "get",
@@ -36,3 +37,5 @@ $("#clearAlarm").click(function () {
                          }
                      });
                  });
+
+});
