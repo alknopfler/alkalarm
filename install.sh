@@ -68,7 +68,7 @@ tput sgr0;echo
 go install webinterface/webserver.go
 cp -r webinterface $PROJECT_PATH
 cp /root/bin/webserver $PROJECT_PATH/webinterface/
-
+#TODO pedir password para codigo acceso
 tput setaf 2;echo
 echo "### Creating the password file with email smtp server password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta smtp: " password
