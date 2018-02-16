@@ -56,6 +56,10 @@ echo "### Copy the python script and binary to the project directory ... ### "
 go install alkalarm.go
 cp _433.py /root/bin/alkalarm $PROJECT_PATH/
 
+echo "### Installing web server and copy the binary to the project directory ... ###"
+go install websinterface/webserver.go
+cp /root/bin/webserver $PROJECT_PATH/
+
 
 echo "### Creating the password file with email smtp server password ... ### "
 read -p "Introduce la password de la cuenta smtp: " password
@@ -74,5 +78,10 @@ chmod 755 /lib/systemd/system/alkalarm.service
 systemctl enable alkalarm
 systemctl start alkalarm
 
-#TODO falta por hacer el webserver installation go install y el daemon para lanzarlo
-echo "### End Of Installation...SUCESS ###"
+echo "### Creating webserver systemd service ###"
+cp alkalarm.service /lib/systemd/system/.
+chmod 755 /lib/systemd/system/alkalarm.service
+systemctl enable alkalarm
+systemctl start alkalarm
+
+echo "### End Of Installation...SUCCESS ###"

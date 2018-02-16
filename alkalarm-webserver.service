@@ -1,0 +1,26 @@
+[Unit]
+Description=AlkAlarm Web Service
+ConditionPathExists=/opt/alkalarm/webserver
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+LimitNOFILE=1024
+
+Restart=always
+RestartSec=5
+startLimitIntervalSec=60
+
+WorkingDirectory=/opt/alkalarm
+ExecStart=/opt/alkalarm/webserver
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=alkalarm-webserver
+
+[Install]
+WantedBy=multi-user.target
