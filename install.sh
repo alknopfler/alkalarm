@@ -40,48 +40,48 @@ function create_folder(){
 
 ##### main #####
 
-echo "Starting the installation...Please press a key:"
+tput setaf 2;echo "Starting the installation...Please press a key:"
 read
 
-echo "### Installing packages ... ###"
+tput setaf 2;echo "### Installing packages ... ###"
 apt-get -y update
 apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
 
-echo "### Creating Folders ... ###"
+tput setaf 2;echo "### Creating Folders ... ###"
 create_folder $PROJECT_PATH
 create_folder $TMP_PATH
 create_folder $LOG_PATH
 
-echo "### Copy the python script and binary to the project directory ... ### "
+tput setaf 2;echo "### Copy the python script and binary to the project directory ... ### "
 go install alkalarm.go
 cp _433.py /root/bin/alkalarm $PROJECT_PATH/
 
-echo "### Installing web server and copy the binary to the project directory ... ###"
-go install websinterface/webserver.go
+tput setaf 2;echo "### Installing web server and copy the binary to the project directory ... ###"
+go install webinterface/webserver.go
 cp /root/bin/webserver $PROJECT_PATH/
 
 
-echo "### Creating the password file with email smtp server password ... ### "
+tput setaf 2;echo "### Creating the password file with email smtp server password ... ### "
 read -p "Introduce la password de la cuenta smtp: " password
 echo $password>$PROJECT_PATH/.passSMTP
 
-echo "### Enabling the PiGPIO daemon ###"
+tput setaf 2;echo "### Enabling the PiGPIO daemon ###"
 systemctl enable pigpiod
 
-echo "### Creating the file in rsyslog ###"
+tput setaf 2;echo "### Creating the file in rsyslog ###"
 cp 30-alkalarm.conf /etc/rsyslog.d/
 systemctl restart rsyslog
 
-echo "### Creating AlkAlarm systemd service ###"
+tput setaf 2;echo "### Creating AlkAlarm systemd service ###"
 cp alkalarm.service /lib/systemd/system/.
 chmod 755 /lib/systemd/system/alkalarm.service
 systemctl enable alkalarm
 systemctl start alkalarm
 
-echo "### Creating webserver systemd service ###"
+tput setaf 2;echo "### Creating webserver systemd service ###"
 cp alkalarm.service /lib/systemd/system/.
 chmod 755 /lib/systemd/system/alkalarm.service
 systemctl enable alkalarm
 systemctl start alkalarm
 
-echo "### End Of Installation...SUCCESS ###"
+tput setaf 2;echo "### End Of Installation...SUCCESS ###"
