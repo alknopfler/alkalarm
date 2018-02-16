@@ -24,9 +24,10 @@ $(document).ready(function () {
              });
              $("#clearAlarm").click(function () {
                   var code = $('#code').val();
+                  var urldelete = 'http://alknopfler.ddns.net:8080/setup/sensor/'+code
                   $.ajax({
                       async: true,
-                      url: 'http://alknopfler.ddns.net:8080/setup/sensor/'+code,
+                      url: urldelete,
                       type: 'delete',
                       success: function () {
                          window.alert("Sensor loaded successfully");
