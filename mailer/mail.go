@@ -65,7 +65,8 @@ func SendMail(typeof,zona string){
 }
 
 func getArrayMailTo(list []cfg.Mailer)[]string{
-	var result [len(list)]string
+	var result []string
+	result = make([]string,len(list))
 	for i := range list {
 		result[i]=list[i].Receptor
 	}
