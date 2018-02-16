@@ -1,41 +1,44 @@
 $(document).ready(function () {
-$.ajax({
-    url: 'http://alknopfler.ddns.net:8080/alarm',
-    type: "get",
-    dataType: "json",
-    data: '',
-    success: function(data, textStatus, jqXHR) {
-        // since we are using jQuery, you don't need to parse response
-        drawTable(data);
-    }
-});
+    $("#alarm").show(function (){
+        $.ajax({
+            url: 'http://alknopfler.ddns.net:8080/alarm',
+            type: "GET",
+            dataType: "json",
+            data: '',
+            success: function(data, textStatus, jqXHR) {
+                // since we are using jQuery, you don't need to parse response
+                drawTable(data);
+            }
+        });
+    });
+        function drawTable(data) {
+            for (var i = 0; i < data.length; i++) {
+                drawRow(data[i]);
+            }
+        }
 
-function drawTable(data) {
-    for (var i = 0; i < data.length; i++) {
-        drawRow(data[i]);
-    }
-}
+        function drawRow(rowData) {
+            var row = $("<tr />")
+            $("#alarm").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+            row.append($("<td>" + rowData.Date + "</td>"));
+            row.append($("<td>" + rowData.Sensor + "</td>"));
+        }
 
-function drawRow(rowData) {
-    var row = $("<tr />")
-    $("#alarm").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-    row.append($("<td>" + rowData.Date + "</td>"));
-    row.append($("<td>" + rowData.Sensor + "</td>"));
-}
-
-$("#clearAlarm").click(function () {
-                    console.log("entra por aqui")
-                     $.ajax({
-                         async: true,
-                         crossDomain: true,
-                         url: 'http://alknopfler.ddns.net:8080/alarm',
-                         type: 'DELETE',
-                         success: function () {
-                            //if (data.success){
-                                   $("#table").load();
-                                   console.log("Entra success")
-                         }
-                     });
-                 });
+    $("#clearAlarm").click(function () {
+                        console.log("entra por aqui")
+                         $.ajax({
+                             async: true,
+                             crossDomain: true,
+                             url: 'http://alknopfler.ddns.net:8080/alarm',
+                             type: 'DELETE',
+                             success: function () {
+                                //if (data.success){
+                                       console.log("Entra success");
+                             },
+                             error: function(){
+                                        console.log("entra error");
+                             }
+                         });
+    });
 
 });
