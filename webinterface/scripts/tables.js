@@ -9,6 +9,7 @@ $.ajax({
         drawTable(data);
     }
 });
+});
 
 function drawTable(data) {
     for (var i = 0; i < data.length; i++) {
@@ -22,7 +23,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.Date + "</td>"));
     row.append($("<td>" + rowData.Sensor + "</td>"));
 }
-});
+
 
 $("#clear").click(function () {
                      $.ajax({
