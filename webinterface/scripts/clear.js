@@ -1,4 +1,5 @@
 $("#clear").click(function () {
+                    console.log("entra por aqui")
                      $.ajax({
                          async: true,
                          crossDomain: true,
