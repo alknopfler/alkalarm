@@ -22,7 +22,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.Date + "</td>"));
     row.append($("<td>" + rowData.Sensor + "</td>"));
 }
-
+});
 
 $("#clear").click(function () {
                      $.ajax({
