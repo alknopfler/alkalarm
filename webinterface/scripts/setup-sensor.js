@@ -22,7 +22,7 @@ $(document).ready(function () {
                      }
                  });
              });
-             $("#clearAlarm").click(function () {
+             $("#deleteSensor").click(function () {
                   var code = $('#code').val();
                   var urldelete = 'http://alknopfler.ddns.net:8080/setup/sensor/'+code
                   $.ajax({
@@ -30,7 +30,7 @@ $(document).ready(function () {
                       url: urldelete,
                       type: 'delete',
                       success: function () {
-                         window.alert("Sensor loaded successfully");
+                         window.alert("Sensor delete successfully");
                          $("#sensortable").load(" #sensortable");
                       },
                       error: function (data){
