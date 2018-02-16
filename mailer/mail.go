@@ -83,10 +83,10 @@ func QueryAll() ([]cfg.Mailer,error){
 	rows, err := db.Query(cfg.MAIL_QUERY_ALL)
 	if err != nil { return result,err }
 	defer rows.Close()
-
+	var item cfg.Mailer
 	for rows.Next() {
-		item := ""
-		err2 := rows.Scan(&item)
+		item.Receptor = ""
+		err2 := rows.Scan(&item.Receptor)
 		if err2 != nil { return nil,err }
 		result = append(result, item)
 	}
