@@ -73,7 +73,7 @@ func getArrayMailTo(list []cfg.Mailer)[]string{
 }
 
 func QueryAll() ([]cfg.Mailer,error){
-	var result []string
+	var result []cfg.Mailer
 	db,err := database.InitDB()
 	if err != nil {
 		log.Println("Error initiating DB in Query Sensor")
