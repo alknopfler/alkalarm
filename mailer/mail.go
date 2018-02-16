@@ -64,7 +64,7 @@ func SendMail(typeof,zona string){
 	}
 }
 
-func QueryAll() ([]string,error){
+func QueryAll() ([]cfg.Mailer,error){
 	var result []string
 	db,err := database.InitDB()
 	if err != nil {
