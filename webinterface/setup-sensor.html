@@ -10,6 +10,7 @@
 		<![endif]-->
 		<script type='text/javascript' src='scripts/respond.min.js'></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script type="text/javascript" language="javascript" src="scripts/setup-sensor.js"></script>
 		</head>
 		<body>
 
@@ -25,9 +26,16 @@
 					</nav>
 				</header>
 				<section align="center" id="main">
-					<a href="setup-sensor.html" id="setupSensor" class="clearAlarm">Sensor</a>
-					<a href="setup-control.html" id="setupControl" class="clearAlarm">Control</a>
-					<a href="setup-mail.html" id="setupMailer" class="clearAlarm">MailTo</a>
+					<input class="textbox" id="inputjson" placeholder="Input Sensor Json" /><a id="saveSensor" class="clearAlarm">Save</a><br><br>
+					<input class="textbox" id="code" placeholder="Input Sensor Code to delete" /><a id="deleteSensor" class="clearAlarm">Delete</a><br><br>
+					<table id="sensortable" class="greenTable">
+						<tr>
+							<th>Code</th>
+							<th>Sensor</th>
+							<th>Zone</th>
+						</tr>
+
+					</table>
 				</section>
 
 
