@@ -12,7 +12,7 @@ $(document).ready(function () {
                      url: 'http://192.168.10.70:8080/setup/sensor',
                      type: 'POST',
                      dataType: 'json',
-                     data: sensor,
+                     data: sensor.serialize(),
                      success: function (data, textStatus, xhr) {
                          console.log(data);
                      },
