@@ -73,7 +73,9 @@ func main() {
 
 
 	corsObj:=handlers.AllowedOrigins([]string{"*"})
-	err := http.ListenAndServe(cfg.SERVER_API_PORT, handlers.CORS(corsObj)(r))
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"})
+	err := http.ListenAndServe(cfg.SERVER_API_PORT, handlers.CORS(corsObj,headersOk,methodsOk)(r))
 	if err != nil {
 		log.Println("Error listening api server...")
 	}
