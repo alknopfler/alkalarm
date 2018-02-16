@@ -9,7 +9,6 @@ $.ajax({
         drawTable(data);
     }
 });
-});
 
 function drawTable(data) {
     for (var i = 0; i < data.length; i++) {
@@ -23,18 +22,3 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.Date + "</td>"));
     row.append($("<td>" + rowData.Sensor + "</td>"));
 }
-
-
-$("#clear").click(function () {
-                     $.ajax({
-                         async: true,
-                         crossDomain: true,
-                         url: 'http://alknopfler.ddns.net:8080/alarm',
-                         type: 'DELETE',
-                         success: function () {
-                            //if (data.success){
-                                   console.log("entra por buena")
-                            //}
-                         }
-                     });
-                 });
