@@ -38,6 +38,9 @@ $(document).ready(function () {
                       }
                   });
              });
+             $("#example").click(function () {
+                                                        document.getElementById("inputjson").value = "[	{\"receptor\":\"alknopfler@gmail.com\" }]";
+                                                    });
              $("#mailtable").show(function (){
                      $.ajax({
                          url: 'http://alknopfler.ddns.net:8080/setup/mail',

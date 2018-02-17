@@ -38,6 +38,9 @@ $(document).ready(function () {
                       }
                   });
              });
+             $("#example").click(function () {
+                                           document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"}]";
+                                       });
              $("#sensortable").show(function (){
                      $.ajax({
                          url: 'http://alknopfler.ddns.net:8080/setup/sensor',
