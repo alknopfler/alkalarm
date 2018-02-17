@@ -10,7 +10,7 @@ import (
 //HandlerDeleteMail function
 func HandlerVerifyPass(w http.ResponseWriter, r *http.Request) {
 	receptorInput, _ := mux.Vars(r)["pass"]
-	if receptorInput+"\n" != cfg.WEBACCESS_PASS{
+	if receptorInput != cfg.WEBACCESS_PASS{
 		responseWithError(w, http.StatusBadGateway, "Bad Password")
 		return
 	}

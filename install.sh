@@ -1,6 +1,7 @@
 #!/bin/bash
 
-tput setaf 1;echo "   _               _
+tput setaf 1;echo
+"   _               _
    / \  | | | __   / \  | | __ _ _ __ _ __ ___
   / _ \ | | |/ /  / _ \ | |/ _' | '__| '_ ' _ \
  / ___ \| |   <  / ___ \| | (_| | |  | | | | | |
@@ -78,7 +79,7 @@ cp /root/bin/discoverCodes $PROJECT_PATH/
 tput setaf 2;echo
 echo "### Creating the email smtp server account ... ### "
 tput sgr0;read -p "Introduce el usuario desde el que enviar notificaciones (pej. pepe@gmail.com) : " useraccount
-echo $useraccount>$PROJECT_PATH/.userSMTP
+echo -n $useraccount>$PROJECT_PATH/.userSMTP
 
 tput setaf 2;echo
 echo "### Creating the password file with email smtp server password ... ### "
@@ -88,7 +89,7 @@ echo $password>$PROJECT_PATH/.passSMTP
 tput setaf 2;echo
 echo "### Creating the password file with webAdmin access password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta admin: " password
-echo $password>$PROJECT_PATH/.passACCESS
+echo -n $password>$PROJECT_PATH/.passACCESS
 
 tput setaf 2;echo
 echo "### Creating the file in rsyslog ###"
