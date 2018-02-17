@@ -1,42 +1,64 @@
 $(document).ready(function () {
- var code = prompt("Please enter your code:", "");
-
- jQuery.get('../../.htaccess', function(data) {
- if (code ==data) {
 
              $("#saveSensor").click(function () {
-                 var sensor = $('#inputjson').val();
+                 var code = prompt("Please enter your access code:", "");
                  $.ajax({
-                     async: true,
-                     crossDomain: true,
-                     url: 'http://alknopfler.ddns.net:8080/setup/sensor',
-                     type: 'POST',
-                     dataType: 'json',
-                     data: sensor,
-                     success: function (data, textStatus, xhr) {
-                         window.alert("Sensor loaded successfully");
-                         location.reload();
-                     },
-                     error: function (data){
-                         window.alert("Remember to stop the alarm before...");
-                     }
+                      url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                      type: "get",
+                      dataType: "json",
+                      data: '',
+                      error: function(data, textStatus, jqXHR) {
+                            window.alert("Your Access Password is incorrect...");
+                            location.reload();
+                      },
+                      success: function(data, textStatus, jqXHR) {
+                         var sensor = $('#inputjson').val();
+                         $.ajax({
+                             async: true,
+                             crossDomain: true,
+                             url: 'http://alknopfler.ddns.net:8080/setup/sensor',
+                             type: 'POST',
+                             dataType: 'json',
+                             data: sensor,
+                             success: function (data, textStatus, xhr) {
+                                 window.alert("Sensor loaded successfully");
+                                 location.reload();
+                             },
+                             error: function (data){
+                                 window.alert("Remember to stop the alarm before...");
+                             }
+                         });
+                      }
                  });
              });
              $("#deleteSensor").click(function () {
-                  var code = $('#code').val();
-                  var urldelete = 'http://alknopfler.ddns.net:8080/setup/sensor/'+code
-                  $.ajax({
-                      async: true,
-                      url: urldelete,
-                      type: 'delete',
-                      success: function () {
-                         window.alert("Sensor delete successfully");
-                         location.reload();
-                      },
-                      error: function (data){
-                           window.alert("Remember to stop the alarm before...");
-                      }
-                  });
+                   var code = prompt("Please enter your access code:", "");
+                   $.ajax({
+                        url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                        type: "get",
+                        dataType: "json",
+                        data: '',
+                        error: function(data, textStatus, jqXHR) {
+                              window.alert("Your Access Password is incorrect...");
+                              location.reload();
+                        },
+                        success: function(data, textStatus, jqXHR) {
+                          var code = $('#code').val();
+                          var urldelete = 'http://alknopfler.ddns.net:8080/setup/sensor/'+code
+                          $.ajax({
+                              async: true,
+                              url: urldelete,
+                              type: 'delete',
+                              success: function () {
+                                 window.alert("Sensor delete successfully");
+                                 location.reload();
+                              },
+                              error: function (data){
+                                   window.alert("Remember to stop the alarm before...");
+                              }
+                          });
+                        }
+                   });
              });
              $("#example").click(function () {
                                            document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"}]";
@@ -60,6 +82,4 @@ $(document).ready(function () {
                          }
                      });
                  });
- }
- });
  });
