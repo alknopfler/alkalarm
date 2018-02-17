@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tput setaf 1;echo"
+tput setaf 1;echo "
     _               _
    / \  | | | __   / \  | | __ _ _ __ _ __ ___
   / _ \ | | |/ /  / _ \ | |/ _' | '__| '_ ' _  \
