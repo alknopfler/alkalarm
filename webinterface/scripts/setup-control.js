@@ -38,6 +38,9 @@ $(document).ready(function () {
                       }
                   });
              });
+             $("#example").click(function () {
+                              document.getElementById("inputjson").value = "[{\"Code\":\"3462412\",\"Description\":\"mando1\",\"TypeOf\":\"inactive\"},{\"Code\":\"3462448\",\"Description\":\"mando1\",\"TypeOf\":\"full\"},{\"Code\":\"3462592\",\"Description\":\"mando1\",\"TypeOf\":\"partial\"}]";
+                          });
              $("#controltable").show(function (){
                      $.ajax({
                          url: 'http://alknopfler.ddns.net:8080/setup/control',
