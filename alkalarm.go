@@ -45,6 +45,11 @@ func init(){
 			log.Println("Error activating the first time (init)")
 			os.Exit(3)
 		}
+		err=database.Operate(db,cfg.ADMIN_INSERT,cfg.WEBACCESS_PASS)
+		if err!=nil{
+			log.Println("Error creating the first pass (init)")
+			os.Exit(3)
+		}
 	}
 	log.Println("Success...Starting the program")
 }
@@ -69,7 +74,7 @@ func main() {
 	r.HandleFunc("/activate/partial",api.HandlerActivatePartial).Methods("POST")
 	r.HandleFunc("/deactivate",api.HandlerDeactivate).Methods("POST")
 	r.HandleFunc("/status",api.HandlerAlarmStatus).Methods("GET")
-
+	r.HandleFunc("/admin/{pass}",api.HandlerVerifyPass).Methods("GET")
 
 	corsObj:=handlers.AllowedOrigins([]string{"*"})
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})

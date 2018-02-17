@@ -76,14 +76,19 @@ go install scripts/discoverCodes.go
 cp /root/bin/discoverCodes $PROJECT_PATH/
 
 tput setaf 2;echo
+echo "### Creating the email smtp server account ... ### "
+tput sgr0;read -p "Introduce el usuario desde el que enviar notificaciones (pej. pepe@gmail.com) : " useraccount
+echo $useraccount>$PROJECT_PATH/.userSMTP
+
+tput setaf 2;echo
 echo "### Creating the password file with email smtp server password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta smtp: " password
 echo $password>$PROJECT_PATH/.passSMTP
 
 tput setaf 2;echo
-echo "### Enabling the PiGPIO daemon ###"
-tput sgr0;echo
-systemctl enable pigpiod
+echo "### Creating the password file with webAdmin access password ... ### "
+tput sgr0;read -p "Introduce la password de la cuenta admin: " password
+echo $password>$PROJECT_PATH/.passACCESS
 
 tput setaf 2;echo
 echo "### Creating the file in rsyslog ###"
@@ -92,7 +97,12 @@ cp 30-alkalarm.conf /etc/rsyslog.d/
 systemctl restart rsyslog
 
 tput setaf 2;echo
-echo "### Creating AlkAlarm systemd service ###"
+echo "### Enabling the PiGPIO daemon ###"
+tput sgr0;echo
+systemctl enable pigpiod
+
+tput setaf 2;echo
+echo "### Creating and starting AlkAlarm systemd service ###"
 tput sgr0;echo
 cp alkalarm.service /lib/systemd/system/.
 chmod 755 /lib/systemd/system/alkalarm.service
@@ -100,7 +110,7 @@ systemctl enable alkalarm
 systemctl start alkalarm
 
 tput setaf 2;echo
-echo "### Creating webserver systemd service ###"
+echo "### Creating and starting webserver systemd service ###"
 tput sgr0;echo
 cp alkalarm-webserver.service /lib/systemd/system/.
 chmod 755 /lib/systemd/system/alkalarm-webserver.service

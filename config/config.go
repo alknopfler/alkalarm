@@ -23,10 +23,11 @@ var (
 	DB_NAME = PROJECT_PATH+"data.db"
 	DB_TYPE	= "sqlite3"
 
-	FROM = "alknopfler@gmail.com"
+	FROM = readFromFile(".userSMTP")
 	SMTP_SERVER = "smtp.gmail.com"
 	SMTP_PORT = "587"
-	SMTP_PASS = readPassFromFile()
+	SMTP_PASS = readFromFile(".passSMTP")
+	WEBACCESS_PASS = readFromFile(".passACCESS")
 
 )
 type ArraySensor struct{
@@ -65,8 +66,8 @@ type GlobalState struct{
 }
 
 
-func readPassFromFile()string{
-	b, err := ioutil.ReadFile(PROJECT_PATH+".passSMTP") // just pass the file name
+func readFromFile(file string)string{
+	b, err := ioutil.ReadFile(PROJECT_PATH+file) // just pass the file name
 	if err != nil {
 		log.Print(err)
 	}

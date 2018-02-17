@@ -15,6 +15,7 @@ const (
 		ALARM_INSERT = "INSERT INTO alarms(date,sensor) values(?,?)"
 		CONTROL_INSERT = "INSERT INTO control(code,description,typeOf) values(?,?,?)"
 		GLOBAL_STATE_INSERT= "INSERT INTO global_state(id,gstate) values(1,?)"
+		ADMIN_INSERT="INSERT INTO admin(pass) values(?)"
 
 	//// DELETES ////
 		SENSOR_DELETE = "DELETE FROM sensors WHERE code=?"
