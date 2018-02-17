@@ -11,7 +11,7 @@ import (
 func HandlerVerifyPass(w http.ResponseWriter, r *http.Request) {
 	receptorInput, _ := mux.Vars(r)["pass"]
 	if receptorInput != cfg.WEBACCESS_PASS{
-		responseWithError(w, http.StatusBadGateway, "Bad Password")
+		responseWithError(w, http.StatusBadGateway, "Bad Password"+cfg.WEBACCESS_PASS)
 		return
 	}
 	responseWithJSON(w,http.StatusOK,"Good Password")
