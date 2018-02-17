@@ -49,7 +49,7 @@ $(document).ready(function () {
                              for (var i = 0; i < data.length; i++) {
                                  var row = $("<tr />")
                                  $("#mailtable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-                                 row.append($("<td>" + data[i].Receptor + "</td>"));
+                                 row.append($("<td>" + data[i] + "</td>"));
 
                              }
                          }

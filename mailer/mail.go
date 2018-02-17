@@ -50,13 +50,13 @@ func SendMail(typeof,zona string){
 	}
 
 	msg := "From: " + cfg.FROM + "\n" +
-		"To: " + list[0].Receptor + "\n" +
+		"To: " + list[0] + "\n" +
 		"Subject: ALARMA CASA - Sensor de "+strings.ToUpper(typeof)+" de la zona: "+strings.ToUpper(zona)+"\n\n" +
 		"Ha saltado el sensor de "+strings.ToUpper(typeof)+" de la zona : " + strings.ToUpper(zona)
 
 	err = smtp.SendMail(cfg.SMTP_SERVER+":"+cfg.SMTP_PORT,
 		smtp.PlainAuth("", cfg.FROM, cfg.SMTP_PASS, cfg.SMTP_SERVER),
-		cfg.FROM, getArrayMailTo(list), []byte(msg))
+		cfg.FROM, list, []byte(msg))
 
 	if err != nil {
 		log.Println("smtp error:", err)
@@ -64,17 +64,9 @@ func SendMail(typeof,zona string){
 	}
 }
 
-func getArrayMailTo(list []cfg.Mailer)[]string{
-	var result []string
-	result = make([]string,len(list))
-	for i := range list {
-		result[i]=list[i].Receptor
-	}
-	return result
-}
 
-func QueryAll() ([]cfg.Mailer,error){
-	var result []cfg.Mailer
+func QueryAll() ([]string,error){
+	var result []string
 	db,err := database.InitDB()
 	if err != nil {
 		log.Println("Error initiating DB in Query Sensor")
@@ -84,10 +76,9 @@ func QueryAll() ([]cfg.Mailer,error){
 	rows, err := db.Query(cfg.MAIL_QUERY_ALL)
 	if err != nil { return result,err }
 	defer rows.Close()
-	var item cfg.Mailer
 	for rows.Next() {
-		item.Receptor = ""
-		err2 := rows.Scan(&item.Receptor)
+		item := ""
+		err2 := rows.Scan(&item)
 		if err2 != nil { return nil,err }
 		result = append(result, item)
 	}
