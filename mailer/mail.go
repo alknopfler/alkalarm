@@ -76,6 +76,7 @@ func QueryAll() ([]string,error){
 	rows, err := db.Query(cfg.MAIL_QUERY_ALL)
 	if err != nil { return result,err }
 	defer rows.Close()
+
 	for rows.Next() {
 		item := ""
 		err2 := rows.Scan(&item)
@@ -84,7 +85,6 @@ func QueryAll() ([]string,error){
 	}
 	return result, nil
 }
-
 func Exists(receptor string) bool{
 	db,err := database.InitDB()
 	if err != nil {
