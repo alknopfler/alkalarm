@@ -1,5 +1,6 @@
 
  $(document).ready(function () {
+ //TODO probar localhost en lugar de hostname
      var code = prompt("Please enter your access code:", "");
      $.ajax({
           url: 'http://alknopfler.ddns.net:8080/admin/'+code,
