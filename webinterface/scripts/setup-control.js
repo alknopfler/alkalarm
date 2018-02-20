@@ -2,7 +2,7 @@ $(document).ready(function () {
              $("#saveControl").click(function () {
                       var code = prompt("Please enter your access code:", "");
                       $.ajax({
-                           url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                           url: 'http://{{HOST}}:8080/admin/'+code,
                            type: "get",
                            dataType: "json",
                            data: '',
@@ -15,7 +15,7 @@ $(document).ready(function () {
                                  $.ajax({
                                      async: true,
                                      crossDomain: true,
-                                     url: 'http://alknopfler.ddns.net:8080/setup/control',
+                                     url: 'http://{{HOST}}:8080/setup/control',
                                      type: 'POST',
                                      dataType: 'json',
                                      data: sensor,
@@ -33,7 +33,7 @@ $(document).ready(function () {
              $("#deleteControl").click(function () {
                 var code = prompt("Please enter your access code:", "");
                 $.ajax({
-                     url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                     url: 'http://{{HOST}}:8080/admin/'+code,
                      type: "get",
                      dataType: "json",
                      data: '',
@@ -43,7 +43,7 @@ $(document).ready(function () {
                      },
                      success: function(data, textStatus, jqXHR) {
                           var code = $('#code').val();
-                          var urldelete = 'http://alknopfler.ddns.net:8080/setup/control/'+code
+                          var urldelete = 'http://{{HOST}}:8080/setup/control/'+code
                           $.ajax({
                               async: true,
                               url: urldelete,
@@ -64,7 +64,7 @@ $(document).ready(function () {
                           });
              $("#controltable").show(function (){
                      $.ajax({
-                         url: 'http://alknopfler.ddns.net:8080/setup/control',
+                         url: 'http://{{HOST}}:8080/setup/control',
                          type: "get",
                          dataType: "json",
                          data: '',

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#alarm").show(function (){
         $.ajax({
-            url: 'http://alknopfler.ddns.net:8080/alarm',
+            url: 'http://{{HOST}}:8080/alarm',
             type: "get",
             dataType: "json",
             data: '',
@@ -19,7 +19,7 @@ $(document).ready(function () {
     $("#clearAlarm").click(function () {
                          $.ajax({
                              async: true,
-                             url: 'http://alknopfler.ddns.net:8080/alarm',
+                             url: 'http://{{HOST}}:8080/alarm',
                              type: 'delete',
                              success: function () {
                                 $("#alarm").load(" #alarm")

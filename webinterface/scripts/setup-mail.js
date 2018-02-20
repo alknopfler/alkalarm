@@ -2,7 +2,7 @@ $(document).ready(function () {
              $("#saveMail").click(function () {
                var code = prompt("Please enter your access code:", "");
                $.ajax({
-                    url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                    url: 'http://{{HOST}}:8080/admin/'+code,
                     type: "get",
                     dataType: "json",
                     data: '',
@@ -15,7 +15,7 @@ $(document).ready(function () {
                          $.ajax({
                              async: true,
                              crossDomain: true,
-                             url: 'http://alknopfler.ddns.net:8080/setup/mail',
+                             url: 'http://{{HOST}}:8080/setup/mail',
                              type: 'POST',
                              dataType: 'json',
                              data: sensor,
@@ -33,7 +33,7 @@ $(document).ready(function () {
              $("#deleteMail").click(function () {
                  var code = prompt("Please enter your access code:", "");
                  $.ajax({
-                      url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                      url: 'http://{{HOST}}:8080/admin/'+code,
                       type: "get",
                       dataType: "json",
                       data: '',
@@ -43,7 +43,7 @@ $(document).ready(function () {
                       },
                       success: function(data, textStatus, jqXHR) {
                           var receptor = $('#receptor').val();
-                          var urldelete = 'http://alknopfler.ddns.net:8080/setup/mail/'+receptor
+                          var urldelete = 'http://{{HOST}}:8080/setup/mail/'+receptor
                           $.ajax({
                               async: true,
                               url: urldelete,
@@ -64,7 +64,7 @@ $(document).ready(function () {
              });
              $("#mailtable").show(function (){
                      $.ajax({
-                         url: 'http://alknopfler.ddns.net:8080/setup/mail',
+                         url: 'http://{{HOST}}:8080/setup/mail',
                          type: "get",
                          dataType: "json",
                          data: '',

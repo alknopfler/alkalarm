@@ -3,7 +3,7 @@ $(document).ready(function () {
              $("#saveSensor").click(function () {
                  var code = prompt("Please enter your access code:", "");
                  $.ajax({
-                      url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                      url: 'http://{{HOST}}:8080/admin/'+code,
                       type: "get",
                       dataType: "json",
                       data: '',
@@ -16,7 +16,7 @@ $(document).ready(function () {
                          $.ajax({
                              async: true,
                              crossDomain: true,
-                             url: 'http://alknopfler.ddns.net:8080/setup/sensor',
+                             url: 'http://{{HOST}}:8080/setup/sensor',
                              type: 'POST',
                              dataType: 'json',
                              data: sensor,
@@ -34,7 +34,7 @@ $(document).ready(function () {
              $("#deleteSensor").click(function () {
                    var code = prompt("Please enter your access code:", "");
                    $.ajax({
-                        url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+                        url: 'http://{{HOST}}:8080/admin/'+code,
                         type: "get",
                         dataType: "json",
                         data: '',
@@ -44,7 +44,7 @@ $(document).ready(function () {
                         },
                         success: function(data, textStatus, jqXHR) {
                           var code = $('#code').val();
-                          var urldelete = 'http://alknopfler.ddns.net:8080/setup/sensor/'+code
+                          var urldelete = 'http://{{HOST}}:8080/setup/sensor/'+code
                           $.ajax({
                               async: true,
                               url: urldelete,
@@ -65,7 +65,7 @@ $(document).ready(function () {
                                        });
              $("#sensortable").show(function (){
                      $.ajax({
-                         url: 'http://alknopfler.ddns.net:8080/setup/sensor',
+                         url: 'http://{{HOST}}:8080/setup/sensor',
                          type: "get",
                          dataType: "json",
                          data: '',
