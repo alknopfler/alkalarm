@@ -59,25 +59,6 @@ create_folder $TMP_PATH
 create_folder $LOG_PATH
 
 tput setaf 2;echo
-echo "### Copy the python script and binary to the project directory ... ### "
-tput sgr0;echo
-go install alkalarm.go
-cp _433.py /root/bin/alkalarm $PROJECT_PATH/
-
-tput setaf 2;echo
-echo "### Installing web server and copy the binary to the project directory ... ###"
-tput sgr0;echo
-go install webinterface/webserver.go
-cp -r webinterface $PROJECT_PATH
-cp /root/bin/webserver $PROJECT_PATH/webinterface/
-
-tput setaf 2;echo
-echo "### Installing the discovery codes utility and copy the binary to the project directory ... ###"
-tput sgr0;echo
-go install scripts/discoverCodes.go
-cp /root/bin/discoverCodes $PROJECT_PATH/
-
-tput setaf 2;echo
 echo "### Creating the email smtp server account ... ### "
 tput sgr0;read -p "Introduce el usuario desde el que enviar notificaciones (pej. pepe@gmail.com) : " useraccount
 echo -n $useraccount>$PROJECT_PATH/.userSMTP
@@ -91,6 +72,31 @@ tput setaf 2;echo
 echo "### Creating the password file with webAdmin access password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta admin: " password
 echo -n $password>$PROJECT_PATH/.passACCESS
+
+tput setaf 2;echo
+echo "### Creating the domain for the webserver ... ### "
+tput sgr0;read -p "Introduce el host o la IP del host alkalarm: " HOST
+cp -r webinterface $PROJECT_PATH
+sed -i -- "s/{{HOST}}/$HOST/g" $PROJECT_PATH/webinterface/scripts/button.js
+
+tput setaf 2;echo
+echo "### Copy the python script and binary to the project directory ... ### "
+tput sgr0;echo
+go install alkalarm.go
+cp _433.py /root/bin/alkalarm $PROJECT_PATH/
+
+tput setaf 2;echo
+echo "### Installing web server and copy the binary to the project directory ... ###"
+tput sgr0;echo
+go install webinterface/webserver.go
+
+cp /root/bin/webserver $PROJECT_PATH/webinterface/
+
+tput setaf 2;echo
+echo "### Installing the discovery codes utility and copy the binary to the project directory ... ###"
+tput sgr0;echo
+go install scripts/discoverCodes.go
+cp /root/bin/discoverCodes $PROJECT_PATH/
 
 tput setaf 2;echo
 echo "### Creating the file in rsyslog ###"
