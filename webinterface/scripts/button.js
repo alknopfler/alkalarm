@@ -3,7 +3,8 @@
  //TODO probar localhost en lugar de hostname
      var code = prompt("Please enter your access code:", "");
      $.ajax({
-          url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+          //url: 'http://alknopfler.ddns.net:8080/admin/'+code,
+          url: 'http://localhost:8080/admin'+code,
           type: "get",
           dataType: "json",
           data: '',
@@ -12,7 +13,8 @@
                 location.reload();
           },
           success: function(data, textStatus, jqXHR) {
-                 $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
+                // $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
+                $.get("http://localhost:8080/status", function(respuesta){
                    if (respuesta == "full"){
                          $("#activarFullAlarm").css({'color':'blue'});
                          $("#activarPartialAlarm").css({'color':'grey'});
@@ -31,7 +33,8 @@
                        $.ajax({
                            async: true,
                            crossDomain: true,
-                           url: 'http://alknopfler.ddns.net:8080/activate/full',
+                          // url: 'http://alknopfler.ddns.net:8080/activate/full',
+                           url: 'http://localhost:8080/activate/full',
                            type: 'POST',
                            success: function () {
                                      $("#activarFullAlarm").css({'color':'blue'});
@@ -44,7 +47,8 @@
                      $.ajax({
                          async: true,
                          crossDomain: true,
-                         url: 'http://alknopfler.ddns.net:8080/activate/partial',
+                         //url: 'http://alknopfler.ddns.net:8080/activate/partial',
+                         url: 'http://localhost:8080/activate/partial',
                          type: 'POST',
                          success: function () {
                                  $("#activarFullAlarm").css({'color':'grey'});
@@ -57,7 +61,8 @@
                      $.ajax({
                          async: true,
                          crossDomain: true,
-                         url: 'http://alknopfler.ddns.net:8080/deactivate',
+                         //url: 'http://alknopfler.ddns.net:8080/deactivate',
+                         url: 'http://localhost:8080/deactivate',
                          type: 'POST',
                          success: function () {
                                  $("#activarFullAlarm").css({'color':'grey'});
