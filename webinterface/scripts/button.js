@@ -3,7 +3,7 @@
      var code = prompt("Please enter your access code:", "");
      $.ajax({
           //url: 'http://alknopfler.ddns.net:8080/admin/'+code,
-          url: 'http://{{HOST}}:8080/admin'+code,
+          url: 'http://{{HOST}}:8080/admin/'+code,
           type: "get",
           dataType: "json",
           data: '',
