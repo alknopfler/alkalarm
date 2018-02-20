@@ -5,14 +5,12 @@ import (
 	//"github.com/alknopfler/alkalarm/kernel"
 	"github.com/alknopfler/alkalarm/states"
 	cfg "github.com/alknopfler/alkalarm/config"
-	"time"
 )
 
 func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 	if states.Query()== cfg.STATE_INAC{
-		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
-		time.Sleep(60 * time.Second)
 		states.Update(cfg.STATE_FULL)
+		responseWithJSON(w,http.StatusOK,"Alarm started successfully")
 		return
 	}else if states.Query()== cfg.STATE_PART{
 		states.Update(cfg.STATE_FULL)
