@@ -2,7 +2,6 @@
  $(document).ready(function () {
      var code = prompt("Please enter your access code:", "");
      $.ajax({
-          //url: 'http://alknopfler.ddns.net:8080/admin/'+code,
           url: 'http://{{HOST}}:8080/admin/'+code,
           type: "get",
           dataType: "json",
@@ -12,7 +11,6 @@
                 location.reload();
           },
           success: function(data, textStatus, jqXHR) {
-                // $.get("http://alknopfler.ddns.net:8080/status", function(respuesta){
                 $.get("http://{{HOST}}:8080/status", function(respuesta){
                    if (respuesta == "full"){
                          $("#activarFullAlarm").css({'color':'blue'});
@@ -32,7 +30,6 @@
                        $.ajax({
                            async: true,
                            crossDomain: true,
-                          // url: 'http://alknopfler.ddns.net:8080/activate/full',
                            url: 'http://{{HOST}}:8080/activate/full',
                            type: 'POST',
                            success: function () {
@@ -46,7 +43,6 @@
                      $.ajax({
                          async: true,
                          crossDomain: true,
-                         //url: 'http://alknopfler.ddns.net:8080/activate/partial',
                          url: 'http://{{HOST}}:8080/activate/partial',
                          type: 'POST',
                          success: function () {
@@ -60,7 +56,6 @@
                      $.ajax({
                          async: true,
                          crossDomain: true,
-                         //url: 'http://alknopfler.ddns.net:8080/deactivate',
                          url: 'http://{{HOST}}:8080/deactivate',
                          type: 'POST',
                          success: function () {
