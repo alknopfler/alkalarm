@@ -1,6 +1,6 @@
 # alkalarm WIKI
 
-For documentation please visit the wiki 
+Read the documentation with the wiki 
 
 https://github.com/alknopfler/alkalarm/wiki
 
@@ -27,4 +27,6 @@ The main idea of this project is based on the same kind of Alarm GSM systems, bu
 * Zones in order to separate the sensor in rooms
 
 
+Read the documentation with the wiki 
 
+https://github.com/alknopfler/alkalarm/wiki
