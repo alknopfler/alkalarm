@@ -80,7 +80,7 @@ table.greenTable tfoot .links a{
 /* Structure */
 #wrapper {
 	width: 90%;
-	height: 40px;
+	height: 50px;
 	max-width: 920px;
 	margin: auto;
 	padding: 2%;
@@ -96,7 +96,7 @@ table.greenTable tfoot .links a{
 /* Logo H1 */
 header h1 {
     text-shadow: rgba(0, 0, 0, 0.5) 2px 6px 5px, rgba(255, 255, 255, 0.4) 2px -4px 30px;
-	height: 40px;
+	height: 100%;
 	width: 160px;
 	float: left;
 	display: block;
