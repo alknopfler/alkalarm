@@ -64,7 +64,7 @@ $(document).ready(function () {
              });
              $("#mailtable").show(function (){
                      $.ajax({
-                         url: 'http://{{HOST}}:8080/setup/mail',
+                         url: 'http://{{HOST}}:8080/mails',
                          type: "get",
                          dataType: "json",
                          data: '',

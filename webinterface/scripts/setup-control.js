@@ -64,7 +64,7 @@ $(document).ready(function () {
                           });
              $("#controltable").show(function (){
                      $.ajax({
-                         url: 'http://{{HOST}}:8080/setup/control',
+                         url: 'http://{{HOST}}:8080/controls',
                          type: "get",
                          dataType: "json",
                          data: '',

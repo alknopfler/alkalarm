@@ -65,7 +65,7 @@ $(document).ready(function () {
                                        });
              $("#sensortable").show(function (){
                      $.ajax({
-                         url: 'http://{{HOST}}:8080/setup/sensor',
+                         url: 'http://{{HOST}}:8080/sensors',
                          type: "get",
                          dataType: "json",
                          data: '',
