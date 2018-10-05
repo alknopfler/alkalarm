@@ -16,7 +16,6 @@ import (
 
 
 func init(){
-	needCreation:=true
  	logging, e := syslog.New(syslog.LOG_NOTICE, "alkalarm")
 	if e == nil {
 		log.SetOutput(logging)
@@ -25,8 +24,9 @@ func init(){
 	log.Print("Validating the database, and other params...Could take some minutes...")
 	//First Time to execute needs create database and scheme
 	if _, err := os.Stat(cfg.DB_NAME); err == nil {
-		log.Println("ya existe la base de datos")
-		needCreation= false
+		log.Println("Database exists...")
+
+		os.Exit(1)
 	}
 	db,err := database.InitDB()
 	if err != nil {
@@ -39,18 +39,17 @@ func init(){
 		log.Println("Error creating the schema the first time (init)")
 		os.Exit(3)
 	}
-	if needCreation {
-		err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
-		if err!=nil{
-			log.Println("Error activating the first time (init)")
-			os.Exit(3)
-		}
-		err=database.Operate(db,cfg.ADMIN_INSERT,cfg.WEBACCESS_PASS)
-		if err!=nil{
-			log.Println("Error creating the first pass (init)")
-			os.Exit(3)
-		}
+	err=database.Operate(db,cfg.GLOBAL_STATE_INSERT,cfg.STATE_INAC)
+	if err!=nil{
+		log.Println("Error activating the first time (init)")
+		os.Exit(3)
 	}
+	err=database.Operate(db,cfg.ADMIN_INSERT,cfg.WEBACCESS_PASS)
+	if err!=nil{
+		log.Println("Error creating the first pass (init)")
+		os.Exit(3)
+	}
+
 	log.Println("Success...Starting the program")
 }
 
