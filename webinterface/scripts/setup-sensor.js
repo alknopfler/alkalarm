@@ -43,6 +43,7 @@ $(document).ready(function () {
                 location.reload();
             },
             success: function(data, textStatus, jqXHR) {
+                window.alert("Scanning the code...Please force sensor activation or press any control key");
                 $.ajax({
                     async: true,
                     crossDomain: true,
@@ -51,14 +52,11 @@ $(document).ready(function () {
                     dataType: 'json',
                     data: '',
                     success: function (data) {
-                        window.alert("Scanning...Please activate the sensor or press any control key");
+                        $('#inputjson').value = data;
                     },
                     error: function (data){
                         window.alert("Remember to stop the alarm before...");
                     },
-                    complete: function () {
-                        $('#inputjson').value = data;
-                    }
                 });
             }
         });
