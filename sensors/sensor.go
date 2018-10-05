@@ -144,15 +144,16 @@ func discoverCodeSensor() (string, error) {
 }
 
 func ScanSensor()([]byte,error){
-		fmt.Println("Looking for new sensor...Try to activate manually to detect it...")
-		code,err:=discoverCodeSensor()
-		var sensor *cfg.Sensor
-		if err!=nil{
-			return nil,err
-		}
+	fmt.Println("Looking for new sensor...Try to activate manually to detect it...")
+	code,err:=discoverCodeSensor()
+	var sensor *cfg.Sensor
+	if err!=nil{
+		return nil,err
+	}
+	fmt.Println("Sensor detected!!! with code: "+code)
 
-		sensor = &cfg.Sensor{code,"Presence","zona1"}
-		response, _ := json.Marshal(sensor)
+	sensor = &cfg.Sensor{code,"Presence","zona1"}
+	response, _ := json.Marshal(sensor)
 
 	return response, nil
 }

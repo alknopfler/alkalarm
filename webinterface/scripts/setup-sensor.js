@@ -51,10 +51,13 @@ $(document).ready(function () {
                     dataType: 'json',
                     data: '',
                     success: function (data) {
-                        $('#inputjson').text();
+                        window.alert("Scanning...Please activate the sensor or press any control key");
                     },
                     error: function (data){
                         window.alert("Remember to stop the alarm before...");
+                    },
+                    complete: function () {
+                        $('#inputjson').value = data;
                     }
                 });
             }
