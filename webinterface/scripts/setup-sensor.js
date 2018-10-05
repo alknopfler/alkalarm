@@ -31,6 +31,35 @@ $(document).ready(function () {
                       }
                  });
              });
+    $("#scanSensor").click(function () {
+        var code = prompt("Please enter your access code:", "");
+        $.ajax({
+            url: 'http://{{HOST}}:8080/admin/'+code,
+            type: "get",
+            dataType: "json",
+            data: '',
+            error: function(data, textStatus, jqXHR) {
+                window.alert("Your Access Password is incorrect...");
+                location.reload();
+            },
+            success: function(data, textStatus, jqXHR) {
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: 'http://{{HOST}}:8080/scan/sensor',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: '',
+                    success: function (data) {
+                        $('#inputjson').text();
+                    },
+                    error: function (data){
+                        window.alert("Remember to stop the alarm before...");
+                    }
+                });
+            }
+        });
+    });
              $("#deleteSensor").click(function () {
                    var code = prompt("Please enter your access code:", "");
                    $.ajax({

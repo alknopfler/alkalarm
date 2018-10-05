@@ -59,6 +59,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/setup/sensor", api.HandlerCreateSensor).Methods("POST")
+	r.HandleFunc("/scan/sensor", api.HandlerScanSensor).Methods("POST")
 	r.HandleFunc("/sensors", api.HandlerGetSensors).Methods("GET")
 	r.HandleFunc("/setup/sensor/{code}", api.HandlerDeleteSensor).Methods("DELETE")
 	r.HandleFunc("/setup/mail", api.HandlerCreateMail).Methods("POST")
