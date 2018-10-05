@@ -52,10 +52,10 @@ $(document).ready(function () {
                     dataType: 'json',
                     data: '',
                     success: function (data) {
-                        $('#inputjson').value = data;
+                        window.alert("The code is: "+data)
                     },
                     error: function (data){
-                        window.alert("Remember to stop the alarm before...");
+                        window.alert("Sensor not found or key not pressed");
                     },
                 });
             }
