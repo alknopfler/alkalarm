@@ -4,6 +4,11 @@ import (
 	cfg "github.com/alknopfler/alkalarm/config"
 	"log"
 	"github.com/alknopfler/alkalarm/database"
+	"fmt"
+	"bufio"
+	"errors"
+	"strings"
+	"os/exec"
 )
 
 
@@ -100,4 +105,45 @@ func Exists(code string) bool{
 		return true
 	}
 	return false
+}
+
+func discoverCodeSensor() (string, error) {
+	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
+	cmdArgs := strings.Fields(cmdName)
+
+	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
+	stdout, _ := cmd.StdoutPipe()
+	cmd.Start()
+	oneByte := make([]byte,0)
+	for{
+		_, err := stdout.Read(oneByte)
+		if err != nil {
+			fmt.Printf(err.Error())
+			break
+		}
+		r := bufio.NewReader(stdout)
+		line,_, _ := r.ReadLine()
+		if (string(line)!=""){
+			cmd.Process.Kill()
+			return string(line),nil  //si ha encontrado  salgo directametne con nil matando previamente
+		}
+
+	}
+	cmd.Process.Kill()  //si no ha encontrado nada en 10 seg mato y salgo con error
+	return "",errors.New("Sensor Not Found after 10 second looking for it...")
+}
+
+func ScanControl()(cfg.Control,error){
+	fmt.Println("Looking for new control...Try to activate manually to detect it...")
+	code,err:=discoverCodeSensor()
+	var control cfg.Sensor
+	if err!=nil{
+		return cfg.Control{},err
+	}
+	fmt.Println("Control key detected!!! with code: "+code)
+
+	control = cfg.Control{code,"XXXX","XXXX"}
+
+
+	return control, nil
 }

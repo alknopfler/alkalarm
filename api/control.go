@@ -6,6 +6,8 @@ import (
 	"github.com/gorilla/mux"
 	cfg "github.com/alknopfler/alkalarm/config"
 	"github.com/alknopfler/alkalarm/states"
+	"github.com/alknopfler/alkalarm/sensors"
+	"fmt"
 )
 
 
@@ -24,6 +26,19 @@ func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		responseWithJSON(w, http.StatusCreated, "Control Registered successfully")
+		return
+	}
+	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")
+}
+
+func HandlerScanControl(w http.ResponseWriter, r *http.Request) {
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
+		code,err:=control.ScanControl()
+		if err!= nil {
+			responseWithError(w,http.StatusInternalServerError,err.Error())
+			return
+		}
+		responseWithJSON(w,http.StatusCreated,code)
 		return
 	}
 	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")

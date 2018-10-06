@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"github.com/alknopfler/alkalarm/sensors"
 	"github.com/gorilla/mux"
@@ -32,14 +31,11 @@ func HandlerCreateSensor(w http.ResponseWriter, r *http.Request) {
 
 func HandlerScanSensor(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_INAC {   //must be inactive
-		fmt.Println("api scanning")
 		code,err:=sensors.ScanSensor()
 		if err!= nil {
 			responseWithError(w,http.StatusInternalServerError,err.Error())
 			return
 		}
-		fmt.Println(code)
-		fmt.Println(err)
 		responseWithJSON(w,http.StatusCreated,code)
 		return
 	}

@@ -66,6 +66,7 @@ func main() {
 	r.HandleFunc("/mails", api.HandlerGetMail).Methods("GET")
 	r.HandleFunc("/setup/mail/{receptor}", api.HandlerDeleteMail).Methods("DELETE")
 	r.HandleFunc("/setup/control", api.HandlerCreateControl).Methods("POST")
+	r.HandleFunc("/scan/control", api.HandlerScanControl).Methods("GET")
 	r.HandleFunc("/controls", api.HandlerGetControl).Methods("GET")
 	r.HandleFunc("/setup/control/{code}", api.HandlerDeleteControl).Methods("DELETE")
 	r.HandleFunc("/alarm", api.HandlerGetAlarm).Methods("GET")

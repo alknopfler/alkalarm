@@ -60,7 +60,7 @@ $(document).ready(function () {
                  });
              });
              $("#example").click(function () {
-                   document.getElementById("inputjson").value = "[	{\"receptor\":\"alknopfler@gmail.com\" }]";
+                   document.getElementById("inputjson").value = "[{\"receptor\":\"alknopfler@gmail.com\"}]";
              });
              $("#mailtable").show(function (){
                      $.ajax({
