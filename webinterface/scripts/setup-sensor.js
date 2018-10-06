@@ -31,25 +31,13 @@ $(document).ready(function () {
                       }
                  });
              });
-    $("#scanSensor").click(function () {
-        var code = prompt("Please enter your access code:", "");
-        $.ajax({
-            url: 'http://{{HOST}}:8080/admin/'+code,
-            type: "get",
-            dataType: "json",
-            data: '',
-            error: function(data, textStatus, jqXHR) {
-                window.alert("Your Access Password is incorrect...");
-                location.reload();
-            },
-            success: function(data, textStatus, jqXHR) {
-                window.alert("Scanning the code...Please force sensor activation or press any control key");
+            $("#scanSensor").click(function () {
                 $.ajax({
                     async: true,
                     crossDomain: true,
                     url: 'http://{{HOST}}:8080/scan/sensor',
-                    type: 'get',
-                    dataType: 'json',
+                    type: "get",
+                    dataType: "json",
                     data: '',
                     success: function (data) {
                         window.alert("The code is: "+data.Code)
@@ -58,9 +46,7 @@ $(document).ready(function () {
                         window.alert("Sensor not found or key not pressed");
                     },
                 });
-            }
-        });
-    });
+             });
              $("#deleteSensor").click(function () {
                    var code = prompt("Please enter your access code:", "");
                    $.ajax({
