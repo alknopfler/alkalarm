@@ -32,6 +32,7 @@ $(document).ready(function () {
                  });
              });
             $("#scanSensor").click(function () {
+                $('#inputjson').val("Scanning...Press button or enable sensor detection!");
                 $.ajax({
                     async: true,
                     crossDomain: true,
@@ -40,7 +41,7 @@ $(document).ready(function () {
                     dataType: "json",
                     data: '',
                     success: function (data) {
-                        $('#inputjson').val(data.Code);
+                        $('#inputjson').val(data);
                     },
                     error: function (data){
                         window.alert("Sensor not found or key not pressed");
