@@ -31,6 +31,23 @@ $(document).ready(function () {
                       }
                  });
              });
+            $("#scanSensor").click(function () {
+                $('#inputjson').val("Scanning...Press button or enable sensor detection!");
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: 'http://{{HOST}}:8080/scan/sensor',
+                    type: "get",
+                    dataType: "json",
+                    data: '',
+                    success: function (data) {
+                        $('#inputjson').val('[{"Code":"'+data.Code+'","TypeOf":"presence","Zone":"salon"}]');
+                    },
+                    error: function (data){
+                        window.alert("Sensor not found or key not pressed");
+                    },
+                });
+             });
              $("#deleteSensor").click(function () {
                    var code = prompt("Please enter your access code:", "");
                    $.ajax({
@@ -61,7 +78,7 @@ $(document).ready(function () {
                    });
              });
              $("#example").click(function () {
-                                           document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"}]";
+                                           document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"},{\"Code\":\"3462405\",\"TypeOf\":\"aperture\",\"Zone\":\"entrada\"},{\"Code\":\"3462406\",\"TypeOf\":\"other\",\"Zone\":\"hall\"}]";
                                        });
              $("#sensortable").show(function (){
                      $.ajax({

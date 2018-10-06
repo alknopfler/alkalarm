@@ -29,6 +29,19 @@ func HandlerCreateControl(w http.ResponseWriter, r *http.Request) {
 	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")
 }
 
+func HandlerScanControl(w http.ResponseWriter, r *http.Request) {
+	if states.Query() == cfg.STATE_INAC {   //must be inactive
+		code,err:=control.ScanControl()
+		if err!= nil {
+			responseWithError(w,http.StatusInternalServerError,err.Error())
+			return
+		}
+		responseWithJSON(w,http.StatusCreated,code)
+		return
+	}
+	responseWithError(w, http.StatusBadGateway, "Alarm state must be inactive")
+}
+
 //HandlerDeleteControl function
 func HandlerDeleteControl(w http.ResponseWriter, r *http.Request) {
 	if states.Query() == cfg.STATE_INAC {   //must be inactive

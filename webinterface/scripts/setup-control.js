@@ -30,6 +30,23 @@ $(document).ready(function () {
                            }
                       });
              });
+                $("#scanControl").click(function () {
+                    $('#inputjson').val("Scanning...Press any Control button!");
+                    $.ajax({
+                        async: true,
+                        crossDomain: true,
+                        url: 'http://{{HOST}}:8080/scan/control',
+                        type: "get",
+                        dataType: "json",
+                        data: '',
+                        success: function (data) {
+                            $('#inputjson').val('[{"Code":"'+data.Code+'","Description":"mando1","TypeOf":"inactive"}]');
+                        },
+                        error: function (data){
+                            window.alert("Control key not pressed");
+                        },
+                    });
+                });
              $("#deleteControl").click(function () {
                 var code = prompt("Please enter your access code:", "");
                 $.ajax({
