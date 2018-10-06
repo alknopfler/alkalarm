@@ -41,7 +41,7 @@ $(document).ready(function () {
                     dataType: "json",
                     data: '',
                     success: function (data) {
-                        $('#inputjson').val('[{"Code":"'+data.Code+'","TypeOf":"presence|aperture|other","Zone":"salon"}]');
+                        $('#inputjson').val('[{"Code":"'+data.Code+'","TypeOf":"presence","Zone":"salon"}]');
                     },
                     error: function (data){
                         window.alert("Sensor not found or key not pressed");
@@ -78,7 +78,7 @@ $(document).ready(function () {
                    });
              });
              $("#example").click(function () {
-                                           document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"}]";
+                                           document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"},{\"Code\":\"3462405\",\"TypeOf\":\"aperture\",\"Zone\":\"entrada\"},{\"Code\":\"3462406\",\"TypeOf\":\"other\",\"Zone\":\"hall\"}]";
                                        });
              $("#sensortable").show(function (){
                      $.ajax({

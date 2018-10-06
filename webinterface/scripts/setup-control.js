@@ -40,7 +40,7 @@ $(document).ready(function () {
                         dataType: "json",
                         data: '',
                         success: function (data) {
-                            $('#inputjson').val('[{"Code":"'+data.Code+'","Description":"mando1","TypeOf":"inactive"}');
+                            $('#inputjson').val('[{"Code":"'+data.Code+'","Description":"mando1","TypeOf":"inactive"}]');
                         },
                         error: function (data){
                             window.alert("Control key not pressed");
