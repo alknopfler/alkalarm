@@ -178,6 +178,7 @@ header nav {
 	-webkit-border-bottom-left-radius:20px;
 	-moz-border-radius-bottomleft:20px;
 	border-bottom-left-radius:20px;
+	user-select: none;
 	text-indent:0;
 	border:4px solid #d83526;
 	display:inline-block;
@@ -223,6 +224,7 @@ header nav {
 	-webkit-border-bottom-left-radius:20px;
 	-moz-border-radius-bottomleft:20px;
 	border-bottom-left-radius:20px;
+	user-select: none;
 	text-indent:0;
 	border:4px solid #eeb44f;
 	display:inline-block;
@@ -268,6 +270,7 @@ header nav {
 	-webkit-border-bottom-left-radius:20px;
 	-moz-border-radius-bottomleft:20px;
 	border-bottom-left-radius:20px;
+	user-select: none;
 	text-indent:0;
 	border:4px solid #83c41a;
 	display:inline-block;
