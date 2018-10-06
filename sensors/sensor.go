@@ -1,15 +1,14 @@
 package sensors
 
 import (
-	cfg "github.com/alknopfler/alkalarm/config"
-	"log"
-	"github.com/alknopfler/alkalarm/database"
 	"bufio"
-	"strings"
-	"os/exec"
-	"fmt"
 	"errors"
-	"encoding/json"
+	"fmt"
+	cfg "github.com/alknopfler/alkalarm/config"
+	"github.com/alknopfler/alkalarm/database"
+	"log"
+	"os/exec"
+	"strings"
 )
 
 
@@ -143,17 +142,17 @@ func discoverCodeSensor() (string, error) {
 	return "",errors.New("Sensor Not Found after 10 second looking for it...")
 }
 
-func ScanSensor()([]byte,error){
+func ScanSensor()(cfg.Sensor,error){
 	fmt.Println("Looking for new sensor...Try to activate manually to detect it...")
 	code,err:=discoverCodeSensor()
-	var sensor *cfg.Sensor
+	var sensor cfg.Sensor
 	if err!=nil{
-		return nil,err
+		return cfg.Sensor{},err
 	}
 	fmt.Println("Sensor detected!!! with code: "+code)
 
-	sensor = &cfg.Sensor{code,"Presence","zona1"}
-	response, _ := json.Marshal(sensor)
+	sensor = cfg.Sensor{code,"XXXX","XXXX"}
 
-	return response, nil
+
+	return sensor, nil
 }

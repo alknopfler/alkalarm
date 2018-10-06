@@ -48,11 +48,11 @@ $(document).ready(function () {
                     async: true,
                     crossDomain: true,
                     url: 'http://{{HOST}}:8080/scan/sensor',
-                    type: 'POST',
+                    type: 'get',
                     dataType: 'json',
                     data: '',
                     success: function (data) {
-                        window.alert("The code is: "+stringify(data.Code))
+                        window.alert("The code is: "+data.Code)
                     },
                     error: function (data){
                         window.alert("Sensor not found or key not pressed");
