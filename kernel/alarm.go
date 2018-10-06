@@ -32,7 +32,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
 			if states.Query()== cfg.STATE_INAC{
-				time.Sleep(60 * time.Second)
+				time.Sleep(30 * time.Second)
 				states.Update(cfg.STATE_FULL)
 				return
 			}else if states.Query()== cfg.STATE_PART{
@@ -42,7 +42,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
 			if states.Query() == cfg.STATE_INAC{
-				time.Sleep(60 * time.Second)
+				time.Sleep(30 * time.Second)
 				states.Update(cfg.STATE_PART)
 				return
 			}else if states.Query()== cfg.STATE_FULL{
