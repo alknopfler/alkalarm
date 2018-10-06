@@ -7,6 +7,7 @@ import (
 	"github.com/alknopfler/alkalarm/database"
 
 	"strings"
+	"sync"
 )
 func Register(data cfg.Mailer) error{
 	db,err := database.InitDB()
@@ -41,7 +42,8 @@ func Unregister(data cfg.Mailer) error{
 	return nil
 }
 
-func SendMail(typeof,zona string){
+func SendMail(typeof,zona string, wg *sync.WaitGroup){
+	defer wg.Done()
 	//first of all get all the mails to send the emails
 	list,err:=QueryAll()
 	if err != nil {

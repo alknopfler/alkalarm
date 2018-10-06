@@ -4,10 +4,13 @@ import (
 	cfg "github.com/alknopfler/alkalarm/config"
 	"log"
 	"github.com/alknopfler/alkalarm/database"
+	"sync"
 )
 
 
-func Register(data cfg.Alarm) error{
+func Register(data cfg.Alarm, wg *sync.WaitGroup) error{
+	defer wg.Done()
+
 	db,err := database.InitDB()
 	if err != nil {
 		log.Println("Error initiating DB in Register Alarm")
