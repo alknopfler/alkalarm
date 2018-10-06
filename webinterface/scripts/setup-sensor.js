@@ -41,7 +41,7 @@ $(document).ready(function () {
                     dataType: "json",
                     data: '',
                     success: function (data) {
-                        $('#inputjson').val(data);
+                        $('#inputjson').val('[{"Code":"'+data.Code+'","TypeOf":"presence|aperture|other","Zone":"salon"}]');
                     },
                     error: function (data){
                         window.alert("Sensor not found or key not pressed");
