@@ -52,7 +52,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     data: '',
                     success: function (data) {
-                        window.alert("The code is: "+data.Code)
+                        window.alert("The code is: "+stringify(data.Code))
                     },
                     error: function (data){
                         window.alert("Sensor not found or key not pressed");
