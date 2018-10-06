@@ -136,7 +136,7 @@ func discoverCodeSensor() (string, error) {
 func ScanControl()(cfg.Control,error){
 	fmt.Println("Looking for new control...Try to activate manually to detect it...")
 	code,err:=discoverCodeSensor()
-	var control cfg.Sensor
+	var control cfg.Control
 	if err!=nil{
 		return cfg.Control{},err
 	}
