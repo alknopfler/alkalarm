@@ -1,19 +1,36 @@
-
-
 package main
 
 import (
-"log"
-"net/http"
+	"log"
+	"net/http"
+	"fmt"
 )
 
-func main() {
-	fs := http.FileServer(http.Dir("./"))
-	http.Handle("/", fs)
-
-	log.Println("Listening... :80")
-	http.ListenAndServe(":80", nil)
 
 
+func new() http.Handler {
+	mux := http.NewServeMux()
+	// Root
+	mux.Handle("/",  http.FileServer(http.Dir("./")))
+	// OauthGoogle
+	mux.HandleFunc("/auth", oauthByGoogleOauth)
+	mux.HandleFunc("/callback", oauthGoogleCallback)
+
+	return mux
 }
+
+func main() {
+	server := &http.Server{
+		Addr: fmt.Sprintf(":80"),
+		Handler: new(),
+	}
+
+	log.Printf("Starting HTTP Server. Listening at %q", server.Addr)
+	if err := server.ListenAndServe(); err != http.ErrServerClosed {
+		log.Printf("%v", err)
+	} else {
+		log.Println("Server closed!")
+	}
+}
+
 
