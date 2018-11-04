@@ -7,7 +7,7 @@ https://github.com/alknopfler/alkalarm/wiki
 # Welcome to the alkalarm wiki!
 
 **AlkAlarm** is a open source project created to get ready a home Alarm System in few minutes. In the market you will buy a home system alarm based on 433Mhz sensors and using GSM modules to send the notifications like: 
-![Alarm System ](https://www.alarmasparacasabaratas.com/wp-content/uploads/2017/08/alarma-gsm-eray-comprar-online.jpg)
+![Alarm System ](./alkalarm.jpg)
 
 The main idea of this project is based on the same kind of Alarm GSM systems, but in this case, we only have to buy the sensors and sirens, because:
 * the main controller, and gsm module will be made with the **raspberry** (physically)
