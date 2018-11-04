@@ -12,6 +12,9 @@ import (
 	"context"
 )
 
+const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
+
+
 func oauthByGoogleOauth(w http.ResponseWriter, r *http.Request){
 	// Create oauthState cookie
 	oauthState := generateStateOauthCookie(w)
