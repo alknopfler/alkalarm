@@ -1,0 +1,56 @@
+hash: d7db25eb0c459b7452ad4e00036f4cc963831bec62d4467b30be062ac44b5c13
+updated: 2018-11-04T18:57:51.776497+01:00
+imports:
+- name: cloud.google.com/go
+  version: 2de6e15cf9252ba6c2179d155dd6c991dc013956
+  subpackages:
+  - compute/metadata
+- name: github.com/golang/protobuf
+  version: 1918e1ff6ffd2be7bed0553df8650672c3bfe80d
+  subpackages:
+  - proto
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/handlers
+  version: 90663712d74cb411cbef281bc1e08c19d1a76145
+- name: github.com/gorilla/mux
+  version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/mattn/go-sqlite3
+  version: c7c4067b79cc51e6dfdcef5c702e74b1e0fa7c75
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+- name: golang.org/x/net
+  version: c10e9556a7bc0e7c942242b606f0acf024ad5d6a
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/oauth2
+  version: 232e45548389bd9357411a6922a07c5fd4068bda
+  subpackages:
+  - google
+  - internal
+  - jws
+  - jwt
+- name: google.golang.org/appengine
+  version: 4a4468ece617fc8205e99368fa2200e9d1fad421
+  subpackages:
+  - internal
+  - internal/app_identity
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/modules
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
