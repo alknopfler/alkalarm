@@ -68,10 +68,10 @@ echo "### Creating the password file with email smtp server password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta smtp: " password
 echo $password>$PROJECT_PATH/.passSMTP
 
-tput setaf 2;echo
-echo "### Creating the password file with webAdmin access password ... ### "
-tput sgr0;read -p "Introduce la password de la cuenta admin: " password
-echo -n $password>$PROJECT_PATH/.passACCESS
+#tput setaf 2;echo
+#echo "### Creating the password file with webAdmin access password ... ### "
+#tput sgr0;read -p "Introduce la password de la cuenta admin: " password
+#echo -n $password>$PROJECT_PATH/.passACCESS
 
 tput setaf 2;echo
 echo "### Creating the domain for the webserver ... ### "

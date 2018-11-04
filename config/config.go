@@ -3,6 +3,9 @@ package config
 import (
 	"io/ioutil"
 	"log"
+	"fmt"
+	"os"
+	"encoding/json"
 )
 
 const (
@@ -65,6 +68,21 @@ type GlobalState struct{
 	GState string `json:"State"`
 }
 
+type Credentials struct {
+	Cid string `json:"cid"`
+	Csecret string `json:"csecret"`
+}
+
+func GetOauthCred() Credentials{
+	var c Credentials
+	file, err := ioutil.ReadFile("./creds.json")
+	if err != nil {
+		fmt.Printf("File error: %v\n", err)
+		os.Exit(1)
+	}
+	json.Unmarshal(file, &c)
+	return c
+}
 
 func readFromFile(file string)string{
 	b, err := ioutil.ReadFile(PROJECT_PATH+file) // just pass the file name
