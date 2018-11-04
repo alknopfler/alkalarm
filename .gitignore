@@ -1,5 +1,5 @@
 alkalarm.iml
-.cred.json
+./cred.json
 *.lock
 vendor
 alkalarm
