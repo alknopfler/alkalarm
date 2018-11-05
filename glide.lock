@@ -1,12 +1,12 @@
 hash: d7db25eb0c459b7452ad4e00036f4cc963831bec62d4467b30be062ac44b5c13
-updated: 2018-11-04T18:57:51.776497+01:00
+updated: 2018-11-05T21:38:59.866126+01:00
 imports:
 - name: cloud.google.com/go
   version: 2de6e15cf9252ba6c2179d155dd6c991dc013956
   subpackages:
   - compute/metadata
 - name: github.com/golang/protobuf
-  version: 1918e1ff6ffd2be7bed0553df8650672c3bfe80d
+  version: 75dceb112b174be156fa9952e66d3e99945572b4
   subpackages:
   - proto
 - name: github.com/gorilla/context
@@ -27,7 +27,7 @@ imports:
   - context
   - context/ctxhttp
 - name: golang.org/x/oauth2
-  version: 232e45548389bd9357411a6922a07c5fd4068bda
+  version: ca4130e427c7982e64cb9b5e717ff67bdb725037
   subpackages:
   - google
   - internal
