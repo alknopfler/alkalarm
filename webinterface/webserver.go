@@ -10,7 +10,6 @@ import (
 	"encoding/base64"
 	"math/rand"
 	"context"
-	"strings"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
@@ -56,7 +55,8 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// Redirect or response with a token.
 	// More code .....
 
-	fmt.Fprintf(w, "UserInfo: %s\n", data)
+	//fmt.Fprintf(w, "UserInfo: %s\n", data)
+	http.Redirect(w, r, "/index1.html", http.StatusOK)
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
@@ -82,8 +82,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
-	fileServer := http.FileServer(neuteredFileSystem{http.Dir("./")})
-	mux.Handle("/", http.StripPrefix("/", fileServer))
+	mux.Handle("/", new(MyHandler))
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
@@ -91,27 +90,22 @@ func new() http.Handler {
 	return mux
 }
 
-type neuteredFileSystem struct {
-	fs http.FileSystem
+type MyHandler struct {
 }
 
-func (nfs neuteredFileSystem) Open(path string) (http.File, error) {
-	f, err := nfs.fs.Open(path)
-	if err != nil {
-		return nil, err
-	}
+func (this *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path[1:]
+	log.Println(path)
 
-	s, err := f.Stat()
-	if s.IsDir() {
-		index := strings.TrimSuffix(path, "/") + "/index.html"
-		if _, err := nfs.fs.Open(index); err != nil {
-			return nil, err
-		}
-	}
+	data, err := ioutil.ReadFile("./index.html")
 
-	return f, nil
+	if err == nil {
+		w.Write(data)
+	} else {
+		w.WriteHeader(404)
+		w.Write([]byte("404 Something went wrong - " + http.StatusText(404)))
+	}
 }
-
 func main() {
 	server := &http.Server{
 		Addr: fmt.Sprintf(":80"),
