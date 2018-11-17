@@ -49,7 +49,11 @@ tput setaf 2;echo
 echo "### Installing packages ... ###"
 tput sgr0;echo
 apt-get -y update
-apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
+apt-get -y install python-pip python-dev pigpio python-pigpio python3-pigpio
+wget https://storage.googleapis.com/golang/go1.10.1.linux-armv6l.tar.gz
+sudo tar -C /usr/local -xvf go1.10.1.linux-armv6l.tar.gz
+ln -s /usr/local/go/bin/go /usr/bin/go
+
 
 tput setaf 2;echo
 echo "### Creating Folders ... ###"
