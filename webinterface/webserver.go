@@ -10,6 +10,7 @@ import (
 	"encoding/base64"
 	"math/rand"
 	"context"
+	"strings"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
@@ -54,6 +55,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// GetOrCreate User in your db.
 	// Redirect or response with a token.
 	// More code .....
+
 	fmt.Fprintf(w, "UserInfo: %s\n", data)
 }
 
@@ -80,12 +82,34 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
-	mux.Handle("/",  http.FileServer(http.Dir("./")))
+	fileServer := http.FileServer(neuteredFileSystem{http.Dir("./")})
+	mux.Handle("/", http.StripPrefix("/", fileServer))
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
 
 	return mux
+}
+
+type neuteredFileSystem struct {
+	fs http.FileSystem
+}
+
+func (nfs neuteredFileSystem) Open(path string) (http.File, error) {
+	f, err := nfs.fs.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	s, err := f.Stat()
+	if s.IsDir() {
+		index := strings.TrimSuffix(path, "/") + "/index.html"
+		if _, err := nfs.fs.Open(index); err != nil {
+			return nil, err
+		}
+	}
+
+	return f, nil
 }
 
 func main() {
