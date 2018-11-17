@@ -1,16 +1,5 @@
 $(document).ready(function () {
              $("#saveMail").click(function () {
-               var code = prompt("Please enter your access code:", "");
-               $.ajax({
-                    url: 'http://{{HOST}}:8080/admin/'+code,
-                    type: "get",
-                    dataType: "json",
-                    data: '',
-                    error: function(data, textStatus, jqXHR) {
-                          window.alert("Your Access Password is incorrect...");
-                          location.reload();
-                    },
-                    success: function(data, textStatus, jqXHR) {
                          var sensor = $('#inputjson').val();
                          $.ajax({
                              async: true,
@@ -27,21 +16,8 @@ $(document).ready(function () {
                                  window.alert("Remember to stop the alarm before...");
                              }
                          });
-                    }
-               });
              });
              $("#deleteMail").click(function () {
-                 var code = prompt("Please enter your access code:", "");
-                 $.ajax({
-                      url: 'http://{{HOST}}:8080/admin/'+code,
-                      type: "get",
-                      dataType: "json",
-                      data: '',
-                      error: function(data, textStatus, jqXHR) {
-                            window.alert("Your Access Password is incorrect...");
-                            location.reload();
-                      },
-                      success: function(data, textStatus, jqXHR) {
                           var receptor = $('#receptor').val();
                           var urldelete = 'http://{{HOST}}:8080/setup/mail/'+receptor;
                           $.ajax({
@@ -56,8 +32,6 @@ $(document).ready(function () {
                                    window.alert("Remember to stop the alarm before...");
                               }
                           });
-                      }
-                 });
              });
              $("#example").click(function () {
                    document.getElementById("inputjson").value = "[{\"receptor\":\"alknopfler@gmail.com\"}]";
@@ -79,5 +53,4 @@ $(document).ready(function () {
                          }
                      });
              });
-
  });

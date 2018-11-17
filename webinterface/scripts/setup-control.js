@@ -1,34 +1,21 @@
 $(document).ready(function () {
              $("#saveControl").click(function () {
-                      var code = prompt("Please enter your access code:", "");
-                      $.ajax({
-                           url: 'http://{{HOST}}:8080/admin/'+code,
-                           type: "get",
-                           dataType: "json",
-                           data: '',
-                           error: function(data, textStatus, jqXHR) {
-                                 window.alert("Your Access Password is incorrect...");
-                                 location.reload();
-                           },
-                           success: function(data, textStatus, jqXHR) {
-                                 var sensor = $('#inputjson').val();
-                                 $.ajax({
-                                     async: true,
-                                     crossDomain: true,
-                                     url: 'http://{{HOST}}:8080/setup/control',
-                                     type: 'POST',
-                                     dataType: 'json',
-                                     data: sensor,
-                                     success: function (data, textStatus, xhr) {
-                                         window.alert("Control loaded successfully");
-                                         location.reload();
-                                     },
-                                     error: function (data){
-                                         window.alert("Remember to stop the alarm before...");
-                                     }
-                                 });
-                           }
-                      });
+                     var sensor = $('#inputjson').val();
+                     $.ajax({
+                         async: true,
+                         crossDomain: true,
+                         url: 'http://{{HOST}}:8080/setup/control',
+                         type: 'POST',
+                         dataType: 'json',
+                         data: sensor,
+                         success: function (data, textStatus, xhr) {
+                             window.alert("Control loaded successfully");
+                             location.reload();
+                         },
+                         error: function (data){
+                             window.alert("Remember to stop the alarm before...");
+                         }
+                     });
              });
                 $("#scanControl").click(function () {
                     $('#inputjson').val("Scanning...Press any Control button!");
@@ -48,33 +35,20 @@ $(document).ready(function () {
                     });
                 });
              $("#deleteControl").click(function () {
-                var code = prompt("Please enter your access code:", "");
-                $.ajax({
-                     url: 'http://{{HOST}}:8080/admin/'+code,
-                     type: "get",
-                     dataType: "json",
-                     data: '',
-                     error: function(data, textStatus, jqXHR) {
-                           window.alert("Your Access Password is incorrect...");
-                           location.reload();
-                     },
-                     success: function(data, textStatus, jqXHR) {
-                          var code = $('#code').val();
-                          var urldelete = 'http://{{HOST}}:8080/setup/control/'+code;
-                          $.ajax({
-                              async: true,
-                              url: urldelete,
-                              type: 'delete',
-                              success: function () {
-                                 window.alert("Control delete successfully");
-                                 location.reload();
-                              },
-                              error: function (data){
-                                   window.alert("Remember to stop the alarm before...");
-                              }
-                          });
-                     }
-                });
+                  var code = $('#code').val();
+                  var urldelete = 'http://{{HOST}}:8080/setup/control/'+code;
+                  $.ajax({
+                      async: true,
+                      url: urldelete,
+                      type: 'delete',
+                      success: function () {
+                         window.alert("Control delete successfully");
+                         location.reload();
+                      },
+                      error: function (data){
+                           window.alert("Remember to stop the alarm before...");
+                      }
+                  });
              });
              $("#example").click(function () {
                               document.getElementById("inputjson").value = "[{\"Code\":\"3462412\",\"Description\":\"mando1\",\"TypeOf\":\"inactive\"},{\"Code\":\"3462448\",\"Description\":\"mando1\",\"TypeOf\":\"full\"},{\"Code\":\"3462592\",\"Description\":\"mando1\",\"TypeOf\":\"partial\"}]";
@@ -98,6 +72,4 @@ $(document).ready(function () {
                          }
                      });
                  });
-
-
  });

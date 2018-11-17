@@ -1,17 +1,6 @@
 $(document).ready(function () {
 
              $("#saveSensor").click(function () {
-                 var code = prompt("Please enter your access code:", "");
-                 $.ajax({
-                      url: 'http://{{HOST}}:8080/admin/'+code,
-                      type: "get",
-                      dataType: "json",
-                      data: '',
-                      error: function(data, textStatus, jqXHR) {
-                            window.alert("Your Access Password is incorrect...");
-                            location.reload();
-                      },
-                      success: function(data, textStatus, jqXHR) {
                          var sensor = $('#inputjson').val();
                          $.ajax({
                              async: true,
@@ -28,8 +17,6 @@ $(document).ready(function () {
                                  window.alert("Remember to stop the alarm before...");
                              }
                          });
-                      }
-                 });
              });
             $("#scanSensor").click(function () {
                 $('#inputjson').val("Scanning...Press button or enable sensor detection!");
@@ -49,17 +36,6 @@ $(document).ready(function () {
                 });
              });
              $("#deleteSensor").click(function () {
-                   var code = prompt("Please enter your access code:", "");
-                   $.ajax({
-                        url: 'http://{{HOST}}:8080/admin/'+code,
-                        type: "get",
-                        dataType: "json",
-                        data: '',
-                        error: function(data, textStatus, jqXHR) {
-                              window.alert("Your Access Password is incorrect...");
-                              location.reload();
-                        },
-                        success: function(data, textStatus, jqXHR) {
                           var code = $('#code').val();
                           var urldelete = 'http://{{HOST}}:8080/setup/sensor/'+code;
                           $.ajax({
@@ -74,8 +50,6 @@ $(document).ready(function () {
                                    window.alert("Remember to stop the alarm before...");
                               }
                           });
-                        }
-                   });
              });
              $("#example").click(function () {
                                            document.getElementById("inputjson").value = "[{\"Code\":\"3462404\",\"TypeOf\":\"presence\",\"Zone\":\"salon\"},{\"Code\":\"3462405\",\"TypeOf\":\"aperture\",\"Zone\":\"entrada\"},{\"Code\":\"3462406\",\"TypeOf\":\"other\",\"Zone\":\"hall\"}]";

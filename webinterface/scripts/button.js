@@ -1,16 +1,5 @@
 
  $(document).ready(function () {
-     var code = prompt("Please enter your access code:", "");
-     $.ajax({
-          url: 'http://{{HOST}}:8080/admin/'+code,
-          type: "get",
-          dataType: "json",
-          data: '',
-          error: function(data, textStatus, jqXHR) {
-                window.alert("Your Access Password is incorrect...");
-                location.reload();
-          },
-          success: function(data, textStatus, jqXHR) {
                 $.get("http://{{HOST}}:8080/status", function(respuesta){
                    if (respuesta == "full"){
                          $("#activarFullAlarm").css({'color':'blue'});
@@ -65,6 +54,4 @@
                          }
                      });
                  });
-          }
-     });
  });
