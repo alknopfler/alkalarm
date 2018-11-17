@@ -56,7 +56,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// More code .....
 
 	//fmt.Fprintf(w, "UserInfo: %s\n", data)
-	http.Redirect(w, r, "/index1.html", http.StatusOK)
+	http.Redirect(w, r, "/index1.html", http.StatusTemporaryRedirect)
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
