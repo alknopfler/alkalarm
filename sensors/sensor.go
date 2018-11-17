@@ -120,7 +120,7 @@ func discoverCodeSensor() (string, error) {
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
 
-	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
+	cmd := exec.Command(cmdArgs[0], cmdArgs[1:]...)
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
 	oneByte := make([]byte,0)
@@ -132,7 +132,7 @@ func discoverCodeSensor() (string, error) {
 		}
 		r := bufio.NewReader(stdout)
 		line,_, _ := r.ReadLine()
-		if (string(line)!=""){
+		if string(line)!="" {
 			cmd.Process.Kill()
 			return string(line),nil  //si ha encontrado  salgo directametne con nil matando previamente
 		}

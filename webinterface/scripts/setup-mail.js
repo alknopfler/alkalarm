@@ -43,7 +43,7 @@ $(document).ready(function () {
                       },
                       success: function(data, textStatus, jqXHR) {
                           var receptor = $('#receptor').val();
-                          var urldelete = 'http://{{HOST}}:8080/setup/mail/'+receptor
+                          var urldelete = 'http://{{HOST}}:8080/setup/mail/'+receptor;
                           $.ajax({
                               async: true,
                               url: urldelete,
@@ -71,7 +71,7 @@ $(document).ready(function () {
                          success: function(data, textStatus, jqXHR) {
                              // since we are using jQuery, you don't need to parse response
                              for (var i = 0; i < data.length; i++) {
-                                 var row = $("<tr />")
+                                 var row = $("<tr />");
                                  $("#mailtable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
                                  row.append($("<td>" + data[i] + "</td>"));
 

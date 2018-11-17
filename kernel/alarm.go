@@ -57,7 +57,7 @@ func handlerEvent(evento string){
 func ListenEvents(){
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
-	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
+	cmd := exec.Command(cmdArgs[0], cmdArgs[1:]...)
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
 
