@@ -44,7 +44,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, err := getUserDataFromGoogle(r.FormValue("code"))
+	_, err := getUserDataFromGoogle(r.FormValue("code"))
 	if err != nil {
 		log.Println(err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -82,7 +82,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
-	mux.Handle("/", new(MyHandler))
+	mux.HandleFunc("/", MyHandler)
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
@@ -90,10 +90,8 @@ func new() http.Handler {
 	return mux
 }
 
-type MyHandler struct {
-}
 
-func (this *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func MyHandler (w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path[1:]
 	log.Println(path)
 
