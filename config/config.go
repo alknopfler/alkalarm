@@ -87,7 +87,7 @@ type Credentials struct {
 
 func GetOauthCred() Credentials{
 	var c Credentials
-	file, err := ioutil.ReadFile("./creds.json")
+	file, err := ioutil.ReadFile(PROJECT_PATH+"creds.json")
 	if err != nil {
 		fmt.Printf("File error: %v\n", err)
 		os.Exit(1)
