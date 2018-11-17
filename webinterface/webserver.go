@@ -82,7 +82,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
-	mux.HandleFunc("/", MyHandler)
+	mux.Handle("/",  http.FileServer(http.Dir("./")))
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
@@ -91,19 +91,6 @@ func new() http.Handler {
 }
 
 
-func MyHandler (w http.ResponseWriter, r *http.Request) {
-	path := r.URL.Path[1:]
-	log.Println(path)
-
-	data, err := ioutil.ReadFile("./index.html")
-
-	if err == nil {
-		w.Write(data)
-	} else {
-		w.WriteHeader(404)
-		w.Write([]byte("404 Something went wrong - " + http.StatusText(404)))
-	}
-}
 func main() {
 	server := &http.Server{
 		Addr: fmt.Sprintf(":80"),
