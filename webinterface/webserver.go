@@ -11,6 +11,8 @@ import (
 	"math/rand"
 	"context"
 	"github.com/gorilla/mux"
+	"encoding/json"
+	"strings"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
@@ -45,19 +47,20 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := getUserDataFromGoogle(r.FormValue("code"))
+	data, err := getUserDataFromGoogle(r.FormValue("code"))
 	if err != nil {
 		log.Println(err.Error())
 		http.Redirect(w, r, "/index.html", http.StatusTemporaryRedirect)
 		return
 	}
+	var gmodel config.GoogleUser
+	json.Unmarshal(data,&gmodel)
 
-	// GetOrCreate User in your db.
-	// Redirect or response with a token.
-	// More code .....
-
-	//fmt.Fprintf(w, "UserInfo: %s\n", data)
-	http.Redirect(w,r,"/static/index.html",http.StatusFound)
+	if strings.Contains(config.LIST_ACCESS, gmodel.Email){
+		http.Redirect(w,r,"/static/index.html",http.StatusFound)
+	}else{
+		http.Redirect(w,r,"/static/fail.html",http.StatusNotFound)
+	}
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
@@ -79,21 +82,13 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 	return contents, nil
 }
 
-
-
-
-
 func MyHandler (w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path[1:]
 	log.Println(path)
 	var data []byte
 	var err error
-	//if r.URL.Path == "/"{
-		data, err = ioutil.ReadFile("./index.html")
-	//}else{
-	//	data, err = ioutil.ReadFile("./"+r.URL.Path)
-	//}
 
+	data, err = ioutil.ReadFile("./index.html")
 
 	if err == nil {
 		w.Write(data)

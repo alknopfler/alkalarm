@@ -50,9 +50,9 @@ echo "### Installing packages ... ###"
 tput sgr0;echo
 apt-get -y update
 apt-get -y install python-pip python-dev pigpio python-pigpio python3-pigpio
-#wget https://storage.googleapis.com/golang/go1.10.1.linux-armv6l.tar.gz
-#sudo tar -C /usr/local -xvf go1.10.1.linux-armv6l.tar.gz
-#ln -s /usr/local/go/bin/go /usr/bin/go
+wget https://storage.googleapis.com/golang/go1.10.1.linux-armv6l.tar.gz
+sudo tar -C /usr/local -xvf go1.10.1.linux-armv6l.tar.gz
+ln -s /usr/local/go/bin/go /usr/bin/go
 
 
 tput setaf 2;echo
@@ -72,10 +72,11 @@ echo "### Creating the password file with email smtp server password ... ### "
 tput sgr0;read -p "Introduce la password de la cuenta smtp: " password
 echo $password>$PROJECT_PATH/.passSMTP
 
-#tput setaf 2;echo
-#echo "### Creating the password file with webAdmin access password ... ### "
-#tput sgr0;read -p "Introduce la password de la cuenta admin: " password
-#echo -n $password>$PROJECT_PATH/.passACCESS
+tput setaf 2;echo
+echo "### Creating the accounts to use the alarm system ... ### "
+tput sgr0;read -p "Introduce el listado de emails para usar la alarma (separado por comas): " listAccounts
+echo -n $listAccounts>$PROJECT_PATH/.listACCESS
+
 cp creds.json $PROJECT_PATH
 
 tput setaf 2;echo

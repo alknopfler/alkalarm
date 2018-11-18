@@ -11,7 +11,7 @@ import (
 func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 	if states.Query()!= cfg.STATE_FULL{
 		responseWithJSON(w,http.StatusOK,"Alarm full started successfully")
-		time.Sleep(30*time.Second)
+		time.Sleep(10*time.Second)
 		states.Update(cfg.STATE_FULL)
 		return
 	}
@@ -21,7 +21,7 @@ func HandlerActivateFull(w http.ResponseWriter, r *http.Request) {
 func HandlerActivatePartial(w http.ResponseWriter, r *http.Request) {
 	if states.Query() != cfg.STATE_PART{
 		responseWithJSON(w,http.StatusOK,"Alarm partial started successfully")
-		time.Sleep(30*time.Second)
+		time.Sleep(10*time.Second)
 		states.Update(cfg.STATE_PART)
 		return
 	}
