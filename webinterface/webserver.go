@@ -10,6 +10,7 @@ import (
 	"encoding/base64"
 	"math/rand"
 	"context"
+	"github.com/gorilla/mux"
 )
 
 const oauthGoogleUrlAPI = "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
@@ -79,17 +80,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 }
 
 
-func new() http.Handler {
-	mux := http.NewServeMux()
-	// Root
-	mux.HandleFunc("/", MyHandler)
-	http.Handle("/static/",  http.FileServer(http.Dir("/opt/alkalarm/webinterface/static")))
-	// OauthGoogle
-	mux.HandleFunc("/auth", oauthByGoogleOauth)
-	mux.HandleFunc("/callback", oauthGoogleCallback)
 
-	return mux
-}
 
 
 func MyHandler (w http.ResponseWriter, r *http.Request) {
@@ -112,16 +103,19 @@ func MyHandler (w http.ResponseWriter, r *http.Request) {
 	}
 }
 func main() {
-	server := &http.Server{
-		Addr: fmt.Sprintf(":80"),
-		Handler: new(),
-	}
-
-	log.Printf("Starting HTTP Server. Listening at %q", server.Addr)
-	if err := server.ListenAndServe(); err != http.ErrServerClosed {
-		log.Printf("%v", err)
-	} else {
-		log.Println("Server closed!")
+	r := mux.NewRouter()
+	// Root
+	r.HandleFunc("/", MyHandler)
+	r.PathPrefix("/static/").Handler(
+		http.StripPrefix("/static/", http.FileServer(http.Dir("/opt/alkalarm/webinterface/static/"))),
+	)
+	//mux.Handle("/static/",  http.FileServer(http.Dir("/opt/alkalarm/webinterface/static")))
+	// OauthGoogle
+	r.HandleFunc("/auth", oauthByGoogleOauth)
+	r.HandleFunc("/callback", oauthGoogleCallback)
+	err := http.ListenAndServe(":80", nil)
+	if err != nil {
+		log.Println("Error listening api server...")
 	}
 }
 
