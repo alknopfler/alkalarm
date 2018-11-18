@@ -44,7 +44,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, err := getUserDataFromGoogle(r.FormValue("code"))
+	_, err := getUserDataFromGoogle(r.FormValue("code"))
 	if err != nil {
 		log.Println(err.Error())
 		http.Redirect(w, r, "/alarm.html", http.StatusTemporaryRedirect)
