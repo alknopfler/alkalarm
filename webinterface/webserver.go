@@ -40,14 +40,14 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 
 	if r.FormValue("state") != oauthState.Value {
 		log.Println("invalid oauth google state")
-		http.Redirect(w, r, "/index.html", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, "/indexorig.html", http.StatusTemporaryRedirect)
 		return
 	}
 
 	_, err := getUserDataFromGoogle(r.FormValue("code"))
 	if err != nil {
 		log.Println(err.Error())
-		http.Redirect(w, r, "/index.html", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, "/indexorig.html", http.StatusTemporaryRedirect)
 		return
 	}
 
@@ -56,7 +56,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// More code .....
 
 	//fmt.Fprintf(w, "UserInfo: %s\n", data)
-	http.Redirect(w,r,"/static/index.html",http.StatusFound)
+	http.Redirect(w,r,"/static/indexorig.html",http.StatusFound)
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
@@ -83,7 +83,7 @@ func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
 	mux.HandleFunc("/", MyHandler)
-	mux.Handle("/static/",  http.FileServer(http.Dir("static/")))
+	mux.Handle("/static/",  http.FileServer(http.Dir("./static/")))
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
@@ -98,7 +98,7 @@ func MyHandler (w http.ResponseWriter, r *http.Request) {
 	var data []byte
 	var err error
 	//if r.URL.Path == "/"{
-		data, err = ioutil.ReadFile("./index.html")
+		data, err = ioutil.ReadFile("./indexorig.html")
 	//}else{
 	//	data, err = ioutil.ReadFile("./"+r.URL.Path)
 	//}
