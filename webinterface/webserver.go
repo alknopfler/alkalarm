@@ -55,7 +55,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// Redirect or response with a token.
 	// More code .....
 
-	fmt.Fprintf(w, "UserInfo: %s\n", data)
+	//fmt.Fprintf(w, "UserInfo: %s\n", data)
 	http.Redirect(w,r,"/alarm.html",http.StatusFound)
 }
 
