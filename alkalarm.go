@@ -45,11 +45,11 @@ func init(){
 			log.Println("Error activating the first time (init)")
 			os.Exit(3)
 		}
-		err=database.Operate(db,cfg.ADMIN_INSERT,cfg.WEBACCESS_PASS)
-		if err!=nil{
-			log.Println("Error creating the first pass (init)")
-			os.Exit(3)
-		}
+		//err=database.Operate(db,cfg.ADMIN_INSERT,cfg.WEBACCESS_PASS)
+		//if err!=nil{
+		//	log.Println("Error creating the first pass (init)")
+		//	os.Exit(3)
+		//}
 	}
 	log.Println("Success...Starting the program")
 }

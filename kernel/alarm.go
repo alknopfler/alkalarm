@@ -32,7 +32,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_FULL && states.Query() != cfg.STATE_FULL{
 			if states.Query()== cfg.STATE_INAC{
-				time.Sleep(30 * time.Second)
+				time.Sleep(10 * time.Second)
 				states.Update(cfg.STATE_FULL)
 				return
 			}else if states.Query()== cfg.STATE_PART{
@@ -42,7 +42,7 @@ func handlerEvent(evento string){
 		}
 		if control.QueryTypeOf(evento) == cfg.STATE_PART && states.Query() != cfg.STATE_PART {
 			if states.Query() == cfg.STATE_INAC{
-				time.Sleep(30 * time.Second)
+				time.Sleep(10 * time.Second)
 				states.Update(cfg.STATE_PART)
 				return
 			}else if states.Query()== cfg.STATE_FULL{
@@ -57,7 +57,7 @@ func handlerEvent(evento string){
 func ListenEvents(){
 	cmdName := "python -u " + cfg.PROJECT_PATH + cfg.PYGPIO
 	cmdArgs := strings.Fields(cmdName)
-	cmd := exec.Command(cmdArgs[0], cmdArgs[1:len(cmdArgs)]...)
+	cmd := exec.Command(cmdArgs[0], cmdArgs[1:]...)
 	stdout, _ := cmd.StdoutPipe()
 	cmd.Start()
 
