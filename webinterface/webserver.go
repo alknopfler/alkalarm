@@ -44,7 +44,7 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := getUserDataFromGoogle(r.FormValue("code"))
+	data, err := getUserDataFromGoogle(r.FormValue("code"))
 	if err != nil {
 		log.Println(err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -55,8 +55,8 @@ func oauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	// Redirect or response with a token.
 	// More code .....
 
-	//fmt.Fprintf(w, "UserInfo: %s\n", data)
-	http.Redirect(w, r, "/index1.html", http.StatusPermanentRedirect)
+	fmt.Fprintf(w, "UserInfo: %s\n", data)
+	http.Redirect(w,r,"/alarm.html",200)
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
@@ -94,8 +94,14 @@ func new() http.Handler {
 func MyHandler (w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path[1:]
 	log.Println(path)
+	var data []byte
+	var err error
+	if r.URL.Path == "/"{
+		data, err = ioutil.ReadFile("./index.html")
+	}else{
+		data, err = ioutil.ReadFile("./"+r.URL.Path)
+	}
 
-	data, err := ioutil.ReadFile("./index.html")
 
 	if err == nil {
 		w.Write(data)

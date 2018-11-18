@@ -76,6 +76,7 @@ echo $password>$PROJECT_PATH/.passSMTP
 #echo "### Creating the password file with webAdmin access password ... ### "
 #tput sgr0;read -p "Introduce la password de la cuenta admin: " password
 #echo -n $password>$PROJECT_PATH/.passACCESS
+cp creds.json $PROJECT_PATH
 
 tput setaf 2;echo
 echo "### Creating the domain for the webserver ... ### "
