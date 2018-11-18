@@ -83,7 +83,7 @@ func new() http.Handler {
 	mux := http.NewServeMux()
 	// Root
 	mux.HandleFunc("/", MyHandler)
-	mux.Handle("/static/",  http.FileServer(http.Dir("./static/")))
+	mux.Handle("/static/",  http.FileServer(http.Dir("/opt/alkalarm/webinterface/static")))
 	// OauthGoogle
 	mux.HandleFunc("/auth", oauthByGoogleOauth)
 	mux.HandleFunc("/callback", oauthGoogleCallback)
