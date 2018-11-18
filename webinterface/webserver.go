@@ -113,7 +113,7 @@ func main() {
 	// OauthGoogle
 	r.HandleFunc("/auth", oauthByGoogleOauth)
 	r.HandleFunc("/callback", oauthGoogleCallback)
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":80",r)
 	if err != nil {
 		log.Println("Error listening api server...")
 	}
