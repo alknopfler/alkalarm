@@ -82,7 +82,7 @@ tput setaf 2;echo
 echo "### Creating the domain for the webserver ... ### "
 tput sgr0;read -p "Introduce el host o la IP del host alkalarm: " HOST
 cp -r webinterface $PROJECT_PATH
-sed -i -- "s/{{HOST}}/$HOST/g" $PROJECT_PATH/webinterface/scripts/*.js
+sed -i -- "s/{{HOST}}/$HOST/g" $PROJECT_PATH/webinterface/static/scripts/*.js
 
 tput setaf 2;echo
 echo "### Copy the python script and binary to the project directory ... ### "
