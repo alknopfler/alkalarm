@@ -24,7 +24,7 @@ var (
 	DB_TYPE	= "sqlite3"
 
 	FROM = readFromFile(".userSMTP")
-	SMTP_SERVER = "smtp.gmail.com"
+	SMTP_SERVER = "smtp-mail.outlook.com"
 	SMTP_PORT = "587"
 	SMTP_PASS = readFromFile(".passSMTP")
 	WEBACCESS_PASS = readFromFile(".passACCESS")

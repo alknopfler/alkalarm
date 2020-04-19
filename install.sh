@@ -49,7 +49,7 @@ tput setaf 2;echo
 echo "### Installing packages ... ###"
 tput sgr0;echo
 apt-get -y update
-apt-get -y install golang python-pip python-dev pigpio python-pigpio python3-pigpio
+apt-get -y install python-pip python-dev pigpio python-pigpio python3-pigpio
 
 tput setaf 2;echo
 echo "### Creating Folders ... ###"
@@ -82,21 +82,17 @@ sed -i -- "s/{{HOST}}/$HOST/g" $PROJECT_PATH/webinterface/scripts/*.js
 tput setaf 2;echo
 echo "### Copy the python script and binary to the project directory ... ### "
 tput sgr0;echo
-go install alkalarm.go
-cp _433.py /root/bin/alkalarm $PROJECT_PATH/
+cp _433.py ./alkalarm $PROJECT_PATH/
 
 tput setaf 2;echo
 echo "### Installing web server and copy the binary to the project directory ... ###"
 tput sgr0;echo
-go install webinterface/webserver.go
-
-cp /root/bin/webserver $PROJECT_PATH/webinterface/
+cp ./webserver $PROJECT_PATH/webinterface/
 
 tput setaf 2;echo
 echo "### Installing the discovery codes utility and copy the binary to the project directory ... ###"
 tput sgr0;echo
-go install scripts/discoverCodes.go
-cp /root/bin/discoverCodes $PROJECT_PATH/
+cp ./discoverCodes $PROJECT_PATH/
 
 tput setaf 2;echo
 echo "### Creating the file in rsyslog ###"
